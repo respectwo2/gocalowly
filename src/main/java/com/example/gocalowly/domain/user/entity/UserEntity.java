@@ -7,4 +7,5 @@ public class UserEntity {
 	private String userPhoneNumber;
 	private String userNickName; //실제 로그인 시 사용되는 아이디 unique
 	private int completeCount; // 이번달 칼로리 지킨 날 수
+  private int userTargetCalorie;
 }
