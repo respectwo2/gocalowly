@@ -6,4 +6,6 @@ public class UserEntity {
 	private String userName;
 	private String userPhoneNumber;
 	private String userNickName;
+	private int completeCount;
+	private int userTargetCalorie;
 }
