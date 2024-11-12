@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql
+    container_name: db
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ssafy
+      MYSQL_DATABASE: SSAFY
+      MYSQL_USER: ssafy
+      MYSQL_PASSWORD: ssafy
+      TZ: Asia/Seoul
+    restart: always
+
+    volumes:
+      - ./db-init:/docker-entrypoint-initdb.d
