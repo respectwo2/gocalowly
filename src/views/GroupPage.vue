@@ -4,6 +4,8 @@ import NavBar from '@/components/NavBar.vue';
 import FoodLogCard from '@/components/FoodLogCard.vue';
 import TopGroupNameBanner from '@/components/TopGroupNameBanner.vue';
 import TopGroupRankBanner from '@/components/TopGroupRankBanner.vue';
+import ChatCard from '@/components/ChatCard.vue';
+import ChatSend from '@/components/ChatSend.vue';
 
 
 export default {
@@ -13,7 +15,9 @@ export default {
         NavBar,
         FoodLogCard,
         TopGroupNameBanner,
-        TopGroupRankBanner
+        TopGroupRankBanner,
+        ChatCard,
+        ChatSend
     },
 };
 </script>
@@ -32,7 +36,12 @@ export default {
     </header>
 
     <body>
-
+        <div>
+            <ChatCard />
+        </div>
+        <div>
+            <ChatSend />
+        </div>
 
 
     </body>
@@ -45,9 +54,18 @@ export default {
 </template>
 
 <style scoped>
-header {
+header,
+body,
+footer {
     line-height: 1.5;
     max-height: 100vh;
+}
+
+header div,
+body div,
+footer div {
+    margin-bottom: 3rem;
+    /* 각 div 아래에 간격을 줍니다 */
 }
 
 .logo {

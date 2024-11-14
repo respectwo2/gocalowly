@@ -28,17 +28,6 @@ export default {
 .navbar {
     /* Rectangle 8 */
 
-    position: absolute;
-    width: 356px;
-    height: 98px;
-    left: 17px;
-    top: 730px;
-
-    background: #F87670;
-    border-radius: 50px;
-
-
-    /* 개인 식사등록 그룹 */
     /* Rectangle 8 */
 
     position: absolute;
@@ -50,9 +39,35 @@ export default {
     background: #F87670;
     border-radius: 50px;
 
+
+
+    /* 개인 식사등록 그룹 */
+    /* Rectangle 8 */
+    /* 개인 식사등록 그룹 */
+
+    width: 370px;
+    height: 65px;
+    left: 10px;
+    top: 750px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
 }
 
 .nav-item {
+    display: inline-block;
+    margin: 0 auto;
     text-align: center;
 }
 

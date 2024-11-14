@@ -3,7 +3,7 @@
         <div class="rank-text">그룹 내 상위 10% 유저입니다</div>
 
         <div class="toggle-icon" @click="toggleModal">
-            <img src="../assets/icons/toggle-icon.svg" alt="Toggle Modal" />
+            <img src="../assets/icons/toggle.svg" alt="Toggle Modal" />
         </div>
 
         <div v-if="isModalOpen" class="modal-overlay" @click="toggleModal">
@@ -33,15 +33,18 @@ export default {
 
 <style scoped>
 .group-rank-banner {
-    position: relative;
-    width: 393px;
+    position: absolute;
+    width: 369px;
     height: 64px;
-    background: #9efac1;
-    border-radius: 10px;
+    left: 12px;
+    top: 140px;
+    background: #F87670;
+    border: 1px solid #000000;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 /* Rank Text */
@@ -51,18 +54,18 @@ export default {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-    text-align: center;
     color: #000000;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 /* Toggle Icon */
 .toggle-icon {
     width: 44px;
     height: 46px;
-    filter: drop-shadow(-1.8px -1.8px 7.3px rgba(36, 39, 96, 0.25)) drop-shadow(3.6px 7.3px 7.3px rgba(36, 39, 96, 0.25));
+    filter: drop-shadow(-1.81538px -1.81538px 7.26154px rgba(36, 39, 96, 0.25)) drop-shadow(3.63077px 7.26154px 7.26154px rgba(36, 39, 96, 0.25));
     cursor: pointer;
 }
 

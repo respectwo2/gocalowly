@@ -46,9 +46,17 @@ export default {
 </template>
 
 <style scoped>
-header {
+header,
+body,
+footer {
     line-height: 1.5;
     max-height: 100vh;
+}
+
+header div,
+body div,
+footer div {
+    margin-bottom: 3rem;
 }
 
 .logo {

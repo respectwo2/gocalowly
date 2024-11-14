@@ -6,7 +6,7 @@
                 meal.mealType - meal.foodName : meal.calorie kcal
             </li>
         </ul>
-        <div class="total-calories">{{ totalCalories }} kcal</div>
+        <div class="total-calories">{{ totalCalories }}</div>
     </div>
 </template>
 
