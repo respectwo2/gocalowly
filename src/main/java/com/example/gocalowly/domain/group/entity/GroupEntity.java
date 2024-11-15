@@ -1,7 +1,7 @@
 package com.example.gocalowly.domain.group.entity;
 
 public class GroupEntity {
-	private int groupId;
+	private int groupNo;
 	private int calorieGoal;
 	private int headcount;
 	private String groupName;
@@ -15,8 +15,8 @@ public class GroupEntity {
 		this.headcount = headcount;
 		this.groupName = groupName;
 	}
-	public int getGroupId() {
-		return groupId;
+	public int getgroupNo() {
+		return groupNo;
 	}
 	public int getCalorieGoal() {
 		return calorieGoal;
