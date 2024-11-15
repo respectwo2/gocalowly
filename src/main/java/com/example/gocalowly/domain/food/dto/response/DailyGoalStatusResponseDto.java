@@ -6,5 +6,25 @@ import java.util.Date;
 public class DailyGoalStatusResponseDto {
     private Date date;     // 날짜
     private boolean isGoal;  // 목표 달성 여부 (true: 목표 달성, false: 미달성)
+    
+    public DailyGoalStatusResponseDto() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public DailyGoalStatusResponseDto(Date date, boolean isGoal) {
+		super();
+		this.date = date;
+		this.isGoal = isGoal;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public boolean isGoal() {
+		return isGoal;
+	}
+    
+    
 
 }
