@@ -10,5 +10,7 @@ public class GroupMissionResponseDto {
 		private int missionId; // 미션 ID
 		private String missionName; // 미션 이름
 		private boolean isMissionComplete; // 미션 달성 여부
+		
+		
 	}
 }
