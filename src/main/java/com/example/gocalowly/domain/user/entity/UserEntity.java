@@ -1,7 +1,22 @@
 package com.example.gocalowly.domain.user.entity;
 
+import java.util.UUID;
+
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class UserEntity {
-	private int userNo; // 유저 식별 번호
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(columnDefinition = "BINARY(16)")
+	private UUID userId;
+	
 	private String userPassword;
 	private String userName;
 	private String userPhoneNumber;
