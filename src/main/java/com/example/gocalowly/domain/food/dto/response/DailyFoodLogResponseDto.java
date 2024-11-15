@@ -1,11 +1,12 @@
 package com.example.gocalowly.domain.food.dto.response;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 //음식 기록과 함께 계산한 총 칼로리와 날짜를 반환하는 DTO
 public class DailyFoodLogResponseDto {
-	private Date date;
+	private LocalDateTime date;
 	private int totalCalories;
 	private List<FoodEntry> foodEntries;
 	
@@ -13,20 +14,14 @@ public class DailyFoodLogResponseDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DailyFoodLogResponseDto(Date date, int totalCalories, List<FoodEntry> foodEntries) {
+	public DailyFoodLogResponseDto(LocalDateTime date, int totalCalories, List<FoodEntry> foodEntries) {
 		super();
 		this.date = date;
 		this.totalCalories = totalCalories;
 		this.foodEntries = foodEntries;
 	}
 
-	
-
-
-
-
-
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
