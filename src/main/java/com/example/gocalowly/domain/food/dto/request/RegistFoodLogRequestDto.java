@@ -1,11 +1,12 @@
 package com.example.gocalowly.domain.food.dto.request;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
 //식사(음식) 등록해서 로그에 이용되는 DTO
 public class RegistFoodLogRequestDto {
-	private Date recodeDate;
+	private LocalDateTime recodeDate;
 	private String mealType;
 	private String foodName;
 	private int calorie;
@@ -15,7 +16,7 @@ public class RegistFoodLogRequestDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RegistFoodLogRequestDto(Date recodeDate, String mealType, String foodName, int calorie, UUID userId) {
+	public RegistFoodLogRequestDto(LocalDateTime recodeDate, String mealType, String foodName, int calorie, UUID userId) {
 		super();
 		this.recodeDate = recodeDate;
 		this.mealType = mealType;
@@ -24,7 +25,7 @@ public class RegistFoodLogRequestDto {
 		this.userId = userId;
 	}
 
-	public Date getRecodeDate() {
+	public LocalDateTime getRecodeDate() {
 		return recodeDate;
 	}
 

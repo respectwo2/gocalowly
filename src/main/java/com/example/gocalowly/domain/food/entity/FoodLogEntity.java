@@ -1,5 +1,6 @@
 package com.example.gocalowly.domain.food.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ public class FoodLogEntity {
 	@Column(columnDefinition = "BINARY(16)")
 	private int recodeId;
 	
-	private Date recodeDate;
+	private LocalDateTime recodeDate;
 	private String mealType;
 	private String foodName;
 	private int calorie;
@@ -26,7 +27,7 @@ public class FoodLogEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FoodLogEntity(Date recodeDate, String mealType, String foodName, int calorie, UUID userId) {
+	public FoodLogEntity(LocalDateTime recodeDate, String mealType, String foodName, int calorie, UUID userId) {
 		super();
 		this.recodeDate = recodeDate;
 		this.mealType = mealType;
@@ -39,7 +40,7 @@ public class FoodLogEntity {
 		return recodeId;
 	}
 
-	public Date getRecodeDate() {
+	public LocalDateTime getRecodeDate() {
 		return recodeDate;
 	}
 
