@@ -1,3 +1,5 @@
+USE SSAFY;
+
 CREATE TABLE `Food` (
 	`food_data_code`	varchar(20)	NOT NULL,
 	`food_data_name`	varchar(20)	NULL,
@@ -130,4 +132,3 @@ ALTER TABLE `UserGroupMission` ADD CONSTRAINT `FK_GroupMission_TO_UserGroupMissi
 REFERENCES `GroupMission` (
 	`mission_id`
 );
-
