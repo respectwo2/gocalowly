@@ -4,7 +4,7 @@
 
     <div class="toggle-icon" @click="toggleModal">
       <img
-        src="../assets/icons/toggle.svg"
+        src="../../assets/icons/toggle.svg"
         alt="Toggle Modal"
         width="40"
         height="40"
@@ -39,7 +39,7 @@ export default {
 <style scoped>
 .group-rank-banner {
   position: absolute;
-  width: 369px;
+  width: 365px;
   height: 64px;
   left: 12px;
   top: 140px;

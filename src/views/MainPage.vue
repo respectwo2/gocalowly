@@ -1,9 +1,9 @@
 <script>
-import TopBar from "@/components/TopBar.vue";
-import NavBar from "@/components/NavBar.vue";
-import FoodLogCard from "@/components/FoodLogCard.vue";
-import TopBanner from "@/components/TopBanner.vue";
-import TopDateBanner from "@/components/TopDateBanner.vue";
+import TopBar from "@/components/common/TopBar.vue";
+import NavBar from "@/components/common/NavBar.vue";
+import FoodLogCard from "@/components/main/FoodLogCard.vue";
+import TopBanner from "@/components/main/TopBanner.vue";
+import TopDateBanner from "@/components/main/TopDateBanner.vue";
 
 export default {
   name: "MainPage",

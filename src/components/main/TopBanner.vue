@@ -50,14 +50,13 @@ export default {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
   position: absolute;
-  width: 369px;
+  width: 365px;
   height: 64px;
   left: 12px;
   top: 70px;
 }
 
-.calorie-info {
-  width: 330px;
+.calorie-text {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 20px;

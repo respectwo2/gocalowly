@@ -16,7 +16,7 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
   position: absolute;
-  width: 369px;
+  width: 365px;
   height: 64px;
   left: 12px;
   top: 70px;
