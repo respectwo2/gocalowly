@@ -1,117 +1,116 @@
 <script>
-import TopBar from '@/components/TopBar.vue';
-import NavBar from '@/components/NavBar.vue';
-import FoodLogCard from '@/components/FoodLogCard.vue';
-import TopBanner from '@/components/TopBanner.vue';
-import TopDateBanner from '@/components/TopDateBanner.vue';
+import TopBar from "@/components/TopBar.vue";
+import NavBar from "@/components/NavBar.vue";
+import FoodLogCard from "@/components/FoodLogCard.vue";
+import TopBanner from "@/components/TopBanner.vue";
+import TopDateBanner from "@/components/TopDateBanner.vue";
 
 export default {
-    name: 'MainPage',
-    components: {
-        TopBar,
-        NavBar,
-        FoodLogCard,
-        TopBanner,
-        TopDateBanner
-    },
+  name: "MainPage",
+  components: {
+    TopBar,
+    NavBar,
+    FoodLogCard,
+    TopBanner,
+    TopDateBanner,
+  },
 };
 </script>
 
 <template>
-    <header>
-        <div>
-            <TopBar />
-        </div>
-        <div>
-            <TopBanner />
-        </div>
-        <div>
-            <TopDateBanner />
-        </div>
-    </header>
+  <header>
+    <div>
+      <TopBar />
+    </div>
+    <div>
+      <TopBanner />
+    </div>
+    <div>
+      <TopDateBanner />
+    </div>
+  </header>
 
-    <body>
-        <div>
-            <FoodLogCard />
-        </div>
+  <body>
+    <div>
+      <FoodLogCard />
+    </div>
+  </body>
 
-
-    </body>
-
-    <footer>
-        <div>
-            <NavBar />
-        </div>
-    </footer>
+  <footer>
+    <div>
+      <NavBar />
+    </div>
+  </footer>
 </template>
 
 <style scoped>
 header,
 body,
 footer {
-    line-height: 1.5;
-    max-height: 100vh;
+  line-height: 1.5;
+  max-height: 100vh;
 }
 
 header div,
 body div,
 footer div {
-    margin-bottom: 3rem;
+  margin-bottom: 3rem;
+  /* 각 div 아래에 간격을 줍니다 */
 }
 
 .logo {
-    display: block;
-    margin: 0 auto 2rem;
+  display: block;
+  margin: 0 auto 2rem;
 }
 
 nav {
-    width: 100%;
-    font-size: 12px;
-    text-align: center;
-    margin-top: 2rem;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2rem;
 }
 
 nav a.router-link-exact-active {
-    color: var(--color-text);
+  color: var(--color-text);
 }
 
 nav a.router-link-exact-active:hover {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 nav a {
-    display: inline-block;
-    padding: 0 1rem;
-    border-left: 1px solid var(--color-border);
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid var(--color-border);
 }
 
 nav a:first-of-type {
-    border: 0;
+  border: 0;
 }
 
 @media (min-width: 1024px) {
-    header {
-        display: flex;
-        place-items: center;
-        padding-right: calc(var(--section-gap) / 2);
-    }
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
 
-    .logo {
-        margin: 0 2rem 0 0;
-    }
+  .logo {
+    margin: 0 2rem 0 0;
+  }
 
-    header .wrapper {
-        display: flex;
-        place-items: flex-start;
-        flex-wrap: wrap;
-    }
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
 
-    nav {
-        text-align: left;
-        margin-left: -1rem;
-        font-size: 1rem;
-        padding: 1rem 0;
-        margin-top: 1rem;
-    }
+  nav {
+    text-align: left;
+    margin-left: -1rem;
+    font-size: 1rem;
+    padding: 1rem 0;
+    margin-top: 1rem;
+  }
 }
 </style>
