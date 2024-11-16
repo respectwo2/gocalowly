@@ -1,7 +1,7 @@
 <template>
   <div class="calorie-info">
     <div class="calorie-text">
-      <p>목표 하루 칼로리: {{ userTargetCalorie }}kcal</p>
+      <p>목표 하루 칼로리: {{ userTargetcalorie }}kcal</p>
       <p>오늘 입력한 칼로리: {{ totalCalories }}kcal</p>
     </div>
   </div>
@@ -14,7 +14,7 @@ import axios from "axios";
 export default {
   name: "CalorieInfo",
   setup() {
-    const userTargetCalorie = ref(0);
+    const userTargetcalorie = ref(0);
     const totalCalories = ref(0);
 
     const fetchCalorieData = async () => {
@@ -22,7 +22,7 @@ export default {
         const response = await axios.get(
           "https://localhost:8080/api/user/target-calorie"
         );
-        userTargetCalorie.value = response.data.userTargetCalorie;
+        userTargetcalorie.value = response.data.userTargetcalorie;
         currentCalorie.value = response.data.currentCalorie;
       } catch (error) {
         console.error("Error fetching calorie data:", error);
@@ -34,7 +34,7 @@ export default {
     });
 
     return {
-      userTargetCalorie,
+      userTargetcalorie,
       totalCalories,
     };
   },
