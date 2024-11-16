@@ -1,6 +1,13 @@
 package com.example.gocalowly.domain.food.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="food")
 public class FoodData {
+	@Id
 	private String foodDataCode;
 	private String foodDataName;
 	private int foodDataCalorie;
