@@ -7,7 +7,7 @@ public class FoodLogMapper {
 	
 	public FoodLogEntity dtoToEntity(RegistFoodLogRequestDto request) {
 		return new FoodLogEntity(
-				request.getRecodeDate(),
+				request.getRecordDate(),
 				request.getMealType(),
 				request.getFoodName(),
 				request.getCalorie(),
