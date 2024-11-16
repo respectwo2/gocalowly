@@ -13,6 +13,7 @@ services:
       MYSQL_PASSWORD: ssafy
       TZ: Asia/Seoul
     restart: always
-
+    command: bash -c "chmod 044 /etc/my.cnf && docker-entrypoint.sh mysqld"
     volumes:
+      - ./my.cnf:/etc/my.cnf
       - ./db-init:/docker-entrypoint-initdb.d

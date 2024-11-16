@@ -1,10 +1,10 @@
-DROP TABLE `Food`;
-CREATE TABLE `Food` (
+DROP TABLE `food`;
+CREATE TABLE `food` (
 	`food_data_code`	varchar(100)	NOT NULL,
 	`food_data_name`	varchar(100)	NULL,
 	`food_data_calorie`	int	NULL
 );
-INSERT INTO `Food` VALUES
+INSERT INTO `food` VALUES
 ("D301-018340000-0001","비빔밥_약초",128)
 ,("D301-019040000-0001","삼각김밥_고추장불고기",165)
 ,("D301-019320000-0001","삼각김밥_숯불갈비",161)

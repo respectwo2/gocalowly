@@ -9,15 +9,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="user_food_log")
 public class FoodLogEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(columnDefinition = "BINARY(16)")
-	private int recodeId;
+	private UUID recordId;
 	
-	private LocalDateTime recodeDate;
+	private LocalDateTime recordDate;
 	private String mealType;
 	private String foodName;
 	private int calorie;
@@ -27,21 +29,21 @@ public class FoodLogEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FoodLogEntity(LocalDateTime recodeDate, String mealType, String foodName, int calorie, UUID userId) {
+	public FoodLogEntity(LocalDateTime recordDate, String mealType, String foodName, int calorie, UUID userId) {
 		super();
-		this.recodeDate = recodeDate;
+		this.recordDate = recordDate;
 		this.mealType = mealType;
 		this.foodName = foodName;
 		this.calorie = calorie;
 		this.userId = userId;
 	}
 
-	public int getRecodeId() {
-		return recodeId;
+	public UUID getRecordId() {
+		return recordId;
 	}
 
-	public LocalDateTime getRecodeDate() {
-		return recodeDate;
+	public LocalDateTime getRecordDate() {
+		return recordDate;
 	}
 
 	public String getMealType() {

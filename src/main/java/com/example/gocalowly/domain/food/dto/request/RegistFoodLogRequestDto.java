@@ -6,7 +6,7 @@ import java.util.UUID;
 
 //식사(음식) 등록해서 로그에 이용되는 DTO
 public class RegistFoodLogRequestDto {
-	private LocalDateTime recodeDate;
+	private LocalDateTime recordDate;
 	private String mealType;
 	private String foodName;
 	private int calorie;
@@ -16,17 +16,17 @@ public class RegistFoodLogRequestDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RegistFoodLogRequestDto(LocalDateTime recodeDate, String mealType, String foodName, int calorie, UUID userId) {
+	public RegistFoodLogRequestDto(LocalDateTime recordDate, String mealType, String foodName, int calorie, UUID userId) {
 		super();
-		this.recodeDate = recodeDate;
+		this.recordDate = recordDate;
 		this.mealType = mealType;
 		this.foodName = foodName;
 		this.calorie = calorie;
 		this.userId = userId;
 	}
 
-	public LocalDateTime getRecodeDate() {
-		return recodeDate;
+	public LocalDateTime getRecordDate() {
+		return recordDate;
 	}
 
 	public String getMealType() {

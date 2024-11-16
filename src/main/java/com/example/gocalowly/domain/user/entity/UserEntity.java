@@ -8,8 +8,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="user")
 public class UserEntity {
 	
 	@Id
@@ -22,20 +24,20 @@ public class UserEntity {
 	private String userPhoneNumber;
 	private String userNickName; //실제 로그인 시 사용되는 아이디 unique
 	private int completeCount; // 이번달 칼로리 지킨 날 수
-	private int userTargetCalorie;
+	private int userTargetcalorie;
 	
 	public UserEntity() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public UserEntity(String userPassword, String userName, String userPhoneNumber, String userNickName,
-			int userTargetCalorie) {
+			int userTargetcalorie) {
 		super();
 		this.userPassword = userPassword;
 		this.userName = userName;
 		this.userPhoneNumber = userPhoneNumber;
 		this.userNickName = userNickName;
-		this.userTargetCalorie = userTargetCalorie;
+		this.userTargetcalorie = userTargetcalorie;
 	}
 
 	public UUID getUserId() {
@@ -62,8 +64,8 @@ public class UserEntity {
 		return completeCount;
 	}
 
-	public int getUserTargetCalorie() {
-		return userTargetCalorie;
+	public int getUserTargetcalorie() {
+		return userTargetcalorie;
 	}
 	
 	
