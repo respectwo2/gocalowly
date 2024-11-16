@@ -11,18 +11,23 @@
       />
     </div>
 
-    <div v-if="isModalOpen" class="modal-overlay" @click="toggleModal">
-      <div class="modal-content" @click.stop>
-        <h2>상세 정보</h2>
-        <p>여기에 모달 내용이 들어갑니다.</p>
-        <button @click="toggleModal">닫기</button>
-      </div>
-    </div>
+    <!-- Modal 컴포넌트 렌더링 -->
+    <Modal
+      v-if="isModalOpen"
+      title="상세 정보"
+      content="여기에 모달 내용이 들어갑니다."
+      @close="toggleModal"
+    />
   </div>
 </template>
 
 <script>
+import Modal from "./MissonModal.vue";
+
 export default {
+  components: {
+    Modal,
+  },
   data() {
     return {
       isModalOpen: false,
@@ -75,37 +80,5 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* Modal Overlay */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000; /* 모달 우선순위 조정 */
-}
-
-/* Modal Content */
-.modal-content {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  width: 300px;
-  text-align: center;
-  z-index: 1001; /* 모달 우선순위 조정 */
-}
-
-.modal-content h2 {
-  margin: 0 0 1rem;
-}
-
-.modal-content p {
-  margin-bottom: 1rem;
 }
 </style>
