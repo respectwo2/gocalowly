@@ -4,4 +4,23 @@ package com.example.gocalowly.domain.group.dto.response;
 public class GroupInfoResponseDto {
 	private String groupName; // 그룹 이름
 	private int headcount; // 그룹 인원
+	
+	public GroupInfoResponseDto() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public GroupInfoResponseDto(String groupName, int headcount) {
+		super();
+		this.groupName = groupName;
+		this.headcount = headcount;
+	}
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public int getHeadcount() {
+		return headcount;
+	}
+	
 }

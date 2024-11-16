@@ -4,4 +4,18 @@ package com.example.gocalowly.domain.food.dto.request;
 public class SearchFoodColorieRequestDto {
 	private String foodDataName;
 	
+	public SearchFoodColorieRequestDto() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public SearchFoodColorieRequestDto(String foodDataName) {
+		super();
+		this.foodDataName = foodDataName;
+	}
+
+	public String getFoodDataName() {
+		return foodDataName;
+	}
+	
+	
 }

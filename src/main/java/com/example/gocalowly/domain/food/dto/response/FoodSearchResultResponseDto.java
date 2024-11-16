@@ -5,4 +5,23 @@ package com.example.gocalowly.domain.food.dto.response;
 public class FoodSearchResultResponseDto {
 	private String foodDataName;
 	private int foodDataCalorie;
+	
+	public FoodSearchResultResponseDto() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public FoodSearchResultResponseDto(String foodDataName, int foodDataCalorie) {
+		super();
+		this.foodDataName = foodDataName;
+		this.foodDataCalorie = foodDataCalorie;
+	}
+
+	public String getFoodDataName() {
+		return foodDataName;
+	}
+
+	public int getFoodDataCalorie() {
+		return foodDataCalorie;
+	}
+	
 }
