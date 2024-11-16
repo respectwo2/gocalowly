@@ -2,6 +2,8 @@ package com.example.gocalowly.domain.user.service;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.example.gocalowly.domain.user.dto.request.LoginRequestDto;
 import com.example.gocalowly.domain.user.dto.request.SignUpRequestDto;
 import com.example.gocalowly.domain.user.dto.request.TargetCalorieRequestDto;
@@ -10,6 +12,7 @@ import com.example.gocalowly.domain.user.entity.UserEntity;
 import com.example.gocalowly.domain.user.mapper.UserMapper;
 import com.example.gocalowly.domain.user.repository.UserRepository;
 
+@Service
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -27,7 +30,7 @@ public class UserService {
     
     public LoginResponseDto loginUser(LoginRequestDto loginRequestDto) {
     	return userMapper.entityToDto(
-    			userRepository.findByNicknameAndPass(
+    			userRepository.findByUserNickNameAndUserPassword(
     			loginRequestDto.getUserNickName(), loginRequestDto.getUserPassword())
     			.orElse(null // 여기에 에러 처리 들어갈 수도 있고 Repository랑 똑같이 Optional 들어갈 수 있어요.
     			));
