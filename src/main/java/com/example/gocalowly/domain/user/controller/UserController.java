@@ -3,13 +3,15 @@ package com.example.gocalowly.domain.user.controller;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.gocalowly.domain.user.dto.request.SignUpRequestDto;
 import com.example.gocalowly.domain.user.dto.request.TargetCalorieRequestDto;
+import com.example.gocalowly.domain.user.entity.UserEntity;
 import com.example.gocalowly.domain.user.service.UserService;
 
 @RestController
@@ -32,4 +34,15 @@ public class UserController {
 		return ResponseEntity.badRequest().body("");	
 		}
 	}
+	
+	@PostMapping("/signup")
+	public ResponseEntity<?> signupUser(@RequestBody SignUpRequestDto signUpRequestDto) {
+		try {
+			userService.addUser(signUpRequestDto);
+			return ResponseEntity.ok("");
+		}catch(Exception e) {
+			return ResponseEntity.badRequest().body("");
+		}
+	}
+	
 }
