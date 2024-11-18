@@ -1,5 +1,7 @@
 package com.example.gocalowly.domain.food.repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.ibatis.annotations.Param;
@@ -23,4 +25,15 @@ public interface UserFoodLogRepository extends JpaRepository<FoodLogEntity, UUID
     
     @Query("SELECT IFNULL(SUM(calorie), 0) FROM FoodLogEntity fl WHERE fl.userId = :userId AND fl.recordDate = CURDATE()")
     int findTodayCalorieSumByUserId(@Param("userId") UUID userId);
+    
+//    @Query("SELECT f FROM FoodLogEntity f WHERE f.userId = :userId AND f.recordDate BETWEEN :startOfMonth AND :endOfMonth " )
+//    List<FoodLogEntity> findByUserIdAndMonth(@Param("userId") UUID userId, 
+//                                             @Param("startOfMonth") LocalDateTime startOfMonth, 
+//                                             @Param("endOfMonth") LocalDateTime endOfMonth);
+
+    
+    @Query("SELECT f FROM FoodLogEntity f WHERE f.userId = :userId AND FUNCTION('YEAR', f.recordDate) = FUNCTION('YEAR', CURRENT_DATE) AND FUNCTION('MONTH', f.recordDate) = FUNCTION('MONTH', CURRENT_DATE)")
+    List<FoodLogEntity> findByUserIdAndCurrentMonth(@Param("userId") UUID userId);
+
+
 }
