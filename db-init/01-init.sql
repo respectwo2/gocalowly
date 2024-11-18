@@ -25,14 +25,14 @@ CREATE TABLE `group_mission` (
 CREATE TABLE `chat_message` (
 	`chat_no`	int	NOT NULL,
 	`user_name`	varchar(50)	NULL,
-	`chat_date`	date	NULL,
+	`chat_date`	datetime	NULL,
 	`content`	varchar(100)	NULL,
 	`group_no`	int	NOT NULL
 );
 
 CREATE TABLE `user_food_log` (
 	`record_id`	binary(16)	NOT NULL,
-	`record_date`	date	NULL,
+	`record_date`	datetime	NULL,
 	`meal_type`	varchar(10)	NULL,
 	`food_name`	varchar(50)	NULL,
 	`calorie`	int	NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `user` (
 
 CREATE TABLE `user_goal` (
 	`user_goal_no`	int	NOT NULL,
-	`user_goal_date`	date	NOT NULL,
+	`user_goal_date`	datetime	NOT NULL,
 	`is_goal_complete`	boolean	NULL,
 	`user_id`	binary(16)	NOT NULL
 );
