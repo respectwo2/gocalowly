@@ -2,28 +2,28 @@ package com.example.gocalowly.domain.user.dto.request;
 
 // 회원가입때 사용되는 DTO
 public class SignUpRequestDto {
-	private String userNickName; //유저 닉네임
+	private String userNickname; //유저 닉네임
 	private String userPassword; //유저 비밀번호
 	private String userName; //유저 이름
-	private String userPhoneNumber; //유저 번호
-	private int userTargetCalorie; //목표 칼로리
+	private String userPhonenumber; //유저 번호
+	private int userTargetcalorie; //목표 칼로리
 	
 	public SignUpRequestDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SignUpRequestDto(String userNickName, String userPassword, String userName, String userPhoneNumber,
-			int userTargetCalorie) {
+	public SignUpRequestDto(String userNickname, String userPassword, String userName, String userPhonenumber,
+			int userTargetcalorie) {
 		super();
-		this.userNickName = userNickName;
+		this.userNickname = userNickname;
 		this.userPassword = userPassword;
 		this.userName = userName;
-		this.userPhoneNumber = userPhoneNumber;
-		this.userTargetCalorie = userTargetCalorie;
+		this.userPhonenumber = userPhonenumber;
+		this.userTargetcalorie = userTargetcalorie;
 	}
 
-	public String getUserNickName() {
-		return userNickName;
+	public String getUserNickname() {
+		return userNickname;
 	}
 
 	public String getUserPassword() {
@@ -34,12 +34,12 @@ public class SignUpRequestDto {
 		return userName;
 	}
 
-	public String getUserPhoneNumber() {
-		return userPhoneNumber;
+	public String getUserPhonenumber() {
+		return userPhonenumber;
 	}
 
-	public int getUserTargetCalorie() {
-		return userTargetCalorie;
+	public int getUserTargetcalorie() {
+		return userTargetcalorie;
 	}
 	
 	

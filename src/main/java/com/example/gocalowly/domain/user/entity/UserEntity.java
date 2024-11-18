@@ -21,8 +21,8 @@ public class UserEntity {
 	
 	private String userPassword;
 	private String userName;
-	private String userPhoneNumber;
-	private String userNickName; //실제 로그인 시 사용되는 아이디 unique
+	private String userPhonenumber;
+	private String userNickname; //실제 로그인 시 사용되는 아이디 unique
 	private int completeCount; // 이번달 칼로리 지킨 날 수
 	private int userTargetcalorie;
 	
@@ -35,8 +35,8 @@ public class UserEntity {
 		super();
 		this.userPassword = userPassword;
 		this.userName = userName;
-		this.userPhoneNumber = userPhoneNumber;
-		this.userNickName = userNickName;
+		this.userPhonenumber = userPhonenumber;
+		this.userNickname = userNickname;
 		this.userTargetcalorie = userTargetcalorie;
 	}
 
@@ -52,12 +52,12 @@ public class UserEntity {
 		return userName;
 	}
 
-	public String getUserPhoneNumber() {
-		return userPhoneNumber;
+	public String getUserPhonenumber() {
+		return userPhonenumber;
 	}
 
-	public String getUserNickName() {
-		return userNickName;
+	public String getUserNickname() {
+		return userNickname;
 	}
 
 	public int getCompleteCount() {
@@ -68,5 +68,11 @@ public class UserEntity {
 		return userTargetcalorie;
 	}
 	
+    public void updateTargetCalorie(int newTargetCalorie) {
+        if (newTargetCalorie <= 0) {
+            // 여기서 예외 처리!!
+        }
+        this.userTargetcalorie = newTargetCalorie;
+    }
 	
 }
