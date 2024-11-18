@@ -1,6 +1,7 @@
 package com.example.gocalowly.domain.user.service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,10 @@ import com.example.gocalowly.domain.user.entity.UserEntity;
 import com.example.gocalowly.domain.user.mapper.UserMapper;
 import com.example.gocalowly.domain.user.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -30,16 +34,17 @@ public class UserService {
     
     public LoginResponseDto loginUser(LoginRequestDto loginRequestDto) {
     	return userMapper.entityToDto(
-    			userRepository.findByUserNickNameAndUserPassword(
-    			loginRequestDto.getUserNickName(), loginRequestDto.getUserPassword())
+    			userRepository.findByUserNicknameAndUserPassword(
+    			loginRequestDto.getUserNickname(), loginRequestDto.getUserPassword())
     			.orElse(null // 여기에 에러 처리 들어갈 수도 있고 Repository랑 똑같이 Optional 들어갈 수 있어요.
     			));
     }
     
-    public boolean updateUserTargetCalorie(TargetCalorieRequestDto targetCalorieRequestDto) {
-    	return userRepository.updateUserTargetCalorie(
-    			targetCalorieRequestDto.getUserId(),
-    			targetCalorieRequestDto.getUserTargetCalorie())
-    			== 1;
+    public void updateUserTargetCalorie(UUID userId, TargetCalorieRequestDto targetCalorieRequestDto) {
+    	UserEntity user = userRepository.findById(userId)
+    			.orElse(null // 여기서 예외 처리!!
+    					);
+    	
+    	user.updateTargetCalorie(targetCalorieRequestDto.getUserTargetcalorie());
     }
 }
