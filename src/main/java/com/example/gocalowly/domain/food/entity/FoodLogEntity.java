@@ -31,10 +31,32 @@ public class FoodLogEntity {
 
 	public FoodLogEntity(LocalDateTime recordDate, String mealType, String foodName, int calorie, UUID userId) {
 		super();
+		setRecordDate(recordDate);
+		setMealType(mealType);
+		setFoodName(foodName);
+		setCalorie(calorie);
+		setUserId(userId);
+	}
+
+	
+	
+	private void setRecordDate(LocalDateTime recordDate) {
 		this.recordDate = recordDate;
+	}
+
+	private void setMealType(String mealType) {
 		this.mealType = mealType;
+	}
+
+	private void setFoodName(String foodName) {
 		this.foodName = foodName;
+	}
+
+	private void setCalorie(int calorie) {
 		this.calorie = calorie;
+	}
+
+	private void setUserId(UUID userId) {
 		this.userId = userId;
 	}
 
