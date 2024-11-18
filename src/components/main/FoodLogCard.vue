@@ -2,8 +2,8 @@
   <div class="food-log-card">
     <div class="date">{{ date }}</div>
     <ul>
-      <li v-for="meal in meals" :key="meal.mealType" class="meal-item">
-        meal.mealType - meal.foodName : meal.calorie kcal
+      <li v-for="food in foodEntries" :key="food.mealType" class="food-item">
+        food.mealType - food.foodName : food.calorie kcal
       </li>
     </ul>
     <div class="total-calories">{{ totalCalories }}</div>
@@ -14,7 +14,7 @@
 export default {
   props: {
     date: String,
-    meals: Array,
+    foods: Array,
     totalCalories: Number,
   },
 };
@@ -44,7 +44,7 @@ export default {
 }
 
 /* Meal Item */
-.meal-item {
+.food-item {
   position: relative;
   width: 229px;
   font-family: "Inter", sans-serif;

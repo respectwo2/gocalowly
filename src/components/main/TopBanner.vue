@@ -1,8 +1,12 @@
 <template>
   <div class="calorie-info">
     <div class="calorie-text">
-      <p>목표 하루 칼로리: {{ userTargetcalorie }}kcal</p>
-      <p>오늘 입력한 칼로리: {{ totalCalories }}kcal</p>
+      <div>
+        Goal : {{ userTargetcalorie }}kcal
+      </div>
+      <div>
+        Today's : {{ totalCalories }}kcal
+      </div>
     </div>
   </div>
 </template>
@@ -63,8 +67,10 @@ export default {
   line-height: 24px;
   color: #000000;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-top: 5px;
 }
 </style>
