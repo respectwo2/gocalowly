@@ -100,7 +100,7 @@ public class UserEntity {
 	private void setUserTargetcalorie(int userTargetcalorie) {
 		this.userTargetcalorie = userTargetcalorie;
 	}
-	
+
 	
     
 	
