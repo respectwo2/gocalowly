@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.gocalowly.domain.food.dto.request.ReadUserColorieRequestDto;
 import com.example.gocalowly.domain.food.dto.response.DailyCalorieSummaryResponseDto;
 import com.example.gocalowly.domain.food.service.UserFoodLogService;
 
@@ -29,6 +28,6 @@ public class UserFoodLogController {
 		UUID userId = UUID.fromString("00000000-0000-0000-0000-000000000001");
 		
 		return ResponseEntity.ok(
-				userFoodLogService.findDailyCalorieSummary(new ReadUserColorieRequestDto(userId)));
+				userFoodLogService.findDailyCalorieSummary(userId));
 	}
 }

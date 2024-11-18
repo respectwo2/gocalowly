@@ -4,21 +4,15 @@ import java.util.List;
 
 // 미션 달성 여부 업데이트를 요청하는 RequestDto 입니다. 
 public class GroupMissionUpdateRequestDto {
-	private int userNo; // 유저 No
 	private List<MissionComplete> missionCompletes; // 미션 별 달성 여부 리스트 입니다.
 
 	public GroupMissionUpdateRequestDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public GroupMissionUpdateRequestDto(int userNo, List<MissionComplete> missionCompletes) {
+	public GroupMissionUpdateRequestDto(List<MissionComplete> missionCompletes) {
 		super();
-		this.userNo = userNo;
 		this.missionCompletes = missionCompletes;
-	}
-
-	public int getUserNo() {
-		return userNo;
 	}
 
 	public List<MissionComplete> getMissionCompletes() {

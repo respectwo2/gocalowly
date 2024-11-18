@@ -30,7 +30,7 @@ public class UserEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserEntity(String userPassword, String userName, String userPhoneNumber, String userNickName,
+	public UserEntity(String userPassword, String userName, String userPhonenumber, String userNickname,
 			int userTargetcalorie) {
 		super();
 		this.userPassword = userPassword;
