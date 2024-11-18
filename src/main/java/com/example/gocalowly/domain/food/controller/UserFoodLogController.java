@@ -5,7 +5,10 @@ import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.gocalowly.domain.food.dto.request.ReadUserColorieRequestDto;
@@ -23,7 +26,7 @@ public class UserFoodLogController {
 	
 	@GetMapping("/target-calorie")
 	public ResponseEntity<DailyCalorieSummaryResponseDto> findDaliyCalorieSummary() {
-		UUID userId = UUID.fromString("00000000-0000-0000-0000-000000000051");
+		UUID userId = UUID.fromString("00000000-0000-0000-0000-000000000001");
 		
 		return ResponseEntity.ok(
 				userFoodLogService.findDailyCalorieSummary(new ReadUserColorieRequestDto(userId)));
