@@ -22,6 +22,6 @@ public class UserFoodLogService {
 		int userTargetCaloire = userFoodLogRepository.findTargetCalorieByUserId(userId);
 		int totalCalories = userFoodLogRepository.findTodayCalorieSumByUserId(userId);
 		
-		return new DailyCalorieSummaryResponseDto(userTargetCaloire, totalCalories);
+		return new DailyCalorieSummaryResponseDto(totalCalories, userTargetCaloire);
 	}
 }
