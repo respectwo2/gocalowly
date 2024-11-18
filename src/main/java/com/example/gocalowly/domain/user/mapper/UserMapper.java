@@ -20,7 +20,7 @@ public class UserMapper {
 
 	// 유저로 로그인 객체 생성
 	public LoginResponseDto entityToDto(UserEntity user) {
-		return new LoginResponseDto(user.getUserId(),
+		return new LoginResponseDto(
 				user.getUserNickname()
 				);
 	}
