@@ -11,8 +11,18 @@ public class GroupEntity {
 	}
 	public GroupEntity(int calorieGoal, int headcount, String groupName) {
 		super();
+		setCalorieGoal(calorieGoal);
+		setHeadcount(headcount);
+		setGroupName(groupName);
+	}
+	
+	private void setCalorieGoal(int calorieGoal) {
 		this.calorieGoal = calorieGoal;
+	}
+	private void setHeadcount(int headcount) {
 		this.headcount = headcount;
+	}
+	private void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
 	public int getgroupNo() {

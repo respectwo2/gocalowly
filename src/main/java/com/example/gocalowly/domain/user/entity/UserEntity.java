@@ -33,11 +33,11 @@ public class UserEntity {
 	public UserEntity(String userPassword, String userName, String userPhonenumber, String userNickname,
 			int userTargetcalorie) {
 		super();
-		this.userPassword = userPassword;
-		this.userName = userName;
-		this.userPhonenumber = userPhonenumber;
-		this.userNickname = userNickname;
-		this.userTargetcalorie = userTargetcalorie;
+		setUserPassword(userPassword);
+		setUserName(userName);
+		setUserPhonenumber(userPhonenumber);
+		setUserNickname(userNickname);
+		setUserTargetcalorie(userTargetcalorie);
 	}
 
 	public UUID getUserId() {
@@ -74,5 +74,34 @@ public class UserEntity {
         }
         this.userTargetcalorie = newTargetCalorie;
     }
+
+	public void changePassword(String encryptedPassword) {
+		this.userPassword = encryptedPassword;
+	}
+
+	
+	
+	private void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+
+	private void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	private void setUserPhonenumber(String userPhonenumber) {
+		this.userPhonenumber = userPhonenumber;
+	}
+
+	private void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
+	}
+
+	private void setUserTargetcalorie(int userTargetcalorie) {
+		this.userTargetcalorie = userTargetcalorie;
+	}
+	
+	
+    
 	
 }

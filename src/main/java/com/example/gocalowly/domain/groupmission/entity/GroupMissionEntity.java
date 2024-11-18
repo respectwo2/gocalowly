@@ -9,11 +9,19 @@ public class GroupMissionEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public GroupMissionEntity(int missionId, String missionName, int groupId) {
+	public GroupMissionEntity(int missionId, String missionName) {
 		super();
+		setMissionId(missionId);
+		setMissionName(missionName);
+	}
+	
+
+	private void setMissionId(int missionId) {
 		this.missionId = missionId;
+	}
+
+	private void setMissionName(String missionName) {
 		this.missionName = missionName;
-		this.groupId = groupId;
 	}
 
 	public int getMissionId() {
