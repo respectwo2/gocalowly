@@ -7,14 +7,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.example.gocalowly.domain.food.dto.response.DailyCalorieSummaryResponseDto;
-import com.example.gocalowly.domain.food.entity.FoodData;
 import com.example.gocalowly.domain.food.entity.FoodLogEntity;
 
+
 public interface UserFoodLogRepository extends JpaRepository<FoodLogEntity, UUID> {
-//    @Query("SELECT new DailyCalorieSummaryResponseDto(u.user_targetcalorie, SUM(uf.calorie))"
-//    		+ " FROM User u"
-//    		+ " LEFT JOIN UserFoodLog uf ON u.user_id = uf.user_id"
-//    		+ " WHERE u.user_id = :userId AND uf.recode_date = CURDATE()")
+//    @Query("SELECT new DailyCalorieSummaryResponseDto(u.userTargetcalorie, IFNULL(SUM(fl.calorie), 0))"
+//    		+ " FROM UserEntity u"
+//    		+ " LEFT JOIN FoodLogEntity fl ON u.userId = fl.userId"
+//    		+ " WHERE u.userId = :userId AND DATE(fl.recordDate) = CURDATE()")
 //    DailyCalorieSummaryResponseDto findTargetCalorieByUserId(@Param("userId") UUID userId);
     
     

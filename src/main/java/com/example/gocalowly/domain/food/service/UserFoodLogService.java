@@ -20,10 +20,12 @@ public class UserFoodLogService {
 	}
 	
 	public DailyCalorieSummaryResponseDto findDailyCalorieSummary(UUID userId) {
-		int userTargetCaloire = userFoodLogRepository.findTargetCalorieByUserId(userId);
-		int totalCalories = userFoodLogRepository.findTodayCalorieSumByUserId(userId);
+
+		int todayTotalCalorie = userFoodLogRepository.findTodayCalorieSumByUserId(userId);
+		int userTargetCalorie = userFoodLogRepository.findTargetCalorieByUserId(userId);
 		
-		return new DailyCalorieSummaryResponseDto(totalCalories, userTargetCaloire);
+		
+		return new DailyCalorieSummaryResponseDto(todayTotalCalorie, userTargetCalorie);
 	}
 	
 	public void addUserFoodLog(RegistFoodLogRequestDto registFoodLogRequestDto, UUID userID) {
