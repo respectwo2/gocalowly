@@ -54,7 +54,6 @@ public class GroupMissionSerivce {
 	private void updateGroupMission(UserGroupMissionEntity userGroupMission, List<MissionComplete> missionCompletes) {
 		for (MissionComplete missionComplete :missionCompletes) {
 			if (missionComplete.getMissionNo() == userGroupMission.getGroupMission().getMissionNo()) {
-				System.out.println(missionComplete.getMissionNo() + " " + missionComplete.isMissionComplete());
 				userGroupMission.setMissionComplete(missionComplete.isMissionComplete());
 			}
 		}
