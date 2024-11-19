@@ -1,5 +1,5 @@
 -- group_mission 더미 데이터 생성
-INSERT INTO `group_mission` (`mission_no`, `misson_name`, `group_no`)
+INSERT INTO `group_mission` (`mission_no`, `mission_name`, `group_no`)
 VALUES
 (1, 'Drink 2L of water', 5),
 (2, 'Exercise for 30 minutes', 5),

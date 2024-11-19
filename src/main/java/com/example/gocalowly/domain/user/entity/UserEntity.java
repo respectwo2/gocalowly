@@ -1,13 +1,22 @@
 package com.example.gocalowly.domain.user.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import com.example.gocalowly.domain.food.entity.FoodLogEntity;
+import com.example.gocalowly.domain.group.entity.GroupEntity;
+import com.example.gocalowly.domain.groupmission.entity.UserGroupMissionEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,6 +38,13 @@ public class UserEntity {
 	public UserEntity() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "group_no")
+	private GroupEntity group;
+	
+	@OneToMany(mappedBy = "user")
+	private List<UserGroupMissionEntity> userGroupMissions = new ArrayList<>();
 
 	public UserEntity(String userPassword, String userName, String userPhonenumber, String userNickname,
 			int userTargetcalorie) {
@@ -100,8 +116,17 @@ public class UserEntity {
 	private void setUserTargetcalorie(int userTargetcalorie) {
 		this.userTargetcalorie = userTargetcalorie;
 	}
-
 	
-    
 	
+	public void addUserGroupMission(UserGroupMissionEntity userGroupMissionEntity) {
+		if (userGroupMissions.contains(userGroupMissionEntity)) {
+			// 여기서 중복 처리!!
+		}
+		
+		userGroupMissions.add(userGroupMissionEntity);
+	}
+	
+	public List<UserGroupMissionEntity> getUserMissions() {
+		return userGroupMissions;
+	}
 }

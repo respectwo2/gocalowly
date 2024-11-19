@@ -6,10 +6,33 @@ import java.util.List;
 public class GroupMissionResponseDto {
 	private List<Mission> missions; // 미션 리스트를 전달합니다.
 	
+	public GroupMissionResponseDto(List<Mission> missions) {
+		this.missions = missions;
+	}
+	
+	public List<Mission> getMissions() {
+		return missions;
+	}
+
 	public static class Mission { // 미션 클래스를 내부에서 선언합니다.
 		private int missionId; // 미션 ID
 		private String missionName; // 미션 이름
 		private boolean isMissionComplete; // 미션 달성 여부
 		
+		public Mission(int missionId, String missionName, boolean isMissionComplete) {
+			this.missionId = missionId;
+			this.missionName = missionName;
+			this.isMissionComplete = isMissionComplete;
+		}
+		
+		public int getMissionId() {
+			return missionId;
+		}
+		public String getMissionName() {
+			return missionName;
+		}
+		public boolean isMissionComplete() {
+			return isMissionComplete;
+		}
 	}
 }
