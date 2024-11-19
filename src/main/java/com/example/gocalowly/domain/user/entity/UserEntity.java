@@ -45,6 +45,9 @@ public class UserEntity {
 	
 	@OneToMany(mappedBy = "user")
 	private List<UserGroupMissionEntity> userGroupMissions = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user")
+	private List<FoodLogEntity> foodlogs = new ArrayList<>();
 
 	public UserEntity(String userPassword, String userName, String userPhonenumber, String userNickname,
 			int userTargetcalorie) {
@@ -128,5 +131,17 @@ public class UserEntity {
 	
 	public List<UserGroupMissionEntity> getUserMissions() {
 		return userGroupMissions;
+	}
+	
+	public void addFoodLog(FoodLogEntity foodLogEntity) {
+		if (foodlogs.contains(foodLogEntity)) {
+			// 여기서 중복 처리!!
+		}
+		
+		foodlogs.add(foodLogEntity);
+	}
+	
+	public List<FoodLogEntity> getFoodLogs() {
+		return foodlogs;
 	}
 }
