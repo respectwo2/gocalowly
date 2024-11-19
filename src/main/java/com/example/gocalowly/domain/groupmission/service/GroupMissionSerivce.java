@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.gocalowly.domain.group.entity.GroupEntity;
 import com.example.gocalowly.domain.group.repository.GroupRepository;
+import com.example.gocalowly.domain.groupmission.dto.request.GroupMissionUpdateRequestDto;
+import com.example.gocalowly.domain.groupmission.dto.request.GroupMissionUpdateRequestDto.MissionComplete;
 import com.example.gocalowly.domain.groupmission.dto.response.GroupMissionResponseDto;
 import com.example.gocalowly.domain.groupmission.entity.UserGroupMissionEntity;
 import com.example.gocalowly.domain.groupmission.repository.GroupMissionRepository;
@@ -29,10 +31,9 @@ public class GroupMissionSerivce {
 	}
 	
 	public GroupMissionResponseDto getGroupMissions(UUID userId) {
-		UserEntity user = userRepository.findById(userId).
-				orElseThrow(() -> new NoSuchElementException("일치하는 유저가 없습니다."));
-				
-		List<UserGroupMissionEntity> userMissions = user.getUserMissions();
+		List<UserGroupMissionEntity> userMissions = userRepository.findById(userId)
+				.orElseThrow(() -> new NoSuchElementException("일치하는 유저가 없습니다."))
+				.getUserMissions();
 		
 		return new GroupMissionResponseDto(userMissions.stream()
 				.map(userGroupMissionEntity -> new GroupMissionResponseDto.Mission(
@@ -41,4 +42,22 @@ public class GroupMissionSerivce {
 						userGroupMissionEntity.isMissionComplete()))
 				.toList());
 	}
+	
+	public void updateGroupMissions(GroupMissionUpdateRequestDto groupMissionUpdateRequestDto, UUID userId) {
+		List<UserGroupMissionEntity> userMissions = userRepository.findById(userId)
+				.orElseThrow(() -> new NoSuchElementException("일치하는 유저가 없습니다."))
+				.getUserMissions();
+		
+		userMissions.forEach(userGroupMission -> updateGroupMission(userGroupMission, groupMissionUpdateRequestDto.getMissionCompletes()));
+	}
+
+	private void updateGroupMission(UserGroupMissionEntity userGroupMission, List<MissionComplete> missionCompletes) {
+		for (MissionComplete missionComplete :missionCompletes) {
+			if (missionComplete.getMissionNo() == userGroupMission.getGroupMission().getMissionNo()) {
+				System.out.println(missionComplete.getMissionNo() + " " + missionComplete.isMissionComplete());
+				userGroupMission.setMissionComplete(missionComplete.isMissionComplete());
+			}
+		}
+	}
+	
 }
