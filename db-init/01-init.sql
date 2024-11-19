@@ -13,7 +13,7 @@ CREATE TABLE `group` (
 
 CREATE TABLE `group_mission` (
 	`mission_no`	int	NOT NULL,
-	`misson_name`	varchar(30)	NULL,
+	`mission_name`	varchar(30)	NULL,
 	`group_no`	int	NOT NULL
 );
 
