@@ -31,7 +31,7 @@ public class GroupMissionSerivce {
 	}
 	
 	public GroupMissionResponseDto getGroupMissions(UUID userId) {
-		List<UserGroupMissionEntity> userMissions = userRepository.findById(userId)
+		List<UserGroupMissionEntity> userMissions = userRepository.findByIdWithMissions(userId)
 				.orElseThrow(() -> new NoSuchElementException("일치하는 유저가 없습니다."))
 				.getUserMissions();
 		
@@ -44,7 +44,7 @@ public class GroupMissionSerivce {
 	}
 	
 	public void updateGroupMissions(GroupMissionUpdateRequestDto groupMissionUpdateRequestDto, UUID userId) {
-		List<UserGroupMissionEntity> userMissions = userRepository.findById(userId)
+		List<UserGroupMissionEntity> userMissions = userRepository.findByIdWithMissions(userId)
 				.orElseThrow(() -> new NoSuchElementException("일치하는 유저가 없습니다."))
 				.getUserMissions();
 		
