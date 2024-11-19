@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.gocalowly.domain.food.dto.request.RegistFoodLogRequestDto;
 import com.example.gocalowly.domain.food.dto.response.DailyCalorieSummaryResponseDto;
 import com.example.gocalowly.domain.food.dto.response.DailyFoodLogResponseDto;
+import com.example.gocalowly.domain.food.dto.response.DailyGoalStatusResponseDto;
 import com.example.gocalowly.domain.food.service.UserFoodLogService;
 
 @RestController
@@ -28,9 +29,6 @@ public class UserFoodLogController {
 	
 	@GetMapping("/target-calorie")
 	public ResponseEntity<DailyCalorieSummaryResponseDto> findDaliyCalorieSummary() {
-		UUID testUserId = UUID.fromString("00000000-0000-0000-0000-000000000001");
-
-		
 		return ResponseEntity.ok(
 				userFoodLogService.findDailyCalorieSummary(testUserId));
 	}
@@ -51,5 +49,10 @@ public class UserFoodLogController {
 		
 		return ResponseEntity.ok("");
 
+	}
+	
+	@GetMapping("/goals")
+	public ResponseEntity<DailyGoalStatusResponseDto> findDailyGoalStatus() {
+		return ResponseEntity.ok(userFoodLogService.findDailyGoalStatus(testUserId));
 	}
 }
