@@ -19,9 +19,11 @@ public class UserMapper {
 	}
 
 	// 유저로 로그인 객체 생성
-	public LoginResponseDto entityToDto(UserEntity user) {
+	public LoginResponseDto entityToDto(UserEntity user, int groupNo) {
 		return new LoginResponseDto(
-				user.getUserNickname()
+				user.getUserNickname(),
+				user.getUserId(),
+				groupNo
 				);
 	}
 

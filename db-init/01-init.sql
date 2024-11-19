@@ -11,11 +11,6 @@ CREATE TABLE `group` (
 	`group_name`	varchar(30)	NULL
 );
 
-CREATE TABLE `user_group` (
-	`user_id`	binary(16)	NOT NULL,
-	`group_no`	int	NOT NULL
-);
-
 CREATE TABLE `group_mission` (
 	`mission_no`	int	NOT NULL,
 	`misson_name`	varchar(30)	NULL,
@@ -57,7 +52,8 @@ CREATE TABLE `user` (
 	`user_name`	varchar(50)	NULL,
 	`user_phonenumber`	varchar(50)	NULL,
 	`complete_count`	int	NULL,
-	`user_targetcalorie`	int	NULL
+	`user_targetcalorie`	int	NULL,
+    `group_no` int NOT NULL
 );
 
 CREATE TABLE `user_goal` (
@@ -72,11 +68,6 @@ ALTER TABLE `food` ADD CONSTRAINT `PK_FOOD` PRIMARY KEY (
 );
 
 ALTER TABLE `group` ADD CONSTRAINT `PK_GROUP` PRIMARY KEY (
-	`group_no`
-);
-
-ALTER TABLE `user_group` ADD CONSTRAINT `PK_USER_GROUP` PRIMARY KEY (
-	`user_id`,
 	`group_no`
 );
 
@@ -109,38 +100,58 @@ ALTER TABLE `user_goal` ADD CONSTRAINT `PK_USER_GOAL` PRIMARY KEY (
 	`user_goal_no`
 );
 
-ALTER TABLE `user_group` ADD CONSTRAINT `FK_user_TO_user_group_1` FOREIGN KEY (
-	`user_id`
-)
-REFERENCES `user` (
-	`user_id`
-);
-
-ALTER TABLE `user_group` ADD CONSTRAINT `FK_group_TO_user_group_1` FOREIGN KEY (
-	`group_no`
+ALTER TABLE `group_mission` ADD CONSTRAINT `FK_group_TO_group_mission_1` FOREIGN KEY (
+    `group_no`
 )
 REFERENCES `group` (
-	`group_no`
+    `group_no`
+);
+
+ALTER TABLE `chat_message` ADD CONSTRAINT `FK_group_TO_chat_message_1` FOREIGN KEY (
+    `group_no`
+)
+REFERENCES `group` (
+    `group_no`
+);
+
+ALTER TABLE `user_food_log` ADD CONSTRAINT `FK_user_TO_user_food_log_1` FOREIGN KEY (
+    `user_id`
+)
+REFERENCES `user` (
+    `user_id`
 );
 
 ALTER TABLE `user_salt` ADD CONSTRAINT `FK_user_TO_user_salt_1` FOREIGN KEY (
-	`user_id`
+    `user_id`
 )
 REFERENCES `user` (
-	`user_id`
+    `user_id`
 );
 
 ALTER TABLE `user_group_mission` ADD CONSTRAINT `FK_user_TO_user_group_mission_1` FOREIGN KEY (
-	`user_id`
+    `user_id`
 )
 REFERENCES `user` (
-	`user_id`
+    `user_id`
 );
 
 ALTER TABLE `user_group_mission` ADD CONSTRAINT `FK_group_mission_TO_user_group_mission_1` FOREIGN KEY (
-	`mission_no`
+    `mission_no`
 )
 REFERENCES `group_mission` (
-	`mission_no`
+    `mission_no`
 );
 
+ALTER TABLE `user` ADD CONSTRAINT `FK_group_TO_user_1` FOREIGN KEY (
+    `group_no`
+)
+REFERENCES `group` (
+    `group_no`
+);
+
+ALTER TABLE `user_goal` ADD CONSTRAINT `FK_user_TO_user_goal_1` FOREIGN KEY (
+    `user_id`
+)
+REFERENCES `user` (
+    `user_id`
+);

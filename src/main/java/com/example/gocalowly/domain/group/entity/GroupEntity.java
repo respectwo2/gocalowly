@@ -1,6 +1,13 @@
 package com.example.gocalowly.domain.group.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="`group`")
 public class GroupEntity {
+	@Id
 	private int groupNo;
 	private int calorieGoal;
 	private int headcount;
