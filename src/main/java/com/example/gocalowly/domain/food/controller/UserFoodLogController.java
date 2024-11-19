@@ -19,9 +19,9 @@ import com.example.gocalowly.domain.food.service.UserFoodLogService;
 @RestController
 @RequestMapping("/api/user")
 public class UserFoodLogController {
-	UserFoodLogService userFoodLogService;
 	
-	static final UUID testUserId = UUID.fromString("00000000-0000-0000-0000-000000000001");
+	private static final UUID TEST_USERID  = UUID.fromString("00000000-0000-0000-0000-000000000001");
+	UserFoodLogService userFoodLogService;
 	
 	public UserFoodLogController(UserFoodLogService userFoodLogService) {
 		this.userFoodLogService = userFoodLogService;
@@ -29,23 +29,23 @@ public class UserFoodLogController {
 	
 	@GetMapping("/target-calorie")
 	public ResponseEntity<DailyCalorieSummaryResponseDto> findDaliyCalorieSummary() {
+
 		return ResponseEntity.ok(
-				userFoodLogService.findDailyCalorieSummary(testUserId));
+				userFoodLogService.findDailyCalorieSummary(TEST_USERID));
 	}
 	
-
-	@GetMapping("food-logs")
+	@GetMapping("/food-logs")
 	public ResponseEntity<List<DailyFoodLogResponseDto>> findFoodLog(){
 		
 		return ResponseEntity.ok(
-				userFoodLogService.findFoodLogs(testUserId)
+				userFoodLogService.findFoodLogs(TEST_USERID)
 				);
 	}
 
 	@PostMapping("/food-logs")
 	public ResponseEntity<String> addUserFoodLog(@RequestBody RegistFoodLogRequestDto registFoodLogRequestDto){
 		
-		userFoodLogService.addUserFoodLog(registFoodLogRequestDto, testUserId);
+		userFoodLogService.addUserFoodLog(registFoodLogRequestDto, TEST_USERID);
 		
 		return ResponseEntity.ok("");
 

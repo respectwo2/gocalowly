@@ -82,8 +82,7 @@ public class UserFoodLogService {
 			return new DailyFoodLogResponseDto(dateTime, totalCalories[0], foodEntries);
 		}).toList();
 	}
-
-	
+  
 	public void addUserFoodLog(RegistFoodLogRequestDto registFoodLogRequestDto, UUID userId) {		
 		FoodLogEntity foodLog = foodLogMapper.dtoToEntity(registFoodLogRequestDto);
 		foodLog.setUser(entityManager.getReference(UserEntity.class, userId));

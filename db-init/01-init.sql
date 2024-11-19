@@ -19,7 +19,7 @@ CREATE TABLE `group_mission` (
 
 CREATE TABLE `chat_message` (
 	`chat_no`	int	NOT NULL,
-	`user_name`	varchar(50)	NULL,
+	`user_nickname`	varchar(50)	NULL,
 	`chat_date`	datetime	NULL,
 	`content`	varchar(100)	NULL,
 	`group_no`	int	NOT NULL
@@ -155,3 +155,5 @@ ALTER TABLE `user_goal` ADD CONSTRAINT `FK_user_TO_user_goal_1` FOREIGN KEY (
 REFERENCES `user` (
     `user_id`
 );
+
+ALTER TABLE chat_message MODIFY chat_no INT AUTO_INCREMENT;
