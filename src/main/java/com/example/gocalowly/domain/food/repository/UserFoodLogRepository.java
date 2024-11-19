@@ -26,14 +26,26 @@ public interface UserFoodLogRepository extends JpaRepository<FoodLogEntity, UUID
     @Query("SELECT IFNULL(SUM(calorie), 0) FROM FoodLogEntity fl WHERE fl.userId = :userId AND fl.recordDate = CURDATE()")
     int findTodayCalorieSumByUserId(@Param("userId") UUID userId);
     
-//    @Query("SELECT f FROM FoodLogEntity f WHERE f.userId = :userId AND f.recordDate BETWEEN :startOfMonth AND :endOfMonth " )
-//    List<FoodLogEntity> findByUserIdAndMonth(@Param("userId") UUID userId, 
-//                                             @Param("startOfMonth") LocalDateTime startOfMonth, 
-//                                             @Param("endOfMonth") LocalDateTime endOfMonth);
+
+    //날짜를 기준으로 정렬하고, 날짜가 같다면 mealtype으로 정렬
+    @Query("SELECT f FROM FoodLogEntity f " +
+    	       "WHERE f.userId = :userId " +
+    	       "AND f.recordDate BETWEEN :startOfMonth AND :endOfMonth " +
+    	       "ORDER BY FUNCTION('DATE', f.recordDate), " +
+    	       "CASE " +
+    	       "WHEN f.mealType = '아침' THEN 1 " +
+    	       "WHEN f.mealType = '점심' THEN 2 " +
+    	       "WHEN f.mealType = '저녁' THEN 3 " +
+    	       "ELSE 4 " +
+    	       "END")
+    	List<FoodLogEntity> findByUserIdAndCurrentMonthWithOrder(
+    	    @Param("userId") UUID userId, 
+    	    @Param("startOfMonth") LocalDateTime startOfMonth, 
+    	    @Param("endOfMonth") LocalDateTime endOfMonth
+    	);
+    
 
     
-    @Query("SELECT f FROM FoodLogEntity f WHERE f.userId = :userId AND FUNCTION('YEAR', f.recordDate) = FUNCTION('YEAR', CURRENT_DATE) AND FUNCTION('MONTH', f.recordDate) = FUNCTION('MONTH', CURRENT_DATE)")
-    List<FoodLogEntity> findByUserIdAndCurrentMonth(@Param("userId") UUID userId);
 
 
 }
