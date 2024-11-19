@@ -6,9 +6,6 @@ import java.util.UUID;
 public class LoginResponseDto {
 	private UUID userId;
 	private String userNickname;
-
-	private UUID userId;
-
 	private int groupNo;
 	
 	public LoginResponseDto() {

@@ -18,6 +18,7 @@ import com.example.gocalowly.domain.user.service.UserService;
 @RequestMapping("/api/user")
 public class UserController {
 	UserService userService;
+	private final static UUID TEST_USERID = UUID.fromString("00000000-0000-0000-0000-000000000001");
 	
 	public UserController(UserService userService) {
 		this.userService = userService;
@@ -25,10 +26,9 @@ public class UserController {
 	
 	@PostMapping("/target-calorie")
 	public ResponseEntity<?> updateUserTargetCalorie(@RequestBody TargetCalorieRequestDto targetCalorieRequestDto) {
-		UUID testUserUUID= UUID.fromString("00000000-0000-0000-0000-000000000001");
 
 		try {
-			userService.updateUserTargetCalorie(testUserUUID, targetCalorieRequestDto);
+			userService.updateUserTargetCalorie(TEST_USERID, targetCalorieRequestDto);
 			return ResponseEntity.ok("");
 		}catch(Exception e) {
 		return ResponseEntity.badRequest().body("");	
