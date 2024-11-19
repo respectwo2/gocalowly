@@ -23,13 +23,13 @@ public interface UserFoodLogRepository extends JpaRepository<FoodLogEntity, UUID
     @Query("SELECT u.userTargetcalorie FROM UserEntity u WHERE u.userId = :userId")
     int findTargetCalorieByUserId(@Param("userId") UUID userId);
     
-    @Query("SELECT IFNULL(SUM(calorie), 0) FROM FoodLogEntity fl WHERE fl.userId = :userId AND DATE(fl.recordDate) = CURDATE()")
+    @Query("SELECT IFNULL(SUM(calorie), 0) FROM FoodLogEntity fl WHERE fl.user.userId = :userId AND DATE(fl.recordDate) = CURDATE()")
     int findTodayCalorieSumByUserId(@Param("userId") UUID userId);
     
 
     //날짜를 기준으로 정렬하고, 날짜가 같다면 mealtype으로 정렬
     @Query("SELECT f FROM FoodLogEntity f " +
-    	       "WHERE f.userId = :userId " +
+    	       "WHERE f.user.userId = :userId " +
     	       "AND f.recordDate BETWEEN :startOfMonth AND :endOfMonth " +
     	       "ORDER BY FUNCTION('DATE', f.recordDate), " +
     	       "CASE " +

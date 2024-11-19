@@ -17,14 +17,21 @@ import com.example.gocalowly.domain.food.dto.response.DailyFoodLogResponseDto;
 import com.example.gocalowly.domain.food.entity.FoodLogEntity;
 
 import com.example.gocalowly.domain.food.mapper.FoodLogMapper;
-
+import com.example.gocalowly.domain.food.repository.FoodRepository;
 import com.example.gocalowly.domain.food.repository.UserFoodLogRepository;
+import com.example.gocalowly.domain.user.entity.UserEntity;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 @Service
+@Transactional
 public class UserFoodLogService {
 	UserFoodLogRepository userFoodLogRepository;
-
 	FoodLogMapper foodLogMapper;
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	public UserFoodLogService(UserFoodLogRepository userFoodLogRepository, FoodLogMapper foodLogMapper) {
 
@@ -67,12 +74,13 @@ public class UserFoodLogService {
 
 			return new DailyFoodLogResponseDto(dateTime, totalCalories[0], foodEntries);
 		}).toList();
+	}
 
 	
-	public void addUserFoodLog(RegistFoodLogRequestDto registFoodLogRequestDto, UUID userID) {
-		System.out.println(registFoodLogRequestDto.getCalorie());
-		userFoodLogRepository.save(
-				foodLogMapper.dtoToEntity(registFoodLogRequestDto, userID));
-
+	public void addUserFoodLog(RegistFoodLogRequestDto registFoodLogRequestDto, UUID userId) {		
+		FoodLogEntity foodLog = foodLogMapper.dtoToEntity(registFoodLogRequestDto);
+		foodLog.setUser(entityManager.getReference(UserEntity.class, userId));
+		
+		userFoodLogRepository.save(foodLog);
 	}
 }

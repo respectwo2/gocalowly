@@ -3,9 +3,7 @@ package com.example.gocalowly.domain.food.controller;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,6 +42,7 @@ public class UserFoodLogController {
 		return ResponseEntity.ok(
 				userFoodLogService.findFoodLogs(testUserId)
 				);
+	}
 
 	@PostMapping("/food-logs")
 	public ResponseEntity<String> addUserFoodLog(@RequestBody RegistFoodLogRequestDto registFoodLogRequestDto){
