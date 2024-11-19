@@ -51,12 +51,12 @@ public class UserService {
     }
 
     
-    public LoginResponseDto loginUser(LoginRequestDto loginRequestDto) {
+    public LoginResponseDto loginUser(LoginRequestDto loginRequestDto, int groupNo) {
     	return userMapper.entityToDto(
     			userRepository.findByUserNicknameAndUserPassword(
     			loginRequestDto.getUserNickname(), loginRequestDto.getUserPassword())
     			.orElse(null // 여기에 에러 처리 들어갈 수도 있고 Repository랑 똑같이 Optional 들어갈 수 있어요.
-    			));
+    			), groupNo);
     }
     
     public void updateUserTargetCalorie(UUID userId, TargetCalorieRequestDto targetCalorieRequestDto) {
