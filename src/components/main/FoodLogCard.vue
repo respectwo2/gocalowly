@@ -1,76 +1,94 @@
-<template>
-  <div class="food-log-card">
-    <div class="date">{{ date }}</div>
-    <ul>
-      <li v-for="food in foodEntries" :key="food.mealType" class="food-item">
-        food.mealType - food.foodName : food.calorie kcal
-      </li>
-    </ul>
-    <div class="total-calories">{{ totalCalories }}</div>
-  </div>
-</template>
-
 <script>
+import { ref, onMounted, computed } from "vue";
+import axios from "axios";
+
 export default {
-  props: {
-    date: String,
-    foods: Array,
-    totalCalories: Number,
+  name: "FoodLogCard",
+  setup() {
+    const foodLogs = ref([]);
+
+    // API 호출 및 데이터 저장
+    const fetchFoodLogs = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/user/food-logs");
+        foodLogs.value = response.data;
+      } catch (error) {
+        console.error("Error fetching food logs:", error);
+      }
+    };
+
+    // 날짜 포맷팅
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      return date.toLocaleDateString("ko-KR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    };
+
+    onMounted(fetchFoodLogs);
+
+    return {
+      foodLogs,
+      formatDate,
+    };
   },
 };
 </script>
 
+<template>
+  <div class="food-log-container">
+    <div v-for="(log, index) in foodLogs" :key="index" class="food-log-card">
+      <div class="date">{{ formatDate(log.date) }}</div>
+      <ul>
+        <li v-for="(food, foodIndex) in log.foodEntries" :key="foodIndex" class="food-item">
+          {{ food.mealType }} - {{ food.foodName }} : {{ food.calories }} kcal
+        </li>
+      </ul>
+      <div class="total-calories">총 칼로리: {{ log.totalCalories }} kcal</div>
+    </div>
+  </div>
+</template>
+
 <style scoped>
+.food-log-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  max-height: 450px;
+  overflow-y: auto;
+}
+
 .food-log-card {
-  position: relative;
-  width: 300px;
-  height: auto;
   background-color: #f2f4f5;
   border-radius: 20px;
   padding: 16px;
   margin-bottom: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
 }
 
-/* Date */
 .date {
-  position: absolute;
-  left: 16px;
-  top: 16px;
   font-family: "Inter", sans-serif;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 29px;
-  color: #000000;
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 16px;
 }
 
-/* Meal Item */
 .food-item {
-  position: relative;
-  width: 229px;
   font-family: "Inter", sans-serif;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 29px;
-  color: #000000;
-  margin-left: 147px;
-  margin-top: 16px;
-  text-align: center;
-  display: flex;
-  align-items: center;
+  font-size: 16px;
+  margin-bottom: 8px;
 }
 
-/* Total Calories */
 .total-calories {
-  position: absolute;
-  left: 20px;
-  top: calc(100% - 47px);
-  /* Ensures it is aligned to the bottom */
   font-family: "Inter", sans-serif;
-  font-weight: 300;
-  font-size: 24px;
-  line-height: 29px;
-  color: #000000;
-  width: 104px;
-  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 16px;
+  text-align: right;
 }
 </style>

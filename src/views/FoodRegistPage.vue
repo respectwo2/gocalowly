@@ -8,45 +8,28 @@
       <h1>식사 등록</h1>
       <form @submit.prevent="submitForm">
         <div class="form-group">
-          <label for="recodeDate">기록 날짜:</label>
-          <input
-            type="datetime-local"
-            id="recodeDate"
-            v-model="foodLog.recodeDate"
-            required
-          />
+          <label for="recordDate">기록 날짜:</label>
+          <input type="datetime-local" id="recordDate" v-model="foodLog.recordDate" required />
         </div>
 
         <div class="form-group">
           <label for="mealType">식사 유형:</label>
           <select id="mealType" v-model="foodLog.mealType" required>
-            <option value="breakfast">아침</option>
-            <option value="lunch">점심</option>
-            <option value="dinner">저녁</option>
-            <option value="snack">간식</option>
+            <option value="아침">아침</option>
+            <option value="점심">점심</option>
+            <option value="저녁">저녁</option>
+            <option value="간식">간식</option>
           </select>
         </div>
 
         <div class="form-group">
           <label for="foodName">음식 이름:</label>
-          <input
-            type="text"
-            id="foodName"
-            v-model="foodLog.foodName"
-            placeholder="음식 이름을 입력하세요"
-            required
-          />
+          <input type="text" id="foodName" v-model="foodLog.foodName" placeholder="음식 이름을 입력하세요" required />
         </div>
 
         <div class="form-group">
           <label for="calorie">칼로리 (kcal):</label>
-          <input
-            type="number"
-            id="calorie"
-            v-model="foodLog.calorie"
-            placeholder="칼로리를 입력하세요"
-            required
-          />
+          <input type="number" id="calorie" v-model="foodLog.calorie" placeholder="칼로리를 입력하세요" required />
         </div>
 
         <button type="submit">등록</button>
@@ -62,12 +45,7 @@
     </div>
 
     <!-- 모달 컴포넌트 -->
-    <GuideModal
-      v-if="isModalOpen"
-      title="검색"
-      @close="toggleModal"
-      @select-food="applySelectedFood"
-    />
+    <GuideModal v-if="isModalOpen" title="검색" @close="toggleModal" @select-food="applySelectedFood" />
   </div>
 </template>
 
@@ -87,7 +65,7 @@ export default {
   },
   setup() {
     const foodLog = ref({
-      recodeDate: "",
+      recordDate: "",
       mealType: "",
       foodName: "",
       calorie: 0,
@@ -96,19 +74,22 @@ export default {
     const isModalOpen = ref(false);
 
     const submitForm = async () => {
+      console.log(foodLog.value)
       try {
-        await axios.post("/api/food-log", foodLog.value);
-        alert("식사 로그가 등록되었습니다!");
+        await axios.post("http://localhost:8080/api/user/food-logs", foodLog.value);
+        console.log(foodLog.value);
+        alert("식사가 기록되었습니다!");
         resetForm();
+        location.href = "/";
       } catch (error) {
         console.error("Error registering food log:", error);
-        alert("식사 로그 등록에 실패했습니다.");
+        alert("식사 기록 등록에 실패했습니다.");
       }
     };
 
     const resetForm = () => {
       foodLog.value = {
-        recodeDate: "",
+        recordDate: "",
         mealType: "",
         foodName: "",
         calorie: 0,

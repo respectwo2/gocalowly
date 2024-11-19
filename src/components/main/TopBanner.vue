@@ -24,10 +24,10 @@ export default {
     const fetchCalorieData = async () => {
       try {
         const response = await axios.get(
-          "https://localhost:8080/api/user/target-calorie"
+          "http://localhost:8080/api/user/target-calorie"
         );
-        userTargetcalorie.value = response.data.userTargetcalorie;
-        currentCalorie.value = response.data.currentCalorie;
+        userTargetcalorie.value = response.data.userTargetCalorie;
+        totalCalories.value = response.data.totalCalories;
       } catch (error) {
         console.error("Error fetching calorie data:", error);
       }
