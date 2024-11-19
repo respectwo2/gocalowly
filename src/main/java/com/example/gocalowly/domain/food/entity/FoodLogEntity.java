@@ -4,11 +4,16 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
+import com.example.gocalowly.domain.user.entity.UserEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,23 +28,23 @@ public class FoodLogEntity {
 	private String mealType;
 	private String foodName;
 	private int calorie;
-	private UUID userId;
 	
 	public FoodLogEntity() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	UserEntity user;
 
-	public FoodLogEntity(LocalDateTime recordDate, String mealType, String foodName, int calorie, UUID userId) {
+	public FoodLogEntity(LocalDateTime recordDate, String mealType, String foodName, int calorie) {
 		super();
 		setRecordDate(recordDate);
 		setMealType(mealType);
 		setFoodName(foodName);
 		setCalorie(calorie);
-		setUserId(userId);
 	}
 
-	
-	
 	private void setRecordDate(LocalDateTime recordDate) {
 		this.recordDate = recordDate;
 	}
@@ -54,10 +59,6 @@ public class FoodLogEntity {
 
 	private void setCalorie(int calorie) {
 		this.calorie = calorie;
-	}
-
-	private void setUserId(UUID userId) {
-		this.userId = userId;
 	}
 
 	public UUID getRecordId() {
@@ -79,10 +80,13 @@ public class FoodLogEntity {
 	public int getCalorie() {
 		return calorie;
 	}
-
-	public UUID getUserId() {
-		return userId;
+	
+	public void setUser(UserEntity user) {
+		this.user = user;
+		user.addFoodLog(this);
 	}
 	
-	
+	public UserEntity getUser() {
+		return user;
+	}
 }

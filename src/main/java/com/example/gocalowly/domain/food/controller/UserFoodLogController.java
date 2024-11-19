@@ -3,9 +3,7 @@ package com.example.gocalowly.domain.food.controller;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.gocalowly.domain.food.dto.request.RegistFoodLogRequestDto;
 import com.example.gocalowly.domain.food.dto.response.DailyCalorieSummaryResponseDto;
 import com.example.gocalowly.domain.food.dto.response.DailyFoodLogResponseDto;
+import com.example.gocalowly.domain.food.dto.response.DailyGoalStatusResponseDto;
 import com.example.gocalowly.domain.food.service.UserFoodLogService;
 
 @RestController
@@ -30,7 +29,7 @@ public class UserFoodLogController {
 	
 	@GetMapping("/target-calorie")
 	public ResponseEntity<DailyCalorieSummaryResponseDto> findDaliyCalorieSummary() {
-		
+
 		return ResponseEntity.ok(
 				userFoodLogService.findDailyCalorieSummary(TEST_USERID));
 	}
@@ -42,7 +41,7 @@ public class UserFoodLogController {
 				userFoodLogService.findFoodLogs(TEST_USERID)
 				);
 	}
-	
+
 	@PostMapping("/food-logs")
 	public ResponseEntity<String> addUserFoodLog(@RequestBody RegistFoodLogRequestDto registFoodLogRequestDto){
 		
@@ -50,5 +49,10 @@ public class UserFoodLogController {
 		
 		return ResponseEntity.ok("");
 
+	}
+	
+	@GetMapping("/goals")
+	public ResponseEntity<DailyGoalStatusResponseDto> findDailyGoalStatus() {
+		return ResponseEntity.ok(userFoodLogService.findDailyGoalStatus(testUserId));
 	}
 }
