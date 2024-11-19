@@ -6,17 +6,31 @@ import java.util.UUID;
 public class LoginResponseDto {
 	private UUID userId;
 	private String userNickname;
+
+	private UUID userId;
+
 	private int groupNo;
 	
 	public LoginResponseDto() {
 		// TODO Auto-generated constructor stub
 	}
-	public LoginResponseDto(String userNickname) {
+
+	public LoginResponseDto(String userNickname, UUID userId, int groupNo) {
 		super();
 		this.userNickname = userNickname;
+		this.userId = userId;
+		this.groupNo = groupNo;
 	}
 
 	public String getUserNickname() {
 		return userNickname;
+	}
+
+	public UUID getUserId() {
+		return userId;
+	}
+
+	public int getGroupNo() {
+		return groupNo;
 	}
 }

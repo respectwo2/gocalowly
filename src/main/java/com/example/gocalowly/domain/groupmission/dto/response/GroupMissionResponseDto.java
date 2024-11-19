@@ -11,6 +11,5 @@ public class GroupMissionResponseDto {
 		private String missionName; // 미션 이름
 		private boolean isMissionComplete; // 미션 달성 여부
 		
-		
 	}
 }

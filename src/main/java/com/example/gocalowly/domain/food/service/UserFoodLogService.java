@@ -11,17 +11,25 @@ import java.util.stream.Stream;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.gocalowly.domain.food.dto.request.RegistFoodLogRequestDto;
 import com.example.gocalowly.domain.food.dto.response.DailyCalorieSummaryResponseDto;
 import com.example.gocalowly.domain.food.dto.response.DailyFoodLogResponseDto;
 import com.example.gocalowly.domain.food.entity.FoodLogEntity;
+
+import com.example.gocalowly.domain.food.mapper.FoodLogMapper;
+
 import com.example.gocalowly.domain.food.repository.UserFoodLogRepository;
 
 @Service
 public class UserFoodLogService {
 	UserFoodLogRepository userFoodLogRepository;
 
-	public UserFoodLogService(UserFoodLogRepository userFoodLogRepository) {
+	FoodLogMapper foodLogMapper;
+	
+	public UserFoodLogService(UserFoodLogRepository userFoodLogRepository, FoodLogMapper foodLogMapper) {
+
 		this.userFoodLogRepository = userFoodLogRepository;
+		this.foodLogMapper = foodLogMapper;
 	}
 
 	public DailyCalorieSummaryResponseDto findDailyCalorieSummary(UUID userId) {
@@ -30,6 +38,7 @@ public class UserFoodLogService {
 
 		return new DailyCalorieSummaryResponseDto(totalCalories, userTargetCaloire);
 	}
+
 
 	@Transactional(readOnly = true)
 	public List<DailyFoodLogResponseDto> findFoodLogs(UUID userId) {
@@ -58,5 +67,12 @@ public class UserFoodLogService {
 
 			return new DailyFoodLogResponseDto(dateTime, totalCalories[0], foodEntries);
 		}).toList();
+
+	
+	public void addUserFoodLog(RegistFoodLogRequestDto registFoodLogRequestDto, UUID userID) {
+		System.out.println(registFoodLogRequestDto.getCalorie());
+		userFoodLogRepository.save(
+				foodLogMapper.dtoToEntity(registFoodLogRequestDto, userID));
+
 	}
 }

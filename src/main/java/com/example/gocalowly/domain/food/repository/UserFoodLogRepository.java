@@ -23,7 +23,7 @@ public interface UserFoodLogRepository extends JpaRepository<FoodLogEntity, UUID
     @Query("SELECT u.userTargetcalorie FROM UserEntity u WHERE u.userId = :userId")
     int findTargetCalorieByUserId(@Param("userId") UUID userId);
     
-    @Query("SELECT IFNULL(SUM(calorie), 0) FROM FoodLogEntity fl WHERE fl.userId = :userId AND fl.recordDate = CURDATE()")
+    @Query("SELECT IFNULL(SUM(calorie), 0) FROM FoodLogEntity fl WHERE fl.userId = :userId AND DATE(fl.recordDate) = CURDATE()")
     int findTodayCalorieSumByUserId(@Param("userId") UUID userId);
     
 
