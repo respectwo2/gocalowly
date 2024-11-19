@@ -33,12 +33,6 @@ public class DailyFoodLogResponseDto {
 		return foodEntries;
 	}
 
-
-
-
-
-
-
 	// <아/점/저>와 음식 이름, 칼로리를 저장하는 객체
 	public static class FoodEntry {
 		private String mealType;

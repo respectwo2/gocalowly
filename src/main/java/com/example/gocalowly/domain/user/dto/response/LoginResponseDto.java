@@ -4,8 +4,11 @@ import java.util.UUID;
 
 //로그인에 성공한 이후 유저넘버와 닉네임을 응답할때 사용되는 DTO
 public class LoginResponseDto {
-	private String userNickname;
 	private UUID userId;
+	private String userNickname;
+
+	private UUID userId;
+
 	private int groupNo;
 	
 	public LoginResponseDto() {
