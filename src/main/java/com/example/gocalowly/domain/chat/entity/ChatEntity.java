@@ -2,10 +2,23 @@ package com.example.gocalowly.domain.chat.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="chat_message")
 public class ChatEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
 	private int chatNo;
-	private String userNickName;
-	private LocalDateTime charDate;
+	
+	private String userNickname;
+	private LocalDateTime chatDate;
 	private String content;
 	private int groupNo;
 	
@@ -13,11 +26,10 @@ public class ChatEntity {
 		// TODO Auto-generated constructor stub
 	}
 	
-	//현재 시간 포맷팅 추가 구현 필요
-	public ChatEntity(String userNickName, String content, int groupNo) {
+	public ChatEntity(String userNickname,String content,int groupNo) {
 		super();
-		this.userNickName = userNickName;
-		this.charDate = LocalDateTime.now();
+		this.userNickname = userNickname;
+		this.chatDate = LocalDateTime.now();
 		this.content = content;
 		this.groupNo = groupNo;
 	}
@@ -26,12 +38,12 @@ public class ChatEntity {
 		return chatNo;
 	}
 
-	public String getuserNickName() {
-		return userNickName;
+	public String getUserNickname() {
+		return userNickname;
 	}
 
-	public LocalDateTime getCharDate() {
-		return charDate;
+	public LocalDateTime getchatDate() {
+		return chatDate;
 	}
 
 	public String getContent() {
@@ -41,6 +53,11 @@ public class ChatEntity {
 	public int getGroupNo() {
 		return groupNo;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "ChatEntity [chatNo=" + chatNo + ", userNickname=" + userNickname + ", chatDate=" + chatDate
+				+ ", content=" + content + ", groupNo=" + groupNo + "]";
+	}
 	
 }
