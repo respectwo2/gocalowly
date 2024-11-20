@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.gocalowly.domain.group.dto.response.GroupInfoResponseDto;
+import com.example.gocalowly.domain.group.dto.response.GroupRankResponseDto;
 import com.example.gocalowly.domain.group.service.GroupService;
 import com.example.gocalowly.domain.user.service.UserGoalService;
 
@@ -31,7 +32,7 @@ public class GroupController {
 	}
 	
 	@GetMapping("/rank")
-	public ResponseEntity<Integer> getRankInGroup() {
+	public ResponseEntity<GroupRankResponseDto> getRankInGroup() {
 		UUID testUserId  = UUID.fromString("00000000-0000-0000-0000-000000000001");
 		
 		return ResponseEntity.ok(userGoalService.getRankInGroup(testUserId));

@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 	// 회원가입에 이용되는 save(userEntity) 는 자동으로 생성
 	// 목표 칼로리, 금일 총 칼로리 조회에 이용되는 findById 는 자동으로 생성 -> 이것도 Optional로 구현해서 null값은 제외
 	
-	Optional<UserEntity> findByUserNicknameAndUserPassword(String userNickname, String userPassword);
+	Optional<UserEntity> findByUserNickname(String userNickname);
 	
 	@Query("SELECT u FROM UserEntity u JOIN FETCH u.userGroupMissions um JOIN FETCH um.groupMission WHERE u.userId = :userId")
 	Optional<UserEntity> findByIdWithMissions(@Param("userId") UUID userId);

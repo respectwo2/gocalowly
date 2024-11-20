@@ -10,10 +10,10 @@ import com.example.gocalowly.domain.user.entity.UserEntity;
 public class UserMapper {
 	// 회원가입으로 유저 객체 생성
 	public UserEntity dtoToEntity(SignUpRequestDto request) {
-		return new UserEntity(request.getUserNickname(),
-				request.getUserPassword(),
+		return new UserEntity(request.getUserPassword(),
 				request.getUserName(),
 				request.getUserPhonenumber(),
+				request.getUserNickname(),
 				request.getUserTargetcalorie()
 				);
 	}
