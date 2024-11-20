@@ -20,6 +20,7 @@ public class GroupMissionUpdateRequestDto {
 	public List<MissionComplete> getMissionCompletes() {
 		return missionCompletes;
 	}
+	
 
 	public static class MissionComplete { // 미션 달성 여부 클래스를 내부에서 선언한 클래스입니다.
 		private int missionNo; // 미션 ID
@@ -39,10 +40,12 @@ public class GroupMissionUpdateRequestDto {
 		public int getMissionNo() {
 			return missionNo;
 		}
-
+		@JsonProperty("isMissionComplete")
 		public boolean isMissionComplete() {
 			return isMissionComplete;
 		}
+
+		
 
 	}
 }

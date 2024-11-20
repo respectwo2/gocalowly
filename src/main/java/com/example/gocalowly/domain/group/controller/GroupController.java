@@ -32,6 +32,7 @@ public class GroupController {
 	}
 	
 	@GetMapping("/rank")
+
 	public ResponseEntity<GroupRankResponseDto> getRankInGroup() {
 		UUID testUserId  = UUID.fromString("00000000-0000-0000-0000-000000000001");
 		

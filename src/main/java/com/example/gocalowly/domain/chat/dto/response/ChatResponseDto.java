@@ -26,6 +26,14 @@ public class ChatResponseDto {
         return chatDate;
     }
 
+	@Override
+	public String toString() {
+		return "ChatResponseDto [userNickName=" + userNickName + ", content=" + content + ", chatDate=" + chatDate
+				+ "]";
+	}
+    
+    
+
     
     
 }
