@@ -33,7 +33,6 @@ public class GroupMissionController {
 	@PostMapping("/update")
 	public ResponseEntity<?> updateGroupMissions(@RequestBody GroupMissionUpdateRequestDto groupMissionUpdateRequestDto) {
 		UUID testUserUUID= UUID.fromString("00000000-0000-0000-0000-000000000001");
-		
 		try {
 			groupMissionService.updateGroupMissions(groupMissionUpdateRequestDto, testUserUUID);
 			return ResponseEntity.ok("");

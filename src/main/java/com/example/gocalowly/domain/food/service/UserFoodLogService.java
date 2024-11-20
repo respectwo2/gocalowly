@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -99,15 +100,17 @@ public class UserFoodLogService {
 		List<LocalDate> allDatesOfWeek = new ArrayList<>();
 		LocalDate currentDate = startOfWeek.toLocalDate();
 		LocalDate endDate = endOfWeek.toLocalDate();
-
+		
+		
 		while (!currentDate.isAfter(endDate)) {
 		    allDatesOfWeek.add(currentDate);
 		    currentDate = currentDate.plusDays(1); // 하루씩 증가
 		}
-
+		
         // 기본 맵 생성 (빈 리스트로 초기화)
         Map<LocalDate, List<FoodLogEntity>> groupedByDate = allDatesOfWeek.stream()
                 .collect(Collectors.toMap(date -> date, date -> new ArrayList<>()));
+        
 
         // 실제 데이터를 날짜별로 그룹화
         Map<LocalDate, List<FoodLogEntity>> actualGroupedData = foodLogs.stream()
@@ -120,7 +123,10 @@ public class UserFoodLogService {
         		.orElseThrow(() -> new NoSuchElementException("해당하는 유저가 존재하지 않습니다."))
         		.getUserTargetcalorie();
         
-        return new DailyGoalStatusResponseDto(actualGroupedData.entrySet().stream().map(entry -> {
+        
+        return new DailyGoalStatusResponseDto(actualGroupedData.entrySet().stream()
+        		.sorted(Map.Entry.comparingByKey())
+        		.map(entry -> {
         	LocalDateTime date = entry.getKey().atStartOfDay();
         	int calorieSum = entry.getValue().stream().mapToInt(foodLog -> foodLog.getCalorie()).sum();
         	boolean isGoal = false;

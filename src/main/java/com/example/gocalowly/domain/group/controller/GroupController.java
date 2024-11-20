@@ -32,7 +32,7 @@ public class GroupController {
 	
 	@GetMapping("/rank")
 	public ResponseEntity<Integer> getRankInGroup() {
-		UUID testUserId  = UUID.fromString("00000000-0000-0000-0000-000000000001");
+		UUID testUserId  = UUID.fromString("00000000-0000-0000-0000-000000000002");
 		
 		return ResponseEntity.ok(userGoalService.getRankInGroup(testUserId));
 	}

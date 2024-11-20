@@ -1,5 +1,6 @@
 package com.example.gocalowly.domain.chat.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.gocalowly.domain.chat.dto.request.ChatSubmitRequestDto;
+import com.example.gocalowly.domain.chat.dto.response.ChatResponseDto;
 import com.example.gocalowly.domain.chat.service.ChatService;
 
 @RestController
@@ -37,8 +39,7 @@ public class ChatController {
 	@GetMapping("/logs")
 	public ResponseEntity<?> findChatLog() {
 
-		chatService.findChat(TEST_GROUPNO);
-		return ResponseEntity.ok("");
+		return ResponseEntity.ok(chatService.findChat(TEST_GROUPNO));
 
 	}
 
