@@ -59,12 +59,22 @@ public class UserService {
     }
 
     
-    public LoginResponseDto loginUser(LoginRequestDto loginRequestDto, int groupNo) {
-    	return userMapper.entityToDto(
-    			userRepository.findByUserNicknameAndUserPassword(
-    			loginRequestDto.getUserNickname(), loginRequestDto.getUserPassword())
-    			.orElse(null // 여기에 에러 처리 들어갈 수도 있고 Repository랑 똑같이 Optional 들어갈 수 있어요.
-    			), groupNo);
+    public LoginResponseDto loginUser(LoginRequestDto loginRequestDto) {
+    	UserEntity loginUser = userRepository.findByUserNickname(loginRequestDto.getUserNickname())
+    			.orElseThrow(() -> new NoSuchElementException());
+    	
+    	String salt = userSaltRepository.findById(loginUser.getUserId())
+    			.orElseThrow(() -> new NoSuchElementException())
+    			.getSalt();
+    	
+    	String encryptPassword = OpenCrypt.byteArrayToHex(OpenCrypt.getSHA256(loginRequestDto.getUserPassword(), salt));
+    	
+    	if (!loginUser.getUserPassword().equals(encryptPassword)) {
+    		throw new NoSuchElementException();
+    	}
+    	
+    	return new LoginResponseDto(
+    			loginUser.getUserNickname(), loginUser.getUserId(), loginUser.getGroup().getgroupNo());
     }
     
     public void updateUserTargetCalorie(UUID userId, TargetCalorieRequestDto targetCalorieRequestDto) {

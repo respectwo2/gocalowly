@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.gocalowly.domain.group.dto.response.GroupRankResponseDto;
 import com.example.gocalowly.domain.user.entity.UserEntity;
 import com.example.gocalowly.domain.user.entity.UserGoalEntity;
 import com.example.gocalowly.domain.user.repository.UserGoalRepository;
@@ -27,7 +28,7 @@ public class UserGoalService {
 		this.userGoalRepository = userGoalRepository;
 	}
 	
-	public int getRankInGroup(UUID userId) {
+	public GroupRankResponseDto getRankInGroup(UUID userId) {
 		UserEntity user = userRepository.findById(userId)
 				.orElseThrow(() -> new NoSuchElementException("해당하는 유저가 없습니다."));
 	
@@ -38,7 +39,8 @@ public class UserGoalService {
 		
 		int index = groupCompleteDates.indexOf(user.getCompleteCount())+1;
 		
-		return (int) ((double) (index*100) / groupCompleteDates.size());
+		return new GroupRankResponseDto(
+				(index*100) / groupCompleteDates.size());
 	}
 	
 	// 한 달마다 유저 목표 테이블 초기화

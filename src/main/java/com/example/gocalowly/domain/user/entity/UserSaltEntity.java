@@ -26,7 +26,11 @@ public class UserSaltEntity {
 		this.salt = salt;
 	}
 
-	
-	
-	
+	public UUID getUserId() {
+		return userId;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
 }
