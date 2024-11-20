@@ -53,6 +53,6 @@ public class UserFoodLogController {
 	
 	@GetMapping("/goals")
 	public ResponseEntity<DailyGoalStatusResponseDto> findDailyGoalStatus() {
-		return ResponseEntity.ok(userFoodLogService.findDailyGoalStatus(testUserId));
+		return ResponseEntity.ok(userFoodLogService.findDailyGoalStatus(TEST_USERID));
 	}
 }

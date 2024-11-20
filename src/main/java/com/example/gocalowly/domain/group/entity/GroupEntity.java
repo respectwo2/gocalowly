@@ -74,5 +74,12 @@ public class GroupEntity {
 			return;
 		}
 		users.add(user);
+		headcount += 1;
+	}
+	
+	public void deleteUser(UserEntity user) {
+		if (users.remove(user)) {
+			headcount -= 1;
+		}
 	}
 }
