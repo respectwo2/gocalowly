@@ -17,6 +17,9 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 	
 	Optional<UserEntity> findByUserNicknameAndUserPassword(String userNickname, String userPassword);
 	
+	@Query("SELECT u FROM UserEntity u JOIN FETCH u.userGroupMissions um JOIN FETCH um.groupMission WHERE u.userId = :userId")
+	Optional<UserEntity> findByIdWithMissions(@Param("userId") UUID userId);
+	
 //    @Modifying
 //    @Transactional
 //    @Query("UPDATE UserEntity u SET u.userTargetcalorie = :targetCalorie WHERE u.userId = :userId")

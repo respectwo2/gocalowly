@@ -10,13 +10,12 @@ import com.example.gocalowly.domain.food.entity.FoodLogEntity;
 @Component
 public class FoodLogMapper {
 	
-	public FoodLogEntity dtoToEntity(RegistFoodLogRequestDto request, UUID userId) {
+	public FoodLogEntity dtoToEntity(RegistFoodLogRequestDto request) {
 		return new FoodLogEntity(
 				request.getRecordDate(),
 				request.getMealType(),
 				request.getFoodName(),
-				request.getCalorie(),
-				userId
+				request.getCalorie()
 				);
 		}
 
