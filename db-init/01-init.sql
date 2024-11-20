@@ -18,7 +18,7 @@ CREATE TABLE `group_mission` (
 );
 
 CREATE TABLE `chat_message` (
-	`chat_no`	int	NOT NULL,
+	`chat_no`	int	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`user_nickname`	varchar(50)	NULL,
 	`chat_date`	datetime	NULL,
 	`content`	varchar(100)	NULL,
@@ -57,7 +57,7 @@ CREATE TABLE `user` (
 );
 
 CREATE TABLE `user_goal` (
-	`user_goal_no`	int	NOT NULL,
+	`user_goal_no`	int	NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`user_goal_date`	datetime	NOT NULL,
 	`is_goal_complete`	boolean	NULL,
 	`user_id`	binary(16)	NOT NULL
@@ -75,10 +75,6 @@ ALTER TABLE `group_mission` ADD CONSTRAINT `PK_GROUP_MISSION` PRIMARY KEY (
 	`mission_no`
 );
 
-ALTER TABLE `chat_message` ADD CONSTRAINT `PK_CHAT_MESSAGE` PRIMARY KEY (
-	`chat_no`
-);
-
 ALTER TABLE `user_food_log` ADD CONSTRAINT `PK_USER_FOOD_LOG` PRIMARY KEY (
 	`record_id`
 );
@@ -94,10 +90,6 @@ ALTER TABLE `user_group_mission` ADD CONSTRAINT `PK_USER_GROUP_MISSION` PRIMARY 
 
 ALTER TABLE `user` ADD CONSTRAINT `PK_USER` PRIMARY KEY (
 	`user_id`
-);
-
-ALTER TABLE `user_goal` ADD CONSTRAINT `PK_USER_GOAL` PRIMARY KEY (
-	`user_goal_no`
 );
 
 ALTER TABLE `group_mission` ADD CONSTRAINT `FK_group_TO_group_mission_1` FOREIGN KEY (
@@ -155,5 +147,3 @@ ALTER TABLE `user_goal` ADD CONSTRAINT `FK_user_TO_user_goal_1` FOREIGN KEY (
 REFERENCES `user` (
     `user_id`
 );
-
-ALTER TABLE chat_message MODIFY chat_no INT AUTO_INCREMENT;
