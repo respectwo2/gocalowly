@@ -51,7 +51,7 @@ public class UserGroupMissionEntity {
 		return groupMission;
 	}
 
-	public void setGroup(GroupMissionEntity groupMission) {
+	public void setGroupMission(GroupMissionEntity groupMission) {
 		this.groupMission = groupMission;
 	}
 }

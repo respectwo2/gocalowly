@@ -1,5 +1,6 @@
 package com.example.gocalowly.domain.user.repository;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,6 +20,9 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 	
 	@Query("SELECT u FROM UserEntity u JOIN FETCH u.userGroupMissions um JOIN FETCH um.groupMission WHERE u.userId = :userId")
 	Optional<UserEntity> findByIdWithMissions(@Param("userId") UUID userId);
+	
+    @Query("SELECT IFNULL(SUM(calorie), 0) FROM FoodLogEntity fl WHERE fl.user.userId = :userId AND DATE(fl.recordDate) = :yesterday")
+    int findYesterdayCalorieSumByUserId(@Param("userId") UUID userId, @Param("yesterday") LocalDate yesterday);
 	
 //    @Modifying
 //    @Transactional
