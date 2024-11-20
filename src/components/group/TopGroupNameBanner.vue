@@ -1,6 +1,6 @@
 <template>
   <div class="calorie-info">
-    <p class="group-text">그룹이름 : ASD</p>
+    <p class="group-text">이대로가면 뚱땡이임</p>
   </div>
 </template>
 

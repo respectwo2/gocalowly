@@ -7,24 +7,66 @@
             </span>
         </div>
 
-        <!-- 날짜 표시 -->
+        <!-- OX 표시 -->
         <div class="dates">
-            <span v-for="(date, index) in dates" :key="index"
-                :class="['date', { 'highlighted-date': index === highlightedDateIndex }]">
-                {{ date }}
+            <span v-for="(date, index) in paddedDates" :key="index"
+                :class="['date', { 'highlighted-date': index === todayIndex }]">
+                {{ date.isGoal !== undefined ? (date.isGoal ? "O" : "X") : "" }}
             </span>
         </div>
     </div>
 </template>
 
 <script>
+import { ref, onMounted, computed } from "vue";
+import axios from "axios";
+
 export default {
-    name: 'StaticDateDisplay',
-    data() {
+    name: "StaticDateDisplay",
+    setup() {
+        const days = ref(["M", "T", "W", "T", "F", "S", "S"]); // 요일
+        const dailyGoals = ref([]);
+
+        // 현재 요일 (0: 일요일 ~ 6: 토요일)
+        const todayIndex = new Date().getDay() - 1; // 월요일 기준 인덱스화 (Vue에서내가 Sunday까지점점적으로)
+
+        // API 호출 및 데이터 저장
+        const fetchDailyGoals = async () => {
+            try {
+                const response = await axios.get(
+                    "http://localhost:8080/api/user/goals"
+                );
+                dailyGoals.value = response.data.dailyGoals;
+                console.log(dailyGoals.value)
+            } catch (error) {
+                console.error("Error fetching daily goals:", error);
+            }
+        };
+
+        // 패딩된 OX 데이터 계산
+        const paddedDates = computed(() => {
+            const filledDates = dailyGoals.value.map((goal) => ({
+                date: goal.date,
+                isGoal: goal.isGoal,
+            }));
+
+            const padded = Array(7).fill({}); // 일주일 전체 초기화
+            filledDates.forEach((entry, index) => {
+                if (index <= todayIndex) {
+                    padded[index] = entry; // 오늘 이전 데이터 채움
+                }
+            });
+
+            return padded;
+        });
+
+        onMounted(fetchDailyGoals);
+
         return {
-            days: ['M', 'T', 'W', 'T', 'F', 'S', 'S'], // 요일
-            dates: [13, 14, 15, 16, 17, 18, 19], // 표시할 날짜들
-            highlightedDateIndex: 2, // 강조할 날짜의 인덱스 (예: 15일을 강조)
+            days,
+            dailyGoals,
+            paddedDates,
+            todayIndex,
         };
     },
 };
@@ -36,6 +78,7 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 16px;
+    margin-bottom: 0;
 }
 
 .days-of-week {
@@ -45,7 +88,7 @@ export default {
 }
 
 .day {
-    font-family: 'DM Sans', sans-serif;
+    font-family: "DM Sans", sans-serif;
     font-weight: 500;
     font-size: 14px;
     color: #0070f0;
@@ -61,7 +104,7 @@ export default {
 }
 
 .date {
-    font-family: 'DM Sans', sans-serif;
+    font-family: "DM Sans", sans-serif;
     font-weight: 500;
     font-size: 14px;
     color: #979c9e;

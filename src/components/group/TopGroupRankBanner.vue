@@ -1,32 +1,59 @@
 <template>
   <div class="group-rank-banner">
-    <div class="rank-text">그룹 내 상위 10% 유저입니다</div>
+    <div class="rank-text">그룹 내 상위 {{ topPercentile }}% 유저입니다</div>
 
     <div class="toggle-icon" @click="toggleModal">
       <img src="../../assets/icons/toggle.svg" alt="Toggle Modal" width="40" height="40" />
     </div>
 
     <!-- Modal 컴포넌트 렌더링 -->
-    <Modal v-if="isModalOpen" title="상세 정보" content="여기에 모달 내용이 들어갑니다." @close="toggleModal" />
+    <Modal v-if="isModalOpen" @close="toggleModal" />
   </div>
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
+import axios from "axios";
 import Modal from "./MissonModal.vue";
 
 export default {
+  name: "GroupRankBanner",
   components: {
     Modal,
   },
-  data() {
-    return {
-      isModalOpen: false,
+  setup() {
+    const isModalOpen = ref(false);
+    const percentage = ref(0);
+    const topPercentile = ref(0);
+
+    // Modal 열기/닫기
+    const toggleModal = () => {
+      isModalOpen.value = !isModalOpen.value;
     };
-  },
-  methods: {
-    toggleModal() {
-      this.isModalOpen = !this.isModalOpen;
-    },
+
+    // 그룹 랭크 정보 가져오기
+    const fetchGroupRank = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/group/rank");
+        percentage.value = response.data;
+        topPercentile.value = response.data.topPercentile;
+
+      } catch (error) {
+        console.error("Error fetching group rank:", error);
+      }
+    };
+
+    // 컴포넌트가 마운트될 때 데이터 가져오기
+    onMounted(() => {
+      fetchGroupRank();
+    });
+
+    return {
+      isModalOpen,
+      percentage,
+      toggleModal,
+      topPercentile,
+    };
   },
 };
 </script>
@@ -43,16 +70,13 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* 아이템 간 간격 유지 */
   padding: 0 16px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   gap: 10px;
-  /* 아이템 간 간격 조정 */
 }
 
 .rank-text {
   flex-grow: 1;
-  /* 텍스트가 남은 공간을 채움 */
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 20px;
