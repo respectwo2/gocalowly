@@ -1,10 +1,13 @@
 package com.example.gocalowly.domain.user.service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.example.gocalowly.domain.group.entity.GroupEntity;
+import com.example.gocalowly.domain.group.repository.GroupRepository;
 import com.example.gocalowly.domain.user.dto.request.LoginRequestDto;
 import com.example.gocalowly.domain.user.dto.request.PasswordEncryptionResultDto;
 import com.example.gocalowly.domain.user.dto.request.SignUpRequestDto;
@@ -17,6 +20,8 @@ import com.example.gocalowly.domain.user.repository.UserRepository;
 import com.example.gocalowly.domain.user.repository.UserSaltRepository;
 import com.example.gocalowly.util.OpenCrypt;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -25,15 +30,16 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserSaltRepository userSaltRepository;
     private final UserMapper userMapper;
+    private final GroupRepository groupRepository;
 
-    public UserService(UserRepository userRepository, UserSaltRepository userSaltRespository,UserMapper userMapper) {
+    public UserService(UserRepository userRepository, UserSaltRepository userSaltRespository,UserMapper userMapper, GroupRepository groupRepository) {
         this.userRepository = userRepository;
         this.userSaltRepository = userSaltRespository;
         this.userMapper = userMapper;
-    }
-    
-    @Transactional
-    public UserEntity addUser(SignUpRequestDto signUpRequestDto) {
+        this.groupRepository = groupRepository;
+    }  
+
+    public void addUser(SignUpRequestDto signUpRequestDto) {
     	// 엔티티 생성
     	UserEntity user = userMapper.dtoToEntity(signUpRequestDto);
 
@@ -42,12 +48,14 @@ public class UserService {
 
         //엔티티로 변환 후 암호화 작업
         user.changePassword(encryptionResult.getHashedPassword());
-
-        // 저장 작업
-        UserEntity user1 = userRepository.save(user);
-        userRepository.flush(); // 영속성 컨텍스트에서 DB로 플러시
-        userSaltRepository.save(new UserSaltEntity(user1.getUserId(), encryptionResult.getSalt()));
-        return user1;
+        GroupEntity group = groupRepository.findByUserCalorie(signUpRequestDto.getUserTargetcalorie())
+        		.orElseThrow(() -> new NoSuchElementException("해당 칼로리를 목표로 갖는 그룹이 존재하지 않습니다."));
+        
+        user.setGroup(group);
+        user.setGroupMissions(group.getGroupMissions());
+        
+        userRepository.save(user);
+        userSaltRepository.save(new UserSaltEntity(user.getUserId(), encryptionResult.getSalt()));
     }
 
     
