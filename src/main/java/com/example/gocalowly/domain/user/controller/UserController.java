@@ -53,17 +53,16 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody LoginRequestDto loginRequestDto, HttpSession session) {
+	public ResponseEntity<HttpStatus> login(@RequestBody LoginRequestDto loginRequestDto, HttpSession session) {
 		try{
 			LoginResponseDto loginResponseDto = userService.loginUser(loginRequestDto);
 			
 			session.setAttribute("userId", loginResponseDto.getUserId());
 			session.setAttribute("groupNo", loginResponseDto.getGroupNo());
 			session.setAttribute("userNickname", loginResponseDto.getUserNickname());
-					
-			return ResponseEntity.ok("로그인 되었습니다!");
+			return ResponseEntity.ok().build();
 		}catch(NoSuchElementException e) {
-			return ResponseEntity.ok("아이디 또는 비밀번호가 잘못되었습니다.");
+			return ResponseEntity.status(400).build();
 		}
 	}
 }

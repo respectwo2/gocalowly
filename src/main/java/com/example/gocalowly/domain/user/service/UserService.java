@@ -62,13 +62,11 @@ public class UserService {
     public LoginResponseDto loginUser(LoginRequestDto loginRequestDto) {
     	UserEntity loginUser = userRepository.findByUserNickname(loginRequestDto.getUserNickname())
     			.orElseThrow(() -> new NoSuchElementException());
-    	
     	String salt = userSaltRepository.findById(loginUser.getUserId())
     			.orElseThrow(() -> new NoSuchElementException())
     			.getSalt();
-    	
     	String encryptPassword = OpenCrypt.byteArrayToHex(OpenCrypt.getSHA256(loginRequestDto.getUserPassword(), salt));
-    	
+    	System.out.println(encryptPassword);
     	if (!loginUser.getUserPassword().equals(encryptPassword)) {
     		throw new NoSuchElementException();
     	}
