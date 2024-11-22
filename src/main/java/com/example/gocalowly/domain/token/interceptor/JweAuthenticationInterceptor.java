@@ -42,8 +42,6 @@ public class JweAuthenticationInterceptor implements HandlerInterceptor {
                 response.getWriter().write(e.getMessage());
             }
         }
-        
-        System.out.println(accessToken);
 
         // 2. Access Token 만료 시 Refresh Token 검증
         UUID refreshToken = resolveRefreshToken(request);
