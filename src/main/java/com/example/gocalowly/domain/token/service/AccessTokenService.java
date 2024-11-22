@@ -1,12 +1,14 @@
 package com.example.gocalowly.domain.token.service;
 
 import java.security.PrivateKey;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.example.gocalowly.util.JweKeys;
+import com.example.gocalowly.domain.token.exception.TokenException;
+import com.example.gocalowly.util.EncryptKeys;
 import com.nimbusds.jose.EncryptionMethod;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWEAlgorithm;
@@ -20,11 +22,11 @@ import com.nimbusds.jwt.JWTClaimsSet;
 @Service
 public class AccessTokenService {
 	
-    public String generateAccessToken(UUID userId) throws JOSEException {
+    public String generateAccessToken(UUID userId){
         // JWT Claims
         JWTClaimsSet claims = new JWTClaimsSet.Builder()
                 .claim("userId", userId)
-                .expirationTime(new Date(System.currentTimeMillis() + 15 * 60 * 1000)) // 15분 유효
+                .expirationTime(new Date(System.currentTimeMillis() + 60 * 1000)) // 5분 유효
                 .build();
 
         // JWE Header
@@ -36,26 +38,22 @@ public class AccessTokenService {
         JWEObject jweObject = new JWEObject(header, new Payload(claims.toJSONObject()));
 
         // Encrypt JWE with RSA Public Key
-        jweObject.encrypt(new RSAEncrypter(JweKeys.getPublicKey()));
+        try {
+			jweObject.encrypt(new RSAEncrypter(EncryptKeys.getPublicKey()));
+		} catch (JOSEException e) {
+			throw new TokenException("access token 암호화 과정에서 문제!");
+		}
 
         return jweObject.serialize();
     }
-	
-	public String decryptJWE(String jweToken) throws Exception {
-		JWEObject jweObject = JWEObject.parse(jweToken);
-		
-		jweObject.decrypt(new RSADecrypter(JweKeys.getPrivateKey()));
-		
-		return jweObject.getPayload().toString();
-	}
-	
+
     // JWE 검증 메서드
-    public JWTClaimsSet validateAndDecryptJWE(String jweToken) throws Exception {
+    public JWTClaimsSet decryptJWE(String jweToken) throws ParseException, JOSEException  {
         // 1. JWE 토큰 파싱
         JWEObject jweObject = JWEObject.parse(jweToken);
 
         // 2. RSA 개인 키를 사용해 복호화
-        PrivateKey privateKey = JweKeys.getPrivateKey();
+        PrivateKey privateKey = EncryptKeys.getPrivateKey();
         jweObject.decrypt(new RSADecrypter(privateKey));
 
         // 3. Payload에서 JWT Claims 추출
