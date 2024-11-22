@@ -53,14 +53,14 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<HttpStatus> login(@RequestBody LoginRequestDto loginRequestDto, HttpSession session) {
+	public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto, HttpSession session) {
 		try{
 			LoginResponseDto loginResponseDto = userService.loginUser(loginRequestDto);
 			
 			session.setAttribute("userId", loginResponseDto.getUserId());
 			session.setAttribute("groupNo", loginResponseDto.getGroupNo());
 			session.setAttribute("userNickname", loginResponseDto.getUserNickname());
-			return ResponseEntity.ok().build();
+			return ResponseEntity.ok(loginResponseDto);
 		}catch(NoSuchElementException e) {
 			return ResponseEntity.status(400).build();
 		}
