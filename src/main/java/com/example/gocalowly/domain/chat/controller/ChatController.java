@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.example.gocalowly.domain.chat.dto.request.ChatSubmitRequestDto;
 import com.example.gocalowly.domain.chat.dto.response.ChatResponseDto;
@@ -17,6 +18,7 @@ import com.example.gocalowly.domain.chat.service.ChatService;
 
 @RestController
 @RequestMapping("/api/chat")
+
 public class ChatController {
 
 	private static final int TEST_GROUPNO = 1;
@@ -43,10 +45,10 @@ public class ChatController {
 	}
 
 	@GetMapping("/logs")
-	public ResponseEntity<Void> findChatLog() {
+	public ResponseEntity<List<ChatResponseDto>> findChatLog() {
 		try {
-			chatService.findChat(TEST_GROUPNO);
-			return ResponseEntity.status(HttpStatus.OK).build();
+			List<ChatResponseDto> response = chatService.findChat(TEST_GROUPNO);
+			return ResponseEntity.status(HttpStatus.OK).body(response);
 
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

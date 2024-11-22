@@ -45,14 +45,17 @@ public class UserController {
 	
 	@PostMapping("/signup")
 	public ResponseEntity<Void> signupUser(@RequestBody SignUpRequestDto signUpRequestDto) {
-		try {
-			userService.addUser(signUpRequestDto);
-			//새로운 리소스 생성
-			return ResponseEntity.status(HttpStatus.CREATED).build();
-		}catch(Exception e) {
-			//유효하지않은 입력 데이터
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
+//		try {
+//			userService.addUser(signUpRequestDto);
+//			//새로운 리소스 생성
+//			return ResponseEntity.status(HttpStatus.CREATED).build();
+//		}catch(Exception e) {
+//			//유효하지않은 입력 데이터
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+//		}
+		
+		userService.addUser(signUpRequestDto);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
 	@PostMapping("/login")

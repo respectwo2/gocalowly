@@ -18,7 +18,7 @@ import com.example.gocalowly.domain.user.service.UserGoalService;
 public class GroupController {
 
 	private static final UUID TEST_USERID = UUID.fromString("00000000-0000-0000-0000-000000000001");
-	private static final int TEST_GROUPNO = 1;
+	private static final int TEST_GROUPNO = 5;
 	GroupService groupService;
 	UserGoalService userGoalService;
 
