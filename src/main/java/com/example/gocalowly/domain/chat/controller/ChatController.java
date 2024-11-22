@@ -3,6 +3,7 @@ package com.example.gocalowly.domain.chat.controller;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,18 +30,27 @@ public class ChatController {
 	}
 
 	@PostMapping("/send")
-	public ResponseEntity<?> createChat(@RequestBody ChatSubmitRequestDto chatSubmitRequestDto) {
-
+	public ResponseEntity<Void> createChat(@RequestBody ChatSubmitRequestDto chatSubmitRequestDto) {
+		try {
 		chatService.addChat(chatSubmitRequestDto, TEST_NICKNAME, TEST_GROUPNO);
-
-		return ResponseEntity.ok("");
+		//성공적으로 리소스 업데이트 반영
+		return ResponseEntity.status(HttpStatus.CREATED).build();
+		}catch(Exception e) {
+			//유효하지않은 요청
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+			
+		}
 	}
 
 	@GetMapping("/logs")
-	public ResponseEntity<?> findChatLog() {
+	public ResponseEntity<Void> findChatLog() {
+		try {
+			chatService.findChat(TEST_GROUPNO);
+			return ResponseEntity.status(HttpStatus.OK).build();
 
-		return ResponseEntity.ok(chatService.findChat(TEST_GROUPNO));
-
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
 	}
 
 }

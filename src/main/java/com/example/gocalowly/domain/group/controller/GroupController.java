@@ -16,34 +16,45 @@ import com.example.gocalowly.domain.user.service.UserGoalService;
 @RestController
 @RequestMapping("api/group")
 public class GroupController {
+
+	private static final UUID TEST_USERID = UUID.fromString("00000000-0000-0000-0000-000000000001");
+	private static final int TEST_GROUPNO = 1;
 	GroupService groupService;
 	UserGoalService userGoalService;
-	
+
 	public GroupController(GroupService groupService, UserGoalService userGoalService) {
 		this.groupService = groupService;
 		this.userGoalService = userGoalService;
 	}
-	
+
 	@GetMapping("/")
 	public ResponseEntity<GroupInfoResponseDto> getGroupInfo() {
-		int testGroupNo = 5;
-		
-		return ResponseEntity.ok(groupService.getGroupInfo(testGroupNo));
+
+		try {
+			GroupInfoResponseDto response = groupService.getGroupInfo(TEST_GROUPNO);
+			return ResponseEntity.status(HttpStatus.OK).body(response);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
 	}
-	
+
 	@GetMapping("/rank")
 
 	public ResponseEntity<GroupRankResponseDto> getRankInGroup() {
-		UUID testUserId  = UUID.fromString("00000000-0000-0000-0000-000000000001");
-		
-		return ResponseEntity.ok(userGoalService.getRankInGroup(testUserId));
+		try {
+			GroupRankResponseDto response = userGoalService.getRankInGroup(TEST_USERID);
+
+			return ResponseEntity.status(HttpStatus.OK).body(response);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
 	}
-	
+
 	@GetMapping("/testUpdate")
 	public void updateGroupUserGoals() {
 		userGoalService.addAllUserGoals();
 	}
-	
+
 	@GetMapping("/testReset")
 	public void resetGroupUserGoals() {
 		userGoalService.resetUserClearGoals();

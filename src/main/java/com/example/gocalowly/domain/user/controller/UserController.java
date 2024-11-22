@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,8 +16,6 @@ import com.example.gocalowly.domain.user.dto.request.LoginRequestDto;
 import com.example.gocalowly.domain.user.dto.request.SignUpRequestDto;
 import com.example.gocalowly.domain.user.dto.request.TargetCalorieRequestDto;
 import com.example.gocalowly.domain.user.dto.response.LoginResponseDto;
-import com.example.gocalowly.domain.user.entity.UserEntity;
-import com.example.gocalowly.domain.user.service.UserGoalService;
 import com.example.gocalowly.domain.user.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -32,23 +31,27 @@ public class UserController {
 	}
 	
 	@PostMapping("/target-calorie")
-	public ResponseEntity<?> updateUserTargetCalorie(@RequestBody TargetCalorieRequestDto targetCalorieRequestDto) {
+	public ResponseEntity<Void> updateUserTargetCalorie(@RequestBody TargetCalorieRequestDto targetCalorieRequestDto) {
 
 		try {
 			userService.updateUserTargetCalorie(TEST_USERID, targetCalorieRequestDto);
-			return ResponseEntity.ok("");
+			//칼로리 조회 성공
+			return ResponseEntity.status(HttpStatus.CREATED).build();
 		}catch(Exception e) {
-		return ResponseEntity.badRequest().body("");	
+			//유효하지않은 데이터
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 	}
 	
 	@PostMapping("/signup")
-	public ResponseEntity<?> signupUser(@RequestBody SignUpRequestDto signUpRequestDto) {
+	public ResponseEntity<Void> signupUser(@RequestBody SignUpRequestDto signUpRequestDto) {
 		try {
 			userService.addUser(signUpRequestDto);
-			return ResponseEntity.ok("");
+			//새로운 리소스 생성
+			return ResponseEntity.status(HttpStatus.CREATED).build();
 		}catch(Exception e) {
-			return ResponseEntity.badRequest().body("");
+			//유효하지않은 입력 데이터
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 	}
 	
@@ -60,9 +63,11 @@ public class UserController {
 			session.setAttribute("userId", loginResponseDto.getUserId());
 			session.setAttribute("groupNo", loginResponseDto.getGroupNo());
 			session.setAttribute("userNickname", loginResponseDto.getUserNickname());
-			return ResponseEntity.ok(loginResponseDto);
+			//성공
+			return ResponseEntity.status(HttpStatus.OK).body(loginResponseDto);
 		}catch(NoSuchElementException e) {
-			return ResponseEntity.status(400).build();
+			//비인증된 사용자
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		}
 	}
 }
