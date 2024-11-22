@@ -16,6 +16,8 @@ import com.example.gocalowly.domain.chat.dto.request.ChatSubmitRequestDto;
 import com.example.gocalowly.domain.chat.dto.response.ChatResponseDto;
 import com.example.gocalowly.domain.chat.service.ChatService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/chat")
 
@@ -32,7 +34,7 @@ public class ChatController {
 	}
 
 	@PostMapping("/send")
-	public ResponseEntity<Void> createChat(@RequestBody ChatSubmitRequestDto chatSubmitRequestDto) {
+	public ResponseEntity<Void> createChat(@Valid @RequestBody ChatSubmitRequestDto chatSubmitRequestDto) {
 		try {
 		chatService.addChat(chatSubmitRequestDto, TEST_NICKNAME, TEST_GROUPNO);
 		//성공적으로 리소스 업데이트 반영

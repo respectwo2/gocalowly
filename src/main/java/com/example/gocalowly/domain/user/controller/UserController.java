@@ -19,6 +19,7 @@ import com.example.gocalowly.domain.user.dto.response.LoginResponseDto;
 import com.example.gocalowly.domain.user.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/user")
@@ -44,16 +45,8 @@ public class UserController {
 	}
 	
 	@PostMapping("/signup")
-	public ResponseEntity<Void> signupUser(@RequestBody SignUpRequestDto signUpRequestDto) {
-//		try {
-//			userService.addUser(signUpRequestDto);
-//			//새로운 리소스 생성
-//			return ResponseEntity.status(HttpStatus.CREATED).build();
-//		}catch(Exception e) {
-//			//유효하지않은 입력 데이터
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-//		}
-		
+	public ResponseEntity<Void> signupUser(@Valid @RequestBody SignUpRequestDto signUpRequestDto) {
+	    System.out.println("DTO 유효성 검사 시작"); // 유효성 검사 확인용 로그
 		userService.addUser(signUpRequestDto);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
