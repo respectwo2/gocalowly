@@ -6,16 +6,22 @@ import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
-public class JweKeys {
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+
+public class EncryptKeys {
 	private static KeyPair JWE_KEY_PAIR;
-	private static String REFRESH_TOKEN_KEY;
+	private static SecretKey REFRESH_TOKEN_KEY;
 	
 	static {
 		try {
-			KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
-			generator.initialize(2048);
-			JWE_KEY_PAIR = generator.generateKeyPair();
-			REFRESH_TOKEN_KEY = "mySecretKey12345";
+			KeyPairGenerator RSAGenerator = KeyPairGenerator.getInstance("RSA");
+			RSAGenerator.initialize(2048);
+			JWE_KEY_PAIR = RSAGenerator.generateKeyPair();
+			
+			KeyGenerator AESGenerator = KeyGenerator.getInstance("AES");
+			AESGenerator.init(128);
+			REFRESH_TOKEN_KEY = AESGenerator.generateKey();
 		} catch (NoSuchAlgorithmException e) {
 		}
 	}
@@ -28,7 +34,7 @@ public class JweKeys {
 		return (RSAPrivateKey) JWE_KEY_PAIR.getPrivate();
 	}
 	
-	public static String getRefreshTokenKey() {
+	public static SecretKey getRefreshTokenKey() {
 		return REFRESH_TOKEN_KEY;
 	}
 }
