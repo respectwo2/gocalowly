@@ -49,7 +49,7 @@ public class UserService {
         //엔티티로 변환 후 암호화 작업
         user.changePassword(encryptionResult.getHashedPassword());
         GroupEntity group = groupRepository.findByUserCalorie(signUpRequestDto.getUserTargetcalorie())
-        		.orElseThrow(() -> new NoSuchElementException("해당 칼로리를 목표로 갖는 그룹이 존재하지 않습니다."));
+        		.orElseThrow(() -> new NoSuchElementException("그룹못찾음"));
         
         user.setGroup(group);
         user.setGroupMissions(group.getGroupMissions());
@@ -62,13 +62,11 @@ public class UserService {
     public LoginResponseDto loginUser(LoginRequestDto loginRequestDto) {
     	UserEntity loginUser = userRepository.findByUserNickname(loginRequestDto.getUserNickname())
     			.orElseThrow(() -> new NoSuchElementException());
-    	
     	String salt = userSaltRepository.findById(loginUser.getUserId())
     			.orElseThrow(() -> new NoSuchElementException())
     			.getSalt();
-    	
     	String encryptPassword = OpenCrypt.byteArrayToHex(OpenCrypt.getSHA256(loginRequestDto.getUserPassword(), salt));
-    	
+    	System.out.println(encryptPassword);
     	if (!loginUser.getUserPassword().equals(encryptPassword)) {
     		throw new NoSuchElementException();
     	}
@@ -79,8 +77,7 @@ public class UserService {
     
     public void updateUserTargetCalorie(UUID userId, TargetCalorieRequestDto targetCalorieRequestDto) {
     	UserEntity user = userRepository.findById(userId)
-    			.orElse(null // 여기서 예외 처리!!
-    					);
+    			.orElseThrow(() -> new NoSuchElementException());
     	
     	user.updateTargetCalorie(targetCalorieRequestDto.getUserTargetcalorie());
     }

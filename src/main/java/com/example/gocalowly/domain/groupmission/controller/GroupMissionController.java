@@ -3,6 +3,7 @@ package com.example.gocalowly.domain.groupmission.controller;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,9 @@ import com.example.gocalowly.domain.groupmission.service.GroupMissionSerivce;
 @RestController
 @RequestMapping("api/group/missions")
 public class GroupMissionController {
+	
+	private static final UUID TEST_USERID = UUID.fromString("00000000-0000-0000-0000-000000000001");
+	
 	GroupMissionSerivce groupMissionService;
 	
 	public GroupMissionController(GroupMissionSerivce groupMissionService) {
@@ -25,19 +29,23 @@ public class GroupMissionController {
 	
 	@GetMapping("/")
 	public ResponseEntity<GroupMissionResponseDto> getGroupMissions() {
-		UUID testUserUUID= UUID.fromString("00000000-0000-0000-0000-000000000001");
+		try {
+			GroupMissionResponseDto response = groupMissionService.getGroupMissions(TEST_USERID);
+			
+		return ResponseEntity.status(HttpStatus.OK).body(response);
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
 		
-		return ResponseEntity.ok(groupMissionService.getGroupMissions(testUserUUID));
 	}
 	
 	@PostMapping("/update")
-	public ResponseEntity<?> updateGroupMissions(@RequestBody GroupMissionUpdateRequestDto groupMissionUpdateRequestDto) {
-		UUID testUserUUID= UUID.fromString("00000000-0000-0000-0000-000000000001");
+	public ResponseEntity<Void> updateGroupMissions(@RequestBody GroupMissionUpdateRequestDto groupMissionUpdateRequestDto) {
 		try {
-			groupMissionService.updateGroupMissions(groupMissionUpdateRequestDto, testUserUUID);
-			return ResponseEntity.ok("");
+			groupMissionService.updateGroupMissions(groupMissionUpdateRequestDto, TEST_USERID);
+			return ResponseEntity.status(HttpStatus.CREATED).build();
 		}catch(NoSuchElementException e) {
-			return ResponseEntity.badRequest().body("");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 	}
 }
