@@ -64,6 +64,9 @@ export default {
     flex-direction: column;
     gap: 16px;
     overflow-y: auto;
+    padding-bottom: 40px;
+    /* 스크롤 막대 하단 간격 확보 */
+
 }
 
 /* 개별 메시지 */

@@ -1,19 +1,53 @@
+<script>
+import { ref } from "vue";
+import axios from "axios";
+
+export default {
+    name: "ChatSend",
+    setup() {
+        const messageContent = ref(""); // 입력된 메시지
+
+        const sendMessage = async () => {
+            const requestData = {
+                content: messageContent.value,
+            };
+
+            try {
+                if (!messageContent.value.trim()) {
+                    console.warn("Message content is empty.");
+                    return;
+                }
+
+                const response = await axios.post("http://localhost:8080/api/chat/send", requestData);
+
+                messageContent.value = ""; // 입력 필드 초기화
+
+                // 그룹 페이지로 이동
+                location.href = "/group";
+            } catch (error) {
+                console.error("Error sending chat message:", error.response || error.message);
+            }
+        };
+
+        return {
+            messageContent,
+            sendMessage,
+        };
+    },
+};
+</script>
+
 <template>
     <div class="send-message-prompt">
         <!-- 메시지 입력 필드와 아이콘 -->
         <div class="send-message-input">
-            <input type="text" placeholder="Type a message..." class="input-field" />
+            <input type="text" placeholder="Type a message..." class="input-field" v-model="messageContent" />
+            <div class="toggle-icon" @click="sendMessage">
+                <img src="../../assets/icons/toggle.svg" alt="Toggle Modal" width="40" height="40" />
+            </div>
         </div>
-        <button class="send-button">
-        </button>
     </div>
 </template>
-
-<script>
-export default {
-    name: "ChatSend",
-};
-</script>
 
 <style scoped>
 .send-message-prompt {
@@ -86,5 +120,9 @@ export default {
     width: 24px;
     height: 24px;
     fill: #f2f4f5;
+}
+
+.toggle-icon {
+    margin-top: 10px;
 }
 </style>

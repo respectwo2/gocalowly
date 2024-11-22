@@ -76,7 +76,17 @@ export default {
       emit("close");
     };
 
-    onMounted(fetchMissions);
+    const scrollToBottom = () => {
+      if (messagesContainer.value) {
+        messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight;
+      }
+    };
+
+    onMounted(() => {
+      fetchChatMessages();
+      scrollToBottom(); // 컴포넌트가 렌더링되면 스크롤 이동
+    });
+
 
     return {
       missions,
