@@ -26,7 +26,7 @@ public class AccessTokenService {
         // JWT Claims
         JWTClaimsSet claims = new JWTClaimsSet.Builder()
                 .claim("userId", userId)
-                .expirationTime(new Date(System.currentTimeMillis() + 60 * 1000)) // 5분 유효
+                .expirationTime(new Date(System.currentTimeMillis() + 5* 60 * 1000)) // 5분 유효
                 .build();
 
         // JWE Header
