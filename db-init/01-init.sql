@@ -63,6 +63,14 @@ CREATE TABLE `user_goal` (
 	`user_id`	binary(16)	NOT NULL
 );
 
+CREATE TABLE `refresh_token` (
+	`token_no` int AUTO_INCREMENT PRIMARY KEY,
+	`user_id` binary(16) NOT NULL,
+	`encrypted_refresh_token` varchar(100) NOT NULL,
+	`create_time` TIMESTAMP NOT NULL,
+	`expire_time` TIMESTAMP NOT NULL
+);
+
 ALTER TABLE `food` ADD CONSTRAINT `PK_FOOD` PRIMARY KEY (
 	`food_data_code`
 );
