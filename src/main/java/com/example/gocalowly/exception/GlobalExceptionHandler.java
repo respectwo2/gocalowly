@@ -1,7 +1,5 @@
 package com.example.gocalowly.exception;
 
-import java.util.NoSuchElementException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,6 +9,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 //전역 예외 처리기
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+	//아래 처리하지 못한 나머지 예외들을 처리
+	@ExceptionHandler(RuntimeException.class)
+	public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException ex) {
+	    ErrorResponse errorResponse = new ErrorResponse("INTERNAL_SERVER_ERROR", ex.getMessage());
+	    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+	}
+	
 	//유효성 검사
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
