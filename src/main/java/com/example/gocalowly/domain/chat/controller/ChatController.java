@@ -35,26 +35,14 @@ public class ChatController {
 
 	@PostMapping("/send")
 	public ResponseEntity<Void> createChat(@Valid @RequestBody ChatSubmitRequestDto chatSubmitRequestDto) {
-		try {
 		chatService.addChat(chatSubmitRequestDto, TEST_NICKNAME, TEST_GROUPNO);
-		//성공적으로 리소스 업데이트 반영
 		return ResponseEntity.status(HttpStatus.CREATED).build();
-		}catch(Exception e) {
-			//유효하지않은 요청
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-			
-		}
 	}
 
 	@GetMapping("/logs")
 	public ResponseEntity<List<ChatResponseDto>> findChatLog() {
-		try {
 			List<ChatResponseDto> response = chatService.findChat(TEST_GROUPNO);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
-
-		}catch(Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
 	}
 
 }
