@@ -16,6 +16,7 @@ import com.example.gocalowly.domain.user.entity.UserEntity;
 import com.example.gocalowly.domain.user.entity.UserGoalEntity;
 import com.example.gocalowly.domain.user.repository.UserGoalRepository;
 import com.example.gocalowly.domain.user.repository.UserRepository;
+import com.example.gocalowly.exception.ResourceNotFoundException;
 
 @Service
 @Transactional
@@ -30,7 +31,7 @@ public class UserGoalService {
 	
 	public GroupRankResponseDto getRankInGroup(UUID userId) {
 		UserEntity user = userRepository.findById(userId)
-				.orElseThrow(() -> new NoSuchElementException("해당하는 유저가 없습니다."));
+				.orElseThrow(() -> new ResourceNotFoundException("USER_NOT_FOUND"));
 	
 		List<Integer> groupCompleteDates = user.getGroup().getUsers().stream()
 				.map(UserEntity::getCompleteCount)

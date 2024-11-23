@@ -27,6 +27,7 @@ import com.example.gocalowly.domain.food.repository.FoodRepository;
 import com.example.gocalowly.domain.food.repository.UserFoodLogRepository;
 import com.example.gocalowly.domain.user.entity.UserEntity;
 import com.example.gocalowly.domain.user.repository.UserRepository;
+import com.example.gocalowly.exception.ResourceNotFoundException;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -120,7 +121,7 @@ public class UserFoodLogService {
         actualGroupedData.forEach((date, logs) -> groupedByDate.get(date).addAll(logs));
         
         int targetCalorie = userRepository.findById(userId)
-        		.orElseThrow(() -> new NoSuchElementException("해당하는 유저가 존재하지 않습니다."))
+        		.orElseThrow(() -> new ResourceNotFoundException("USER_NOT_FOUND"))
         		.getUserTargetcalorie();
         
         

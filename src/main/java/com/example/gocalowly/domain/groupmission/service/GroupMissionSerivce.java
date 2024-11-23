@@ -16,6 +16,7 @@ import com.example.gocalowly.domain.groupmission.entity.UserGroupMissionEntity;
 import com.example.gocalowly.domain.groupmission.repository.GroupMissionRepository;
 import com.example.gocalowly.domain.user.entity.UserEntity;
 import com.example.gocalowly.domain.user.repository.UserRepository;
+import com.example.gocalowly.exception.ResourceNotFoundException;
 
 import jakarta.transaction.Transactional;
 
@@ -32,7 +33,7 @@ public class GroupMissionSerivce {
 	
 	public GroupMissionResponseDto getGroupMissions(UUID userId) {
 		List<UserGroupMissionEntity> userMissions = userRepository.findByIdWithMissions(userId)
-				.orElseThrow(() -> new NoSuchElementException("일치하는 유저가 없습니다."))
+				.orElseThrow(() -> new ResourceNotFoundException("MISSION_NOT_FOUND"))
 				.getUserMissions();
 		
 		return new GroupMissionResponseDto(userMissions.stream()
@@ -45,7 +46,7 @@ public class GroupMissionSerivce {
 	
 	public void updateGroupMissions(GroupMissionUpdateRequestDto groupMissionUpdateRequestDto, UUID userId) {
 		List<UserGroupMissionEntity> userMissions = userRepository.findByIdWithMissions(userId)
-				.orElseThrow(() -> new NoSuchElementException("일치하는 유저가 없습니다."))
+				.orElseThrow(() -> new ResourceNotFoundException("MISSION_NOT_FOUND"))
 				.getUserMissions();
 		
 		userMissions.forEach(userGroupMission -> updateGroupMission(userGroupMission, groupMissionUpdateRequestDto.getMissionCompletes()));
