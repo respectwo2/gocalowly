@@ -21,7 +21,6 @@ public class FoodService {
 	
 	
 	public List<FoodSearchResultResponseDto> searchFoodByName(String name) {
-
 		return foodRepository.searchByFoodName(name)
 				.stream()
 				.map(FoodData -> foodMapper.entityToDto(FoodData))
