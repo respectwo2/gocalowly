@@ -22,7 +22,7 @@ public class ChatService {
 		this.chatRepository = chatRepository;
 		this.chatMapper = chatMapper;
 	}
-
+	//비어있는 채팅도 정상적인 응답으로 간주해 예외 처리 하지않음
 	public List<ChatResponseDto> findChat(int groupNo) {
         List<ChatEntity> chatEntities = chatRepository.findByGroupNo(groupNo);
         

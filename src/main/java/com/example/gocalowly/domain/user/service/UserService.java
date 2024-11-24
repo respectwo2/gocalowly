@@ -1,7 +1,5 @@
 package com.example.gocalowly.domain.user.service;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -18,67 +16,64 @@ import com.example.gocalowly.domain.user.entity.UserSaltEntity;
 import com.example.gocalowly.domain.user.mapper.UserMapper;
 import com.example.gocalowly.domain.user.repository.UserRepository;
 import com.example.gocalowly.domain.user.repository.UserSaltRepository;
+import com.example.gocalowly.exception.AuthenticationFailedException;
+import com.example.gocalowly.exception.ResourceNotFoundException;
 import com.example.gocalowly.util.OpenCrypt;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
 public class UserService {
-    private final UserRepository userRepository;
-    private final UserSaltRepository userSaltRepository;
-    private final UserMapper userMapper;
-    private final GroupRepository groupRepository;
+	private final UserRepository userRepository;
+	private final UserSaltRepository userSaltRepository;
+	private final UserMapper userMapper;
+	private final GroupRepository groupRepository;
 
-    public UserService(UserRepository userRepository, UserSaltRepository userSaltRespository,UserMapper userMapper, GroupRepository groupRepository) {
-        this.userRepository = userRepository;
-        this.userSaltRepository = userSaltRespository;
-        this.userMapper = userMapper;
-        this.groupRepository = groupRepository;
-    }  
+	public UserService(UserRepository userRepository, UserSaltRepository userSaltRespository, UserMapper userMapper,
+			GroupRepository groupRepository) {
+		this.userRepository = userRepository;
+		this.userSaltRepository = userSaltRespository;
+		this.userMapper = userMapper;
+		this.groupRepository = groupRepository;
+	}
 
-    public void addUser(SignUpRequestDto signUpRequestDto) {
-    	// 엔티티 생성
-    	UserEntity user = userMapper.dtoToEntity(signUpRequestDto);
+	public void addUser(SignUpRequestDto signUpRequestDto) {
+		UserEntity user = userMapper.dtoToEntity(signUpRequestDto);
 
-    	// 암호화 수행할 객체
-        PasswordEncryptionResultDto encryptionResult = OpenCrypt.encryptPw(signUpRequestDto.getUserPassword());
+		PasswordEncryptionResultDto encryptionResult = OpenCrypt.encryptPw(signUpRequestDto.getUserPassword());
+		user.changePassword(encryptionResult.getHashedPassword());
 
-        //엔티티로 변환 후 암호화 작업
-        user.changePassword(encryptionResult.getHashedPassword());
-        GroupEntity group = groupRepository.findByUserCalorie(signUpRequestDto.getUserTargetcalorie())
-        		.orElseThrow(() -> new NoSuchElementException("그룹못찾음"));
-        
-        user.setGroup(group);
-        user.setGroupMissions(group.getGroupMissions());
-        
-        userRepository.save(user);
-        userSaltRepository.save(new UserSaltEntity(user.getUserId(), encryptionResult.getSalt()));
-    }
+		GroupEntity group = groupRepository.findByUserCalorie(signUpRequestDto.getUserTargetcalorie())
+				.orElseThrow(() -> new ResourceNotFoundException("GROUP_NOT_FOUND"));
 
-    
-    public LoginResponseDto loginUser(LoginRequestDto loginRequestDto) {
-    	UserEntity loginUser = userRepository.findByUserNickname(loginRequestDto.getUserNickname())
-    			.orElseThrow(() -> new NoSuchElementException());
-    	String salt = userSaltRepository.findById(loginUser.getUserId())
-    			.orElseThrow(() -> new NoSuchElementException())
-    			.getSalt();
-    	String encryptPassword = OpenCrypt.byteArrayToHex(OpenCrypt.getSHA256(loginRequestDto.getUserPassword(), salt));
-    	System.out.println(encryptPassword);
-    	if (!loginUser.getUserPassword().equals(encryptPassword)) {
-    		throw new NoSuchElementException();
-    	}
-    	
-    	return new LoginResponseDto(
-    			loginUser.getUserNickname(), loginUser.getUserId(), loginUser.getGroup().getgroupNo());
-    }
-    
-    public void updateUserTargetCalorie(UUID userId, TargetCalorieRequestDto targetCalorieRequestDto) {
-    	UserEntity user = userRepository.findById(userId)
-    			.orElseThrow(() -> new NoSuchElementException());
-    	
-    	user.updateTargetCalorie(targetCalorieRequestDto.getUserTargetcalorie());
-    }
+		user.setGroup(group);
+		user.setGroupMissions(group.getGroupMissions());
+
+		userRepository.save(user);
+		userSaltRepository.save(new UserSaltEntity(user.getUserId(), encryptionResult.getSalt()));
+	}
+
+	public LoginResponseDto loginUser(LoginRequestDto loginRequestDto) throws AuthenticationFailedException {
+		UserEntity loginUser = userRepository.findByUserNickname(loginRequestDto.getUserNickname())
+				.orElseThrow(() -> new ResourceNotFoundException("NICKNAME_NOT_FOUND"));
+
+		String salt = userSaltRepository.findById(loginUser.getUserId())
+				.orElseThrow(() -> new ResourceNotFoundException("SALT_NOT_FOUND")).getSalt();
+
+		String encryptPassword = OpenCrypt.byteArrayToHex(OpenCrypt.getSHA256(loginRequestDto.getUserPassword(), salt));
+		if (!loginUser.getUserPassword().equals(encryptPassword)) {
+			throw new AuthenticationFailedException("AUTH_FAILED");
+		}
+
+		return new LoginResponseDto(loginUser.getUserNickname(), loginUser.getUserId(),
+				loginUser.getGroup().getGroupNo());
+	}
+
+	public void updateUserTargetCalorie(UUID userId, TargetCalorieRequestDto targetCalorieRequestDto) {
+		UserEntity user = userRepository.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("USER_NOT_FOUND"));
+
+		user.updateTargetCalorie(targetCalorieRequestDto.getUserTargetcalorie());
+	}
 }

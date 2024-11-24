@@ -47,7 +47,7 @@ public class GroupEntity {
 	private void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
-	public int getgroupNo() {
+	public int getGroupNo() {
 		return groupNo;
 	}
 	public int getCalorieGoal() {

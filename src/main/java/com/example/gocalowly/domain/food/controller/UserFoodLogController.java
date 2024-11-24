@@ -30,47 +30,26 @@ public class UserFoodLogController {
 
 	@GetMapping("/target-calorie")
 	public ResponseEntity<DailyCalorieSummaryResponseDto> findDaliyCalorieSummary() {
-
-		try {
-			DailyCalorieSummaryResponseDto response = userFoodLogService.findDailyCalorieSummary(TEST_USERID);
-
-			return ResponseEntity.status(HttpStatus.OK).body(response);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-
-		}
+		DailyCalorieSummaryResponseDto response = userFoodLogService.findDailyCalorieSummary(TEST_USERID);
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 
 	@GetMapping("/food-logs")
 	public ResponseEntity<List<DailyFoodLogResponseDto>> findFoodLog() {
-		try {
-			List<DailyFoodLogResponseDto> response = userFoodLogService.findFoodLogs(TEST_USERID);
-
-			return ResponseEntity.status(HttpStatus.OK).body(response);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
-
+		List<DailyFoodLogResponseDto> response = userFoodLogService.findFoodLogs(TEST_USERID);
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 
 	@PostMapping("/food-logs")
 	public ResponseEntity<Void> addUserFoodLog(@RequestBody RegistFoodLogRequestDto registFoodLogRequestDto) {
-		try {
-			userFoodLogService.addUserFoodLog(registFoodLogRequestDto, TEST_USERID);
-			return ResponseEntity.status(HttpStatus.CREATED).build();
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
+		userFoodLogService.addUserFoodLog(registFoodLogRequestDto, TEST_USERID);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 
 	}
 
 	@GetMapping("/goals")
 	public ResponseEntity<DailyGoalStatusResponseDto> findDailyGoalStatus() {
-		try {
-			DailyGoalStatusResponseDto response = userFoodLogService.findDailyGoalStatus(TEST_USERID);
-			return ResponseEntity.status(HttpStatus.OK).body(response);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
+		DailyGoalStatusResponseDto response = userFoodLogService.findDailyGoalStatus(TEST_USERID);
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 }

@@ -30,24 +30,16 @@ public class GroupController {
 	@GetMapping("/")
 	public ResponseEntity<GroupInfoResponseDto> getGroupInfo() {
 
-		try {
-			GroupInfoResponseDto response = groupService.getGroupInfo(TEST_GROUPNO);
-			return ResponseEntity.status(HttpStatus.OK).body(response);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
+		GroupInfoResponseDto response = groupService.getGroupInfo(TEST_GROUPNO);
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 
 	@GetMapping("/rank")
 
 	public ResponseEntity<GroupRankResponseDto> getRankInGroup() {
-		try {
-			GroupRankResponseDto response = userGoalService.getRankInGroup(TEST_USERID);
+		GroupRankResponseDto response = userGoalService.getRankInGroup(TEST_USERID);
 
-			return ResponseEntity.status(HttpStatus.OK).body(response);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 
 	@GetMapping("/testUpdate")
