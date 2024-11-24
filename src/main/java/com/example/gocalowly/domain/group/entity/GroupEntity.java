@@ -44,7 +44,7 @@ public class GroupEntity {
 	private void setHeadcount(int headcount) {
 		this.headcount = headcount;
 	}
-	private void setGroupName(String groupName) {
+	public void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
 	public int getGroupNo() {
