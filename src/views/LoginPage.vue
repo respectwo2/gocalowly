@@ -68,7 +68,7 @@ export default {
   </div>
 
   <div class="spacer">
-    <h2>GO칼로리</h2>
+    <img src="@/assets/icons/logo_3-2.png" width="250">
   </div>
 
   <div class="content">
@@ -94,28 +94,17 @@ export default {
 </template>
 
 <style scoped>
-@charset "UTF-8";
-
-@font-face {
-  font-family: "Pretendard-Regular";
-  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-}
-
 body {
-  font-family: "Pretendard-Regular";
   min-height: 100vh;
-  width: 100%;
-  height: 100%;
   display: flex;
-  background: #f5f5f5;
   justify-content: center;
   align-items: center;
+  background: #f5f5f5;
 }
 
+
 .spacer {
-  height: 150px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
