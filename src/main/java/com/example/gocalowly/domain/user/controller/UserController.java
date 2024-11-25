@@ -48,7 +48,7 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
-
+	@PostMapping("/login")
 	public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto, HttpSession session, HttpServletResponse response) throws AuthenticationFailedException {
 
 			LoginResponseDto loginResponseDto = userService.loginUser(loginRequestDto);
