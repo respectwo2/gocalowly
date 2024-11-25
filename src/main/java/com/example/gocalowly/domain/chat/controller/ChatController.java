@@ -21,7 +21,7 @@ public class ChatController {
 
     private static final int TEST_GROUPNO = 1;
     private static final UUID TEST_USERID = UUID.fromString("00000000-0000-0000-0000-000000000001");
-    private static final String TEST_NICKNAME = "윤상민천재";
+    private static final String TEST_NICKNAME = "3대500우성문";
 
     ChatService chatService;
 
