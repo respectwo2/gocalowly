@@ -1,12 +1,12 @@
 -- group_mission 더미 데이터 생성
 INSERT INTO `group_mission` (`mission_no`, `mission_name`, `group_no`)
 VALUES
-(1, 'Drink 2L of water', 5),
-(2, 'Exercise for 30 minutes', 5),
-(3, 'No sugar intake', 5),
-(4, 'Drink 2L of water', 10),
-(5, 'Exercise for 30 minutes', 10),
-(6, 'No sugar intake', 10);
+(1, '물 2L 마시기', 5),
+(2, '운동 30분 하기', 5),
+(3, '스트레칭 동영상 따라하기', 5),
+(4, '물 2L 마시기', 10),
+(5, '운동 30분 하기', 10),
+(6, '스트레칭 동영상 따라하기', 10);
 
 -- user_group_mission 더미 데이터 생성
 INSERT INTO `user_group_mission` (`user_id`, `mission_no`, `is_mission_complete`)
