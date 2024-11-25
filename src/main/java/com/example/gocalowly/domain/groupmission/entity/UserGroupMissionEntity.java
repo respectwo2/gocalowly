@@ -1,10 +1,6 @@
 package com.example.gocalowly.domain.groupmission.entity;
 
-import java.util.UUID;
-
-import com.example.gocalowly.domain.group.entity.GroupEntity;
 import com.example.gocalowly.domain.user.entity.UserEntity;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -15,43 +11,42 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "user_group_mission")
 public class UserGroupMissionEntity {
-	private boolean isMissionComplete = false;
-	
-	@Id
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id")
-	private UserEntity user;
-	
-	@Id
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="mission_no")
-	private GroupMissionEntity groupMission;
+    private boolean isMissionComplete = false;
 
-	public UserGroupMissionEntity() {
-		// TODO Auto-generated constructor stub
-	}
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
-	public boolean isMissionComplete() {
-		return isMissionComplete;
-	}
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mission_no")
+    private GroupMissionEntity groupMission;
 
-	public void setMissionComplete(boolean isMissionComplete) {
-		this.isMissionComplete = isMissionComplete;
-	}
+    public UserGroupMissionEntity() {
+    }
 
-	public UserEntity getUser() {
-		return user;
-	}
+    public boolean isMissionComplete() {
+        return isMissionComplete;
+    }
 
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
+    public void setMissionComplete(boolean isMissionComplete) {
+        this.isMissionComplete = isMissionComplete;
+    }
 
-	public GroupMissionEntity getGroupMission() {
-		return groupMission;
-	}
+    public UserEntity getUser() {
+        return user;
+    }
 
-	public void setGroupMission(GroupMissionEntity groupMission) {
-		this.groupMission = groupMission;
-	}
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public GroupMissionEntity getGroupMission() {
+        return groupMission;
+    }
+
+    public void setGroupMission(GroupMissionEntity groupMission) {
+        this.groupMission = groupMission;
+    }
 }
