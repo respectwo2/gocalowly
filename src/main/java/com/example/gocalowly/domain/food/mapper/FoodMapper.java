@@ -1,15 +1,14 @@
 package com.example.gocalowly.domain.food.mapper;
 
-import org.springframework.stereotype.Component;
-
 import com.example.gocalowly.domain.food.dto.response.FoodSearchResultResponseDto;
 import com.example.gocalowly.domain.food.entity.FoodData;
+import org.springframework.stereotype.Component;
 
 @Component
 public class FoodMapper {
-	public FoodSearchResultResponseDto entityToDto(FoodData foodData) {
-		return new FoodSearchResultResponseDto(
-				foodData.getFoodDataName(),
-				foodData.getFoodDataCalorie());
-	}
+    public FoodSearchResultResponseDto entityToDto(FoodData foodData) {
+        return new FoodSearchResultResponseDto(
+                foodData.getFoodDataName(),
+                foodData.getFoodDataCalorie());
+    }
 }

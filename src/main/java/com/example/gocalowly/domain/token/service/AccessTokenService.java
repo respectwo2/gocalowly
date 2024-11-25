@@ -1,12 +1,5 @@
 package com.example.gocalowly.domain.token.service;
 
-import java.security.PrivateKey;
-import java.text.ParseException;
-import java.util.Date;
-import java.util.UUID;
-
-import org.springframework.stereotype.Service;
-
 import com.example.gocalowly.domain.token.exception.TokenException;
 import com.example.gocalowly.util.EncryptKeys;
 import com.nimbusds.jose.EncryptionMethod;
@@ -18,15 +11,20 @@ import com.nimbusds.jose.Payload;
 import com.nimbusds.jose.crypto.RSADecrypter;
 import com.nimbusds.jose.crypto.RSAEncrypter;
 import com.nimbusds.jwt.JWTClaimsSet;
+import java.security.PrivateKey;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.UUID;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AccessTokenService {
-	
-    public String generateAccessToken(UUID userId){
+
+    public String generateAccessToken(UUID userId) {
         // JWT Claims
         JWTClaimsSet claims = new JWTClaimsSet.Builder()
                 .claim("userId", userId)
-                .expirationTime(new Date(System.currentTimeMillis() + 5* 60 * 1000)) // 5분 유효
+                .expirationTime(new Date(System.currentTimeMillis() + 5 * 60 * 1000)) // 5분 유효
                 .build();
 
         // JWE Header
@@ -39,16 +37,16 @@ public class AccessTokenService {
 
         // Encrypt JWE with RSA Public Key
         try {
-			jweObject.encrypt(new RSAEncrypter(EncryptKeys.getPublicKey()));
-		} catch (JOSEException e) {
-			throw new TokenException("access token 암호화 과정에서 문제!");
-		}
+            jweObject.encrypt(new RSAEncrypter(EncryptKeys.getPublicKey()));
+        } catch (JOSEException e) {
+            throw new TokenException("access token 암호화 과정에서 문제!");
+        }
 
         return jweObject.serialize();
     }
 
     // JWE 검증 메서드
-    public JWTClaimsSet decryptJWE(String jweToken) throws ParseException, JOSEException  {
+    public JWTClaimsSet decryptJWE(String jweToken) throws ParseException, JOSEException {
         // 1. JWE 토큰 파싱
         JWEObject jweObject = JWEObject.parse(jweToken);
 
@@ -72,12 +70,9 @@ public class AccessTokenService {
             }
 
             // 2. 필수 Claims 검증 (예: userId 존재 여부)
-            if (claims.getClaim("userId") == null) {
-                return false;
-            }
+            return claims.getClaim("userId") != null;
 
             // 추가적인 검증 로직 필요시 여기에 추가
-            return true;
         } catch (Exception e) {
             return false;
         }

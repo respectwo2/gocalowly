@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 // 채팅 내역을 전달하는 ResponseDto
 public class ChatResponseDto {
-    private String userNickName; // 채팅 작성자
-    private String content;      // 채팅 내용
-    private LocalDateTime chatDate; // 채팅 등록 시간
+    private final String userNickName; // 채팅 작성자
+    private final String content;      // 채팅 내용
+    private final LocalDateTime chatDate; // 채팅 등록 시간
 
     public ChatResponseDto(String userNickName, String content, LocalDateTime chatDate) {
         this.userNickName = userNickName;
@@ -26,14 +26,11 @@ public class ChatResponseDto {
         return chatDate;
     }
 
-	@Override
-	public String toString() {
-		return "ChatResponseDto [userNickName=" + userNickName + ", content=" + content + ", chatDate=" + chatDate
-				+ "]";
-	}
-    
-    
+    @Override
+    public String toString() {
+        return "ChatResponseDto [userNickName=" + userNickName + ", content=" + content + ", chatDate=" + chatDate
+                + "]";
+    }
 
-    
-    
+
 }
