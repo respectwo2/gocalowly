@@ -43,15 +43,15 @@ public class UserService {
 
 		PasswordEncryptionResultDto encryptionResult = OpenCrypt.encryptPw(signUpRequestDto.getUserPassword());
 		user.changePassword(encryptionResult.getHashedPassword());
-
+		
 		GroupEntity group = groupRepository.findByUserCalorie(signUpRequestDto.getUserTargetcalorie())
 				.orElseThrow(() -> new ResourceNotFoundException("GROUP_NOT_FOUND"));
 
 		user.setGroup(group);
 		user.setGroupMissions(group.getGroupMissions());
-
+		
 		userRepository.save(user);
-		userSaltRepository.save(new UserSaltEntity(user.getUserId(), encryptionResult.getSalt()));
+		userSaltRepository.save(new UserSaltEntity(user.getUserId(),encryptionResult.getSalt()));
 	}
 
 	public LoginResponseDto loginUser(LoginRequestDto loginRequestDto) throws AuthenticationFailedException {

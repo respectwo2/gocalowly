@@ -63,6 +63,7 @@ public class UserEntity {
 		setUserTargetcalorie(userTargetcalorie);
 	}
 
+
 	public UUID getUserId() {
 		return userId;
 	}
@@ -188,4 +189,15 @@ public class UserEntity {
 		userGoals.clear();
 		completeCount = 0;
 	}
+
+	@Override
+	public String toString() {
+		return "UserEntity [userId=" + userId + ", userPassword=" + userPassword + ", userName=" + userName
+				+ ", userPhonenumber=" + userPhonenumber + ", userNickname=" + userNickname + ", completeCount="
+				+ completeCount + ", userTargetcalorie=" + userTargetcalorie + ", group=" + group
+				+ ", userGroupMissions=" + userGroupMissions + ", foodlogs=" + foodlogs + ", userGoals=" + userGoals
+				+ "]";
+	}
+	
+	
 }

@@ -56,4 +56,6 @@ public class SignUpRequestDto {
     public int getUserTargetcalorie() {
         return userTargetcalorie;
     }
+
+    
 }
