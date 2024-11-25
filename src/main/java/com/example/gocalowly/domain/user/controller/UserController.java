@@ -49,7 +49,11 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
+<<<<<<< HEAD
 	public ResponseEntity<Void> login(@RequestBody LoginRequestDto loginRequestDto, HttpSession session, HttpServletResponse response) throws AuthenticationFailedException {
+=======
+	public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto, HttpSession session, HttpServletResponse response) throws AuthenticationFailedException {
+>>>>>>> branch 'cinador' of https://github.com/respectwo2/gocalowly.git
 
 			LoginResponseDto loginResponseDto = userService.loginUser(loginRequestDto);
 			
