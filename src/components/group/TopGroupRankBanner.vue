@@ -1,9 +1,15 @@
 <template>
   <div class="group-rank-banner">
-    <div class="rank-text">그룹 내 상위 {{ topPercentile }}% 유저입니다</div>
+    <div class="rank-text">그룹 내 상위 5% 유저입니다</div>
+    <!-- <div class="rank-text">그룹 내 상위 {{ topPercentile }}% 유저입니다</div> -->
 
     <div class="toggle-icon" @click="toggleModal">
-      <img src="../../assets/icons/toggle.svg" alt="Toggle Modal" width="40" height="40" />
+      <img
+        src="../../assets/icons/toggle.svg"
+        alt="Toggle Modal"
+        width="40"
+        height="40"
+      />
     </div>
 
     <!-- Modal 컴포넌트 렌더링 -->
@@ -34,10 +40,11 @@ export default {
     // 그룹 랭크 정보 가져오기
     const fetchGroupRank = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/group/rank");
+        const response = await axios.get(
+          "http://localhost:8080/api/group/rank"
+        );
         percentage.value = response.data;
         topPercentile.value = response.data.topPercentile;
-
       } catch (error) {
         console.error("Error fetching group rank:", error);
       }
@@ -81,7 +88,7 @@ export default {
   font-weight: 400;
   font-size: 23px;
   line-height: 24px;
-  color: #F2F4F5;
+  color: #f2f4f5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,7 +98,8 @@ export default {
 .toggle-icon {
   width: 25px;
   height: 38px;
-  filter: drop-shadow(-1.81538px -1.81538px 7.26154px rgba(36, 39, 96, 0.25)) drop-shadow(3.63077px 7.26154px 7.26154px rgba(36, 39, 96, 0.25));
+  filter: drop-shadow(-1.81538px -1.81538px 7.26154px rgba(36, 39, 96, 0.25))
+    drop-shadow(3.63077px 7.26154px 7.26154px rgba(36, 39, 96, 0.25));
   cursor: pointer;
   display: flex;
   align-items: center;

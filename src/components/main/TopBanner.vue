@@ -1,12 +1,8 @@
 <template>
   <div class="calorie-info">
     <div class="calorie-text">
-      <div>
-        이달의 목표 {{ userTargetcalorie }}kcal
-      </div>
-      <div>
-        등록한 칼로리 {{ totalCalories }}kcal
-      </div>
+      <div>이달의 목표 {{ userTargetcalorie }}kcal</div>
+      <div>등록한 칼로리 {{ totalCalories }}kcal</div>
     </div>
   </div>
 </template>
@@ -66,7 +62,7 @@ export default {
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  color: #F2F4F5;
+  color: #f2f4f5;
   display: flex;
   /* flex-direction: column; */
   align-items: center;

@@ -27,8 +27,7 @@ export default {
         );
 
         if (response.status === 200) {
-          console.log(response.data);
-          alert(`${response.data.userNickname}님 반갑습니다!`);
+          alert(`${payload.userNickname}님 반갑습니다!`);
           resetForm();
           location.href = "/";
         }
@@ -68,16 +67,24 @@ export default {
   </div>
 
   <div class="spacer">
-    <img src="@/assets/icons/logo_3-2.png" width="250">
+    <img src="@/assets/icons/logo_3-2.png" width="250" />
   </div>
 
   <div class="content">
     <form class="form" @submit.prevent="submitForm">
       <div class="formbox">
-        <input type="text" v-model="loginLog.userNickname" placeholder="닉네임을 입력해주세요" />
+        <input
+          type="text"
+          v-model="loginLog.userNickname"
+          placeholder="닉네임을 입력해주세요"
+        />
       </div>
       <div class="formbox">
-        <input type="password" v-model="loginLog.userPassword" placeholder="비밀번호를 입력해주세요" />
+        <input
+          type="password"
+          v-model="loginLog.userPassword"
+          placeholder="비밀번호를 입력해주세요"
+        />
       </div>
       <div class="loginbtn">
         <button type="submit">로그인</button>
@@ -101,7 +108,6 @@ body {
   align-items: center;
   background: #f5f5f5;
 }
-
 
 .spacer {
   height: 200px;
@@ -131,7 +137,6 @@ body {
 }
 
 .formbox {
-
   width: 100%;
   height: 55px;
   background: #ffffff;

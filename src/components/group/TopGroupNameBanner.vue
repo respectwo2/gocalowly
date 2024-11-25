@@ -1,6 +1,6 @@
 <template>
   <div class="calorie-info">
-    <p class="group-text">이대로가면 뚱땡이임</p>
+    <p class="group-text">행복 다이어트 즐거운 운동</p>
   </div>
 </template>
 
@@ -28,7 +28,7 @@
   font-weight: 400;
   font-size: 25px;
   line-height: 24px;
-  color: #F2F4F5;
+  color: #f2f4f5;
   display: flex;
   align-items: center;
   justify-content: center;
