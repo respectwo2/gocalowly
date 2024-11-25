@@ -30,4 +30,4 @@ VALUES
 (UNHEX(REPLACE(UUID(), '-', '')), CURDATE() - INTERVAL 4 DAY, '아침', '김밥', 250, @user_id),
 (UNHEX(REPLACE(UUID(), '-', '')), CURDATE() - INTERVAL 4 DAY, '점심', '갈비탕', 500, @user_id),
 (UNHEX(REPLACE(UUID(), '-', '')), CURDATE() - INTERVAL 4 DAY, '저녁', '제육볶음', 550, @user_id),
-(UNHEX(REPLACE(UUID(), '-', '')), CURDATE() - INTERVAL 4 DAY, '간식', '찐 감자', 150, @user_id),
+(UNHEX(REPLACE(UUID(), '-', '')), CURDATE() - INTERVAL 4 DAY, '간식', '찐 감자', 150, @user_id);
