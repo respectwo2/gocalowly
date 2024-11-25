@@ -62,7 +62,7 @@ export default {
 }
 
 .food-log-card {
-  background-color: #f2f4f5;
+  background-color: #FFDEDD;
   border-radius: 20px;
   padding: 16px;
   margin-bottom: 16px;
@@ -72,20 +72,20 @@ export default {
 }
 
 .date {
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard-Regular", sans-serif;
   font-weight: 500;
   font-size: 20px;
   margin-bottom: 16px;
 }
 
 .food-item {
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
   margin-bottom: 8px;
 }
 
 .total-calories {
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard-Regular", sans-serif;
   font-weight: bold;
   font-size: 18px;
   margin-top: 16px;

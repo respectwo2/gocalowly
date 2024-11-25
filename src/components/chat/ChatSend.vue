@@ -60,10 +60,10 @@ export default {
     position: absolute;
     width: 375px;
     height: 108px;
-    left: 12px;
+    left: 9px;
     top: 624px;
     background: #ffffff;
-    border-radius: 0px 0px 0px 48px;
+    border-radius: 30px;
 }
 
 /* 메시지 입력 필드 */
@@ -86,7 +86,8 @@ export default {
     border: none;
     outline: none;
     padding: 10px 20px;
-    font-family: 'DM Sans', sans-serif;
+    /* font-family: 'DM Sans', sans-serif; */
+    font-family: "Pretendard-Regular";
     font-weight: 400;
     font-size: 16px;
     color: #72777a;

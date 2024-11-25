@@ -37,6 +37,7 @@ export default {
                     "http://localhost:8080/api/user/goals"
                 );
                 dailyGoals.value = response.data.dailyGoals;
+                console.log(response)
             } catch (error) {
                 console.error("Error fetching daily goals:", error);
             }

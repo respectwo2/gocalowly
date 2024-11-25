@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay" @click="closeModal">
     <div class="modal-content" @click.stop>
-      <h2>금일 그룹 미션 현황</h2>
+      <h2 style="margin-bottom: 20px;">금일 그룹 미션 현황</h2>
       <ul class="mission-list">
         <li v-for="(mission, index) in missions" :key="mission.missionNo"
           :class="{ complete: mission.missionComplete }">
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import axios from "axios";
 
 export default {
@@ -59,7 +59,7 @@ export default {
           payload
         );
 
-        if (response.data == "") {
+        if (response.data === "") {
           alert("미션 상태가 업데이트되었습니다.");
         } else {
           alert("업데이트 실패: 서버에서 거부되었습니다.");
@@ -68,25 +68,31 @@ export default {
         console.error("Error updating missions:", error);
         alert("업데이트에 실패했습니다. 다시 시도해주세요.");
       } finally {
-        emit("close"); // 모달 닫기
+        closeModal();
       }
     };
 
+    // 모달 닫기
     const closeModal = () => {
       emit("close");
     };
 
-    const scrollToBottom = () => {
-      if (messagesContainer.value) {
-        messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight;
+    // Esc 키로 모달 닫기
+    const handleKeydown = (event) => {
+      if (event.key === "Escape") {
+        closeModal();
       }
     };
 
+    // 이벤트 리스너 추가 및 제거
     onMounted(() => {
-      fetchChatMessages();
-      scrollToBottom(); // 컴포넌트가 렌더링되면 스크롤 이동
+      fetchMissions();
+      window.addEventListener("keydown", handleKeydown);
     });
 
+    onBeforeUnmount(() => {
+      window.removeEventListener("keydown", handleKeydown);
+    });
 
     return {
       missions,

@@ -55,7 +55,6 @@ header,
 body,
 footer {
   line-height: 1.5;
-  max-height: 100vh;
 }
 
 header div,

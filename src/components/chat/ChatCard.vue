@@ -23,7 +23,7 @@ export default {
     name: "ChatCard",
     setup() {
         const chatMessages = ref([]); // 채팅 메시지 리스트
-        const myNickname = ref("몸짱우성문"); // 본인 닉네임
+        const myNickname = ref("트레드밀중독상민"); // 본인 닉네임
 
         // API 호출
         const fetchChatMessages = async () => {
@@ -64,7 +64,9 @@ export default {
     flex-direction: column;
     gap: 16px;
     overflow-y: auto;
-    padding-bottom: 40px;
+    padding-bottom: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
     /* 스크롤 막대 하단 간격 확보 */
 
 }
@@ -80,6 +82,7 @@ export default {
 /* User 메시지 (오른쪽 정렬) */
 .user-message {
     align-self: flex-end;
+
 }
 
 /* 상대방 메시지 (왼쪽 정렬) */
@@ -89,7 +92,7 @@ export default {
 
 /* 텍스트 박스 */
 .text-box {
-    background: #f2f4f5;
+    background: #FFDEDD;
     border-radius: 0px 24px 24px 24px;
     padding: 16px;
     display: flex;
@@ -100,11 +103,18 @@ export default {
     background: #0070f0;
     color: #ffffff;
     border-radius: 24px 24px 0px 24px;
+    margin-left: auto;
+    max-width: 70%;
+    text-align: right;
+    word-wrap: break-word;
+    padding: 16px;
 }
+
+
 
 /* 유저 닉네임 스타일 */
 .name {
-    font-family: "DM Sans", sans-serif;
+    font-family: "Pretendard-Regular", sans-serif;
     font-weight: bold;
     font-size: 12px;
     color: #72777a;
@@ -113,7 +123,7 @@ export default {
 
 /* 텍스트 스타일 */
 .text-box p {
-    font-family: "DM Sans", sans-serif;
+    font-family: "Pretendard-Regular", sans-serif;
     font-size: 16px;
     line-height: 24px;
     margin: 0;

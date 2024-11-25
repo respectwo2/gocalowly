@@ -77,11 +77,11 @@ export default {
 
 .rank-text {
   flex-grow: 1;
-  font-family: "Inter", sans-serif;
+  font-family: "Pretendard-Regular", Arial, sans-serif;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 23px;
   line-height: 24px;
-  color: #000000;
+  color: #F2F4F5;
   display: flex;
   align-items: center;
   justify-content: center;

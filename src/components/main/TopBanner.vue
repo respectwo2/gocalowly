@@ -2,10 +2,10 @@
   <div class="calorie-info">
     <div class="calorie-text">
       <div>
-        Goal : {{ userTargetcalorie }}kcal
+        이달의 목표 {{ userTargetcalorie }}kcal
       </div>
       <div>
-        Today's : {{ totalCalories }}kcal
+        등록한 칼로리 {{ totalCalories }}kcal
       </div>
     </div>
   </div>
@@ -62,12 +62,13 @@ export default {
 
 .calorie-text {
   font-family: "Inter", sans-serif;
+  font-family: "Pretendard-Regular", Arial, sans-serif;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  color: #000000;
+  color: #F2F4F5;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
   text-align: center;

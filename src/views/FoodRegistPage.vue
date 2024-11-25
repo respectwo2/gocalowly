@@ -1,52 +1,54 @@
 <template>
-  <div>
+
+  <body>
     <div>
-      <TopBar />
+      <div>
+        <TopBar />
+      </div>
+
+
+      <div class="register-food-log">
+        <h1>식사 등록</h1>
+        <form @submit.prevent="submitForm">
+          <div class="form-group">
+            <label for="recordDate">기록 날짜:</label>
+            <input type="datetime-local" id="recordDate" v-model="foodLog.recordDate" required />
+          </div>
+
+          <div class="form-group">
+            <label for="mealType">식사 유형:</label>
+            <select id="mealType" v-model="foodLog.mealType" required>
+              <option value="아침">아침</option>
+              <option value="점심">점심</option>
+              <option value="저녁">저녁</option>
+              <option value="간식">간식</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="foodName">음식 이름:</label>
+            <input type="text" id="foodName" v-model="foodLog.foodName" placeholder="음식 이름을 입력하세요" required />
+          </div>
+
+          <div class="form-group">
+            <label for="calorie">칼로리 (kcal):</label>
+            <input type="number" id="calorie" v-model="foodLog.calorie" placeholder="칼로리를 입력하세요" required />
+          </div>
+
+          <button type="submit">등록</button>
+        </form>
+      </div>
+      <br />
+      <div class="button-container">
+        <button class="guideBtn" @click="toggleModal">칼로리 가이드</button>
+      </div>
+      <div>
+        <NavBar />
+      </div>
+      <!-- 모달 컴포넌트 -->
+      <GuideModal v-if="isModalOpen" title="검색" @close="toggleModal" @select-food="applySelectedFood" />
     </div>
-
-    <div class="register-food-log">
-      <h1>식사 등록</h1>
-      <form @submit.prevent="submitForm">
-        <div class="form-group">
-          <label for="recordDate">기록 날짜:</label>
-          <input type="datetime-local" id="recordDate" v-model="foodLog.recordDate" required />
-        </div>
-
-        <div class="form-group">
-          <label for="mealType">식사 유형:</label>
-          <select id="mealType" v-model="foodLog.mealType" required>
-            <option value="아침">아침</option>
-            <option value="점심">점심</option>
-            <option value="저녁">저녁</option>
-            <option value="간식">간식</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="foodName">음식 이름:</label>
-          <input type="text" id="foodName" v-model="foodLog.foodName" placeholder="음식 이름을 입력하세요" required />
-        </div>
-
-        <div class="form-group">
-          <label for="calorie">칼로리 (kcal):</label>
-          <input type="number" id="calorie" v-model="foodLog.calorie" placeholder="칼로리를 입력하세요" required />
-        </div>
-
-        <button type="submit">등록</button>
-      </form>
-    </div>
-    <br />
-    <div class="button-container">
-      <button class="guideBtn" @click="toggleModal">칼로리 가이드</button>
-    </div>
-
-    <div>
-      <NavBar />
-    </div>
-
-    <!-- 모달 컴포넌트 -->
-    <GuideModal v-if="isModalOpen" title="검색" @close="toggleModal" @select-food="applySelectedFood" />
-  </div>
+  </body>
 </template>
 
 <script>
@@ -117,6 +119,12 @@ export default {
 </script>
 
 <style scoped>
+/* Pretendard 폰트를 body에 적용 */
+body {
+  font-family: "Pretendard-Regular", sans-serif;
+}
+
+/* 기존 스타일에 적용 */
 .register-food-log {
   max-width: 500px;
   margin: 0 auto;
@@ -124,21 +132,29 @@ export default {
   border: 1px solid #ccc;
   border-radius: 8px;
   background: #f9f9f9;
+  font-family: inherit;
+  /* 상속 */
 }
 
 h1 {
   text-align: center;
   margin-bottom: 20px;
+  font-family: inherit;
+  /* 상속 */
 }
 
 .form-group {
   margin-bottom: 15px;
+  font-family: inherit;
+  /* 상속 */
 }
 
 label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  font-family: inherit;
+  /* 상속 */
 }
 
 input,
@@ -149,6 +165,8 @@ button {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-family: inherit;
+  /* 상속 */
 }
 
 button {
@@ -157,12 +175,17 @@ button {
   border: none;
   cursor: pointer;
   margin-top: 10px;
+  font-size: 22px;
+  font-family: inherit;
+  /* 상속 */
 }
 
 .button-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: inherit;
+  /* 상속 */
 }
 
 .guideBtn {
@@ -173,10 +196,14 @@ button {
   cursor: pointer;
   margin-top: 10px;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 22px;
+  font-family: inherit;
+  /* 상속 */
 }
 
 button:hover {
   background: #e76660;
+  font-family: inherit;
+  /* 상속 */
 }
 </style>

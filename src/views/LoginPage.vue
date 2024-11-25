@@ -74,18 +74,10 @@ export default {
   <div class="content">
     <form class="form" @submit.prevent="submitForm">
       <div class="formbox">
-        <input
-          type="text"
-          v-model="loginLog.userNickname"
-          placeholder="닉네임을 입력해주세요"
-        />
+        <input type="text" v-model="loginLog.userNickname" placeholder="닉네임을 입력해주세요" />
       </div>
       <div class="formbox">
-        <input
-          type="password"
-          v-model="loginLog.userPassword"
-          placeholder="비밀번호를 입력해주세요"
-        />
+        <input type="password" v-model="loginLog.userPassword" placeholder="비밀번호를 입력해주세요" />
       </div>
       <div class="loginbtn">
         <button type="submit">로그인</button>
@@ -106,8 +98,7 @@ export default {
 
 @font-face {
   font-family: "Pretendard-Regular";
-  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
-    format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
@@ -151,6 +142,7 @@ body {
 }
 
 .formbox {
+
   width: 100%;
   height: 55px;
   background: #ffffff;

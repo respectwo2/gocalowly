@@ -48,7 +48,7 @@ export default {
   left: 10px;
   top: 750px;
 
-  font-family: "Inter";
+  font-family: "Pretendard-Regular", Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 24px;
@@ -57,7 +57,7 @@ export default {
   align-items: center;
   text-align: center;
 
-  color: #ffffff;
+  color: #F2F4F5;
 
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -70,7 +70,7 @@ export default {
 
 /* 링크 스타일 (필요에 따라 추가 가능) */
 .nav-item a {
-  color: #020000;
+  color: #F2F4F5;
   text-decoration: none;
 }
 
