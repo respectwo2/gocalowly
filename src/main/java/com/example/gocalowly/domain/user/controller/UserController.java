@@ -48,8 +48,8 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
-
-	public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto, HttpSession session, HttpServletResponse response) throws AuthenticationFailedException {
+	@PostMapping("/login")
+	public ResponseEntity<Void> login(@RequestBody LoginRequestDto loginRequestDto, HttpSession session, HttpServletResponse response) throws AuthenticationFailedException {
 
 			LoginResponseDto loginResponseDto = userService.loginUser(loginRequestDto);
 			
@@ -59,6 +59,6 @@ public class UserController {
 			
 			tokenController.setTokens(loginResponseDto.getUserId(), response);
 			//성공
-			return ResponseEntity.status(HttpStatus.OK).body(loginResponseDto);
+			return ResponseEntity.status(HttpStatus.OK).build();
 	}
 }
