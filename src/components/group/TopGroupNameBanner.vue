@@ -1,6 +1,38 @@
+<script>
+import { ref, onMounted } from "vue";
+import axios from "axios";
+
+export default {
+  name: "CalorieInfo",
+  setup() {
+    const groupText = ref("");
+
+    const fetchGroupText = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/group/");
+        groupText.value =
+          response.data.message || "데이터를 가져올 수 없습니다.";
+        console.log("Fetched group text:", groupText.value);
+      } catch (error) {
+        console.error("Error fetching group text:", error);
+        groupText.value = "에러가 발생했습니다.";
+      }
+    };
+
+    onMounted(() => {
+      fetchGroupText();
+    });
+
+    return {
+      groupText,
+    };
+  },
+};
+</script>
+
 <template>
   <div class="calorie-info">
-    <p class="group-text">행복 다이어트 즐거운 운동</p>
+    <p class="group-text">{{ groupText }}</p>
   </div>
 </template>
 

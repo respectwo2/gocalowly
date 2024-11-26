@@ -1,12 +1,19 @@
 <template>
   <div class="modal-overlay" @click="closeModal">
     <div class="modal-content" @click.stop>
-      <h2 style="margin-bottom: 20px;">금일 그룹 미션 현황</h2>
+      <h2 style="margin-bottom: 20px">금일 그룹 미션 현황</h2>
       <ul class="mission-list">
-        <li v-for="(mission, index) in missions" :key="mission.missionNo"
-          :class="{ complete: mission.missionComplete }">
+        <li
+          v-for="(mission, index) in missions"
+          :key="mission.missionNo"
+          :class="{ complete: mission.missionComplete }"
+        >
           <label class="mission-label">
-            <input type="checkbox" :checked="mission.missionComplete" @change="toggleMissionCompletion(index)" />
+            <input
+              type="checkbox"
+              :checked="mission.missionComplete"
+              @change="toggleMissionCompletion(index)"
+            />
             {{ mission.missionName }}
           </label>
         </li>
@@ -26,7 +33,6 @@ export default {
   setup(_, { emit }) {
     const missions = ref([]);
 
-    // API 호출: 미션 목록 가져오기
     const fetchMissions = async () => {
       try {
         const response = await axios.get(
@@ -38,13 +44,11 @@ export default {
       }
     };
 
-    // 체크박스 클릭 시 UI만 업데이트
     const toggleMissionCompletion = (index) => {
       missions.value[index].missionComplete =
         !missions.value[index].missionComplete;
     };
 
-    // 닫기 버튼 클릭 시 서버로 업데이트
     const closeModalAndUpdate = async () => {
       const payload = {
         missionCompletes: missions.value.map((mission) => ({
@@ -72,19 +76,16 @@ export default {
       }
     };
 
-    // 모달 닫기
     const closeModal = () => {
       emit("close");
     };
 
-    // Esc 키로 모달 닫기
     const handleKeydown = (event) => {
       if (event.key === "Escape") {
         closeModal();
       }
     };
 
-    // 이벤트 리스너 추가 및 제거
     onMounted(() => {
       fetchMissions();
       window.addEventListener("keydown", handleKeydown);

@@ -1,7 +1,6 @@
 <template>
   <div class="group-rank-banner">
-    <div class="rank-text">그룹 내 상위 5% 유저입니다</div>
-    <!-- <div class="rank-text">그룹 내 상위 {{ topPercentile }}% 유저입니다</div> -->
+    <div class="rank-text">그룹 내 상위 {{ topPercentile }}% 유저입니다</div>
 
     <div class="toggle-icon" @click="toggleModal">
       <img
@@ -12,7 +11,6 @@
       />
     </div>
 
-    <!-- Modal 컴포넌트 렌더링 -->
     <Modal v-if="isModalOpen" @close="toggleModal" />
   </div>
 </template>
@@ -32,12 +30,10 @@ export default {
     const percentage = ref(0);
     const topPercentile = ref(0);
 
-    // Modal 열기/닫기
     const toggleModal = () => {
       isModalOpen.value = !isModalOpen.value;
     };
 
-    // 그룹 랭크 정보 가져오기
     const fetchGroupRank = async () => {
       try {
         const response = await axios.get(
@@ -46,11 +42,10 @@ export default {
         percentage.value = response.data;
         topPercentile.value = response.data.topPercentile;
       } catch (error) {
-        console.error("Error fetching group rank:", error);
+        console.error(error);
       }
     };
 
-    // 컴포넌트가 마운트될 때 데이터 가져오기
     onMounted(() => {
       fetchGroupRank();
     });

@@ -27,13 +27,11 @@ import axios from "axios";
 export default {
   name: "StaticDateDisplay",
   setup() {
-    const days = ref(["M", "T", "W", "T", "F", "S", "S"]); // 요일
+    const days = ref(["M", "T", "W", "T", "F", "S", "S"]);
     const dailyGoals = ref([]);
 
-    // 현재 요일 (0: 일요일 ~ 6: 토요일)
-    const todayIndex = new Date().getDay() - 1; // 월요일 기준 인덱스화 (Vue에서내가 Sunday까지점점적으로)
+    const todayIndex = new Date().getDay() - 1;
 
-    // API 호출 및 데이터 저장
     const fetchDailyGoals = async () => {
       try {
         const response = await axios.get(
@@ -46,17 +44,16 @@ export default {
       }
     };
 
-    // 패딩된 OX 데이터 계산
     const paddedDates = computed(() => {
       const filledDates = dailyGoals.value.map((goal) => ({
         date: goal.date,
         isGoal: goal.isGoal,
       }));
 
-      const padded = Array(7).fill({}); // 일주일 전체 초기화
+      const padded = Array(7).fill({});
       filledDates.forEach((entry, index) => {
         if (index <= todayIndex) {
-          padded[index] = entry; // 오늘 이전 데이터 채움
+          padded[index] = entry;
         }
       });
 
@@ -107,7 +104,6 @@ export default {
 }
 
 .date {
-  /* font-family: "DM Sans", sans-serif; */
   font-weight: 500;
   font-size: 14px;
   color: #979c9e;

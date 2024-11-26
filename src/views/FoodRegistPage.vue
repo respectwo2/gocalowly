@@ -1,18 +1,21 @@
 <template>
-
   <body>
     <div>
       <div>
         <TopBar />
       </div>
 
-
       <div class="register-food-log">
         <h1>식사 등록</h1>
         <form @submit.prevent="submitForm">
           <div class="form-group">
             <label for="recordDate">기록 날짜:</label>
-            <input type="datetime-local" id="recordDate" v-model="foodLog.recordDate" required />
+            <input
+              type="datetime-local"
+              id="recordDate"
+              v-model="foodLog.recordDate"
+              required
+            />
           </div>
 
           <div class="form-group">
@@ -27,12 +30,24 @@
 
           <div class="form-group">
             <label for="foodName">음식 이름:</label>
-            <input type="text" id="foodName" v-model="foodLog.foodName" placeholder="음식 이름을 입력하세요" required />
+            <input
+              type="text"
+              id="foodName"
+              v-model="foodLog.foodName"
+              placeholder="음식 이름을 입력하세요"
+              required
+            />
           </div>
 
           <div class="form-group">
             <label for="calorie">칼로리 (kcal):</label>
-            <input type="number" id="calorie" v-model="foodLog.calorie" placeholder="칼로리를 입력하세요" required />
+            <input
+              type="number"
+              id="calorie"
+              v-model="foodLog.calorie"
+              placeholder="칼로리를 입력하세요"
+              required
+            />
           </div>
 
           <button type="submit">등록</button>
@@ -45,8 +60,12 @@
       <div>
         <NavBar />
       </div>
-      <!-- 모달 컴포넌트 -->
-      <GuideModal v-if="isModalOpen" title="검색" @close="toggleModal" @select-food="applySelectedFood" />
+      <GuideModal
+        v-if="isModalOpen"
+        title="검색"
+        @close="toggleModal"
+        @select-food="applySelectedFood"
+      />
     </div>
   </body>
 </template>
@@ -76,9 +95,12 @@ export default {
     const isModalOpen = ref(false);
 
     const submitForm = async () => {
-      console.log(foodLog.value)
+      console.log(foodLog.value);
       try {
-        await axios.post("http://localhost:8080/api/user/food-logs", foodLog.value);
+        await axios.post(
+          "http://localhost:8080/api/user/food-logs",
+          foodLog.value
+        );
         console.log(foodLog.value);
         alert("식사가 기록되었습니다!");
         resetForm();
@@ -119,12 +141,10 @@ export default {
 </script>
 
 <style scoped>
-/* Pretendard 폰트를 body에 적용 */
 body {
   font-family: "Pretendard-Regular", sans-serif;
 }
 
-/* 기존 스타일에 적용 */
 .register-food-log {
   max-width: 500px;
   margin: 0 auto;
@@ -133,20 +153,17 @@ body {
   border-radius: 8px;
   background: #f9f9f9;
   font-family: inherit;
-  /* 상속 */
 }
 
 h1 {
   text-align: center;
   margin-bottom: 20px;
   font-family: inherit;
-  /* 상속 */
 }
 
 .form-group {
   margin-bottom: 15px;
   font-family: inherit;
-  /* 상속 */
 }
 
 label {
@@ -154,7 +171,6 @@ label {
   margin-bottom: 5px;
   font-weight: bold;
   font-family: inherit;
-  /* 상속 */
 }
 
 input,
@@ -166,7 +182,6 @@ button {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-family: inherit;
-  /* 상속 */
 }
 
 button {
@@ -177,7 +192,6 @@ button {
   margin-top: 10px;
   font-size: 22px;
   font-family: inherit;
-  /* 상속 */
 }
 
 .button-container {
@@ -185,7 +199,6 @@ button {
   justify-content: center;
   align-items: center;
   font-family: inherit;
-  /* 상속 */
 }
 
 .guideBtn {
@@ -198,12 +211,10 @@ button {
   padding: 10px 20px;
   font-size: 22px;
   font-family: inherit;
-  /* 상속 */
 }
 
 button:hover {
   background: #e76660;
   font-family: inherit;
-  /* 상속 */
 }
 </style>

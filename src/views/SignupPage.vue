@@ -81,15 +81,12 @@ export default {
     <TopBar />
   </div>
   <div class="signup-page">
-    <!-- 회원가입 페이지 -->
     <div v-if="!showIframe" class="content">
       <div class="signupTitle">
         <span class="signup">회원가입</span>
       </div>
 
-      <!-- 회원가입 폼 -->
       <div class="signupForm">
-        <!-- 닉네임 -->
         <div>
           <p>닉네임</p>
           <input
@@ -98,7 +95,6 @@ export default {
             placeholder="로그인에 이용될 닉네임이에요."
           />
         </div>
-        <!-- 비밀번호 -->
         <div>
           <p>비밀번호</p>
           <input
@@ -107,7 +103,6 @@ export default {
             placeholder="비밀번호를 입력해주세요."
           />
         </div>
-        <!-- 이름 -->
         <div>
           <p>이름</p>
           <input
@@ -116,7 +111,6 @@ export default {
             placeholder="이름을 입력해주세요."
           />
         </div>
-        <!-- 전화번호 -->
         <div>
           <p>전화번호</p>
           <input
@@ -125,7 +119,6 @@ export default {
             placeholder="예시) 01000000000"
           />
         </div>
-        <!-- 목표칼로리 -->
         <div>
           <p>목표칼로리</p>
           <input
@@ -135,17 +128,14 @@ export default {
           />
         </div>
 
-        <!-- 가이드 버튼 -->
         <button class="calorie-guide" @click="openCalorieGuide">
           칼로리 가이드 확인하기
         </button>
       </div>
 
-      <!-- 회원가입 버튼 -->
       <button class="signupBtn" @click="submitSignup">회원가입</button>
     </div>
 
-    <!-- iframe 가이드 화면 -->
     <div v-if="showIframe" class="iframe-container">
       <button class="back-btn" @click="closeIframe">뒤로가기</button>
       <iframe
@@ -194,7 +184,6 @@ body {
   max-width: 400px;
   padding: 0;
   margin: 0;
-  /* 간격 제거 */
 }
 
 .signupTitle {
@@ -259,7 +248,6 @@ body {
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   border: none;
-  /* 기본 테두리 제거 */
 }
 
 .calorie-guide:hover {

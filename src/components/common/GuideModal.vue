@@ -1,20 +1,28 @@
 <template>
-
   <div class="modal-overlay" @click="$emit('close')">
     <div class="modal-content" @click.stop>
       <div class="modal-header">
         <button class="close-button" @click="$emit('close')">×</button>
       </div>
-      <div style="margin-bottom: 15px;">
+      <div style="margin-bottom: 15px">
         <h2>{{ title }}</h2>
       </div>
       <div class="search-section">
-        <input type="text" v-model="searchQuery" placeholder="검색어를 입력하세요" />
+        <input
+          type="text"
+          v-model="searchQuery"
+          placeholder="검색어를 입력하세요"
+        />
         <button @click="search">검색</button>
       </div>
       <div class="search-results" v-if="searchResults.length > 0">
         <ul>
-          <li v-for="(result, index) in searchResults" :key="index" @click="selectFood(result)" class="search-item">
+          <li
+            v-for="(result, index) in searchResults"
+            :key="index"
+            @click="selectFood(result)"
+            class="search-item"
+          >
             <strong>음식 이름:</strong> {{ result.foodDataName }} <br />
             <strong>칼로리:</strong> {{ result.foodDataCalorie }} kcal
           </li>
@@ -61,7 +69,7 @@ export default {
         searchResults.value = response.data || [];
         searchPerformed.value = true;
       } catch (error) {
-        console.error("검색 중 오류 발생:", error.response || error);
+        console.error(error.response || error);
         alert("검색 중 오류가 발생했습니다. 다시 시도하세요.");
       }
     };

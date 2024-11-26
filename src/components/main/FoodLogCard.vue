@@ -7,17 +7,17 @@ export default {
   setup() {
     const foodLogs = ref([]);
 
-    // API 호출 및 데이터 저장
     const fetchFoodLogs = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/user/food-logs");
+        const response = await axios.get(
+          "http://localhost:8080/api/user/food-logs"
+        );
         foodLogs.value = response.data;
       } catch (error) {
         console.error("Error fetching food logs:", error);
       }
     };
 
-    // 날짜 포맷팅
     const formatDate = (dateString) => {
       const date = new Date(dateString);
       return date.toLocaleDateString("ko-KR", {
@@ -42,7 +42,11 @@ export default {
     <div v-for="(log, index) in foodLogs" :key="index" class="food-log-card">
       <div class="date">{{ formatDate(log.date) }}</div>
       <ul>
-        <li v-for="(food, foodIndex) in log.foodEntries" :key="foodIndex" class="food-item">
+        <li
+          v-for="(food, foodIndex) in log.foodEntries"
+          :key="foodIndex"
+          class="food-item"
+        >
           {{ food.mealType }} - {{ food.foodName }} : {{ food.calories }} kcal
         </li>
       </ul>
@@ -62,13 +66,11 @@ export default {
 }
 
 .food-log-card {
-  background-color: #FFDEDD;
+  background-color: #ffdedd;
   border-radius: 20px;
   padding: 16px;
   margin-bottom: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-
 }
 
 .date {

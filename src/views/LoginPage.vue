@@ -11,13 +11,12 @@ export default {
 
   setup() {
     const loginLog = ref({
-      userNickname: "", // HTML과 일치하도록 수정
+      userNickname: "",
       userPassword: "",
     });
 
     const submitForm = async () => {
       try {
-        // Proxy 데이터를 순수 객체로 변환
         const payload = { ...loginLog.value };
         console.log("전송 데이터:", payload);
 
@@ -92,7 +91,6 @@ export default {
     </form>
 
     <div class="line">또는</div>
-    <!-- 회원가입 링크 -->
     <div class="rgst">
       <span>아직 회원이 아니신가요?</span>
       <a href="/signup">회원가입</a>

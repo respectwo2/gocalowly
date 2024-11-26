@@ -61,7 +61,6 @@ header div,
 body div,
 footer div {
   margin-bottom: 3rem;
-  /* 각 div 아래에 간격을 줍니다 */
 }
 
 .logo {

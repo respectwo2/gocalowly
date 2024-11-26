@@ -42,7 +42,6 @@ export default {
 </script>
 <style scoped>
 .calorie-info {
-  /* Rectangle 2 */
   box-sizing: border-box;
 
   background: #f87670;
@@ -64,7 +63,6 @@ export default {
   line-height: 24px;
   color: #f2f4f5;
   display: flex;
-  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
   text-align: center;

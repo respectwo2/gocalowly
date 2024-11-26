@@ -1,6 +1,5 @@
 <template>
   <div class="messages-container">
-    <!-- 채팅 메시지 리스트 -->
     <div
       v-for="(message, index) in chatMessages"
       :key="index"
@@ -9,11 +8,9 @@
         message.userNickName === myNickname ? 'user-message' : 'other-message',
       ]"
     >
-      <!-- 유저 닉네임 -->
       <div v-if="message.userNickName !== myNickname" class="name">
         {{ message.userNickName }}
       </div>
-      <!-- 메시지 내용 -->
       <div class="text-box">
         <p>{{ message.content }}</p>
       </div>
@@ -28,16 +25,14 @@ import axios from "axios";
 export default {
   name: "ChatCard",
   setup() {
-    const chatMessages = ref([]); // 채팅 메시지 리스트
-    const myNickname = ref("3대500우성문"); // 본인 닉네임
-
-    // API 호출
+    const chatMessages = ref([]);
+    const myNickname = ref([]);
     const fetchChatMessages = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/chat/logs");
 
-        // API에서 데이터 가져와 chatMessages에 할당
         chatMessages.value = response.data;
+        myNickname.value = ref(response.data.userNickName);
         console.log("Fetched chat messages:", response.data);
       } catch (error) {
         console.error("Error fetching chat messages:", error);
@@ -57,7 +52,6 @@ export default {
 </script>
 
 <style scoped>
-/* 메시지 전체 컨테이너 */
 .messages-container {
   margin-top: 20px;
   position: absolute;
@@ -72,10 +66,8 @@ export default {
   padding-bottom: 30px;
   padding-left: 5px;
   padding-right: 5px;
-  /* 스크롤 막대 하단 간격 확보 */
 }
 
-/* 개별 메시지 */
 .message {
   display: flex;
   flex-direction: column;
@@ -83,17 +75,14 @@ export default {
   width: 327px;
 }
 
-/* User 메시지 (오른쪽 정렬) */
 .user-message {
   align-self: flex-end;
 }
 
-/* 상대방 메시지 (왼쪽 정렬) */
 .other-message {
   align-self: flex-start;
 }
 
-/* 텍스트 박스 */
 .text-box {
   background: #ffdedd;
   border-radius: 0px 24px 24px 24px;
@@ -113,7 +102,6 @@ export default {
   padding: 16px;
 }
 
-/* 유저 닉네임 스타일 */
 .name {
   font-family: "Pretendard-Regular", sans-serif;
   font-weight: bold;
@@ -122,7 +110,6 @@ export default {
   margin-bottom: 4px;
 }
 
-/* 텍스트 스타일 */
 .text-box p {
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
@@ -135,7 +122,6 @@ export default {
   color: #ffffff;
 }
 
-/* 스크롤바 스타일 */
 .messages-container::-webkit-scrollbar {
   width: 6px;
 }

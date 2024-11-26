@@ -26,10 +26,6 @@ export default {
 
 <style scoped>
 .navbar {
-  /* Rectangle 8 */
-
-  /* Rectangle 8 */
-
   position: absolute;
   width: 356px;
   height: 98px;
@@ -38,10 +34,6 @@ export default {
 
   background: #f87670;
   border-radius: 50px;
-
-  /* 개인 식사등록 그룹 */
-  /* Rectangle 8 */
-  /* 개인 식사등록 그룹 */
 
   width: 370px;
   height: 65px;
@@ -57,7 +49,7 @@ export default {
   align-items: center;
   text-align: center;
 
-  color: #F2F4F5;
+  color: #f2f4f5;
 
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -68,9 +60,8 @@ export default {
   text-align: center;
 }
 
-/* 링크 스타일 (필요에 따라 추가 가능) */
 .nav-item a {
-  color: #F2F4F5;
+  color: #f2f4f5;
   text-decoration: none;
 }
 
