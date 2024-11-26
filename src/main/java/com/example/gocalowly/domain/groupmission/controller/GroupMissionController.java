@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @RestController
 @RequestMapping("api/group/missions")
 public class GroupMissionController {
-
-    private static final UUID TEST_USERID = UUID.fromString("00000000-0000-0000-0000-000000000001");
-
     GroupMissionSerivce groupMissionService;
 
     public GroupMissionController(GroupMissionSerivce groupMissionService) {
@@ -25,8 +23,8 @@ public class GroupMissionController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<GroupMissionResponseDto> getGroupMissions() {
-        GroupMissionResponseDto response = groupMissionService.getGroupMissions(TEST_USERID);
+    public ResponseEntity<GroupMissionResponseDto> getGroupMissions(@SessionAttribute UUID userId) {
+        GroupMissionResponseDto response = groupMissionService.getGroupMissions(userId);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
 
@@ -34,8 +32,8 @@ public class GroupMissionController {
 
     @PostMapping("/update")
     public ResponseEntity<Void> updateGroupMissions(
-            @RequestBody GroupMissionUpdateRequestDto groupMissionUpdateRequestDto) {
-        groupMissionService.updateGroupMissions(groupMissionUpdateRequestDto, TEST_USERID);
+            @RequestBody GroupMissionUpdateRequestDto groupMissionUpdateRequestDto, @SessionAttribute UUID userId) {
+        groupMissionService.updateGroupMissions(groupMissionUpdateRequestDto, userId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

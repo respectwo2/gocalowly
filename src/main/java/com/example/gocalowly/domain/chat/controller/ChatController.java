@@ -13,16 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @RestController
 @RequestMapping("/api/chat")
 
 public class ChatController {
-
-    private static final int TEST_GROUPNO = 1;
-    private static final UUID TEST_USERID = UUID.fromString("00000000-0000-0000-0000-000000000001");
-    private static final String TEST_NICKNAME = "3대500우성문";
-
     ChatService chatService;
 
     public ChatController(ChatService chatservice) {
@@ -30,14 +26,15 @@ public class ChatController {
     }
 
     @PostMapping("/send")
-    public ResponseEntity<Void> createChat(@Valid @RequestBody ChatSubmitRequestDto chatSubmitRequestDto) {
-        chatService.addChat(chatSubmitRequestDto, TEST_NICKNAME, TEST_GROUPNO);
+    public ResponseEntity<Void> createChat(@Valid @RequestBody ChatSubmitRequestDto chatSubmitRequestDto,
+    		@SessionAttribute String userNickname, @SessionAttribute int groupNo) {
+        chatService.addChat(chatSubmitRequestDto, userNickname, groupNo);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/logs")
-    public ResponseEntity<List<ChatResponseDto>> findChatLog() {
-        List<ChatResponseDto> response = chatService.findChat(TEST_GROUPNO);
+    public ResponseEntity<List<ChatResponseDto>> findChatLog(@SessionAttribute int groupNo) {
+        List<ChatResponseDto> response = chatService.findChat(groupNo);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

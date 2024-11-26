@@ -17,24 +17,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
     UserService userService;
     TokenController tokenController;
-    private final static UUID TEST_USERID = UUID.fromString("00000000-0000-0000-0000-000000000001");
-
-
+ 
     public UserController(UserService userService, TokenController tokenController) {
         this.userService = userService;
         this.tokenController = tokenController;
     }
 
     @PostMapping("/target-calorie")
-    public ResponseEntity<Void> updateUserTargetCalorie(
+    public ResponseEntity<Void> updateUserTargetCalorie(@SessionAttribute UUID userId, 
             @Valid @RequestBody TargetCalorieRequestDto targetCalorieRequestDto) {
-        userService.updateUserTargetCalorie(TEST_USERID, targetCalorieRequestDto);
+        userService.updateUserTargetCalorie(userId, targetCalorieRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

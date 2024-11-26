@@ -26,10 +26,10 @@ public class GroupService {
     }
 
     @Transactional
-    public void changeGroupName(int testGroupNo, String newGroupName) {
+    public void changeGroupName(int groupNo, String newGroupName) {
         // 원래는 모든 그룹에 대해 실행해야 하므로 groupRepository.findAll().stream().... 을 이용해서 바꿔야 하지만 지금은 하나만
 
-        GroupEntity group = groupRepository.findById(testGroupNo)
+        GroupEntity group = groupRepository.findById(groupNo)
                 .orElseThrow(() -> new ResourceNotFoundException("GROUP_NOT_FOUND"));
 
         group.setGroupName(newGroupName);
