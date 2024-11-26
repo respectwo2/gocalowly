@@ -28,7 +28,6 @@ public class JweAuthenticationInterceptor implements HandlerInterceptor {
 
         // 1. Access Token 추출 및 검증
         String accessToken = resolveAccessToken(request);
-        System.out.println(accessToken);
         if (accessToken != null) {
             try {
                 JWTClaimsSet claims = accessTokenService.decryptJWE(accessToken);
@@ -54,10 +53,8 @@ public class JweAuthenticationInterceptor implements HandlerInterceptor {
                     throw new TokenException("please login again!");
                 }
 
-                // 새로운 Access Token 생성
                 String newAccessToken = accessTokenService.generateAccessToken(userId);
 
-                // 새로운 Access Token을 응답 헤더에 설정
                 response.setHeader("Authorization", "Bearer " + newAccessToken);
                 refreshTokenService.addRefreshTokenToCookie(response, refreshToken);
 

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @RestController
 public class AIController {
@@ -24,11 +25,9 @@ public class AIController {
     }
 
     @PostMapping("/chatGPT")
-    public ResponseEntity<String> changeGroupName() {
-        int testGroupNo = 1;
-
-        String response = openAiChatModel.call(REQUEST_TO_GPT);
-        groupService.changeGroupName(testGroupNo, response);
+    public ResponseEntity<String> changeGroupName(@SessionAttribute int groupNo) {
+    	String response = openAiChatModel.call(REQUEST_TO_GPT);
+        groupService.changeGroupName(groupNo, response);
 
         return new ResponseEntity<String>(response, HttpStatus.OK);
     }

@@ -10,14 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @RestController
 @RequestMapping("api/group")
 public class GroupController {
-
-    private static final UUID TEST_USERID = UUID.fromString("00000000-0000-0000-0000-000000000001");
-    private static final int TEST_GROUPNO = 5;
-    GroupService groupService;
+   GroupService groupService;
     UserGoalService userGoalService;
 
     public GroupController(GroupService groupService, UserGoalService userGoalService) {
@@ -26,27 +24,16 @@ public class GroupController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<GroupInfoResponseDto> getGroupInfo() {
+    public ResponseEntity<GroupInfoResponseDto> getGroupInfo(@SessionAttribute int groupNo) {
 
-        GroupInfoResponseDto response = groupService.getGroupInfo(TEST_GROUPNO);
+        GroupInfoResponseDto response = groupService.getGroupInfo(groupNo);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping("/rank")
-
-    public ResponseEntity<GroupRankResponseDto> getRankInGroup() {
-        GroupRankResponseDto response = userGoalService.getRankInGroup(TEST_USERID);
+    public ResponseEntity<GroupRankResponseDto> getRankInGroup(@SessionAttribute UUID userId) {
+        GroupRankResponseDto response = userGoalService.getRankInGroup(userId);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
-    }
-
-    @GetMapping("/testUpdate")
-    public void updateGroupUserGoals() {
-        userGoalService.addAllUserGoals();
-    }
-
-    @GetMapping("/testReset")
-    public void resetGroupUserGoals() {
-        userGoalService.resetUserClearGoals();
     }
 }

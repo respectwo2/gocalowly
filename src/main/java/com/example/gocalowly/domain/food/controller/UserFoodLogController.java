@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserFoodLogController {
-
-    private static final UUID TEST_USERID = UUID.fromString("00000000-0000-0000-0000-000000000001");
     UserFoodLogService userFoodLogService;
 
     public UserFoodLogController(UserFoodLogService userFoodLogService) {
@@ -27,27 +26,27 @@ public class UserFoodLogController {
     }
 
     @GetMapping("/target-calorie")
-    public ResponseEntity<DailyCalorieSummaryResponseDto> findDaliyCalorieSummary() {
-        DailyCalorieSummaryResponseDto response = userFoodLogService.findDailyCalorieSummary(TEST_USERID);
+    public ResponseEntity<DailyCalorieSummaryResponseDto> findDaliyCalorieSummary(@SessionAttribute UUID userId) {
+        DailyCalorieSummaryResponseDto response = userFoodLogService.findDailyCalorieSummary(userId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping("/food-logs")
-    public ResponseEntity<List<DailyFoodLogResponseDto>> findFoodLog() {
-        List<DailyFoodLogResponseDto> response = userFoodLogService.findFoodLogs(TEST_USERID);
+    public ResponseEntity<List<DailyFoodLogResponseDto>> findFoodLog(@SessionAttribute UUID userId) {
+        List<DailyFoodLogResponseDto> response = userFoodLogService.findFoodLogs(userId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping("/food-logs")
-    public ResponseEntity<Void> addUserFoodLog(@RequestBody RegistFoodLogRequestDto registFoodLogRequestDto) {
-        userFoodLogService.addUserFoodLog(registFoodLogRequestDto, TEST_USERID);
+    public ResponseEntity<Void> addUserFoodLog(@RequestBody RegistFoodLogRequestDto registFoodLogRequestDto, @SessionAttribute UUID userId) {
+        userFoodLogService.addUserFoodLog(registFoodLogRequestDto, userId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }
 
     @GetMapping("/goals")
-    public ResponseEntity<DailyGoalStatusResponseDto> findDailyGoalStatus() {
-        DailyGoalStatusResponseDto response = userFoodLogService.findDailyGoalStatus(TEST_USERID);
+    public ResponseEntity<DailyGoalStatusResponseDto> findDailyGoalStatus(@SessionAttribute UUID userId) {
+        DailyGoalStatusResponseDto response = userFoodLogService.findDailyGoalStatus(userId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
