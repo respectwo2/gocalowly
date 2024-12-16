@@ -62,4 +62,4 @@
 
 ---
 
-## 📄 [추가 논의점](https://www.notion.so/9d2647ee827845daa39f9b041a79d8fe)
+## 📄 <a href="https://www.notion.so/9d2647ee827845daa39f9b041a79d8fe" target="_blank">[추가 논의점]</a>
