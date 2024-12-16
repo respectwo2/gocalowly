@@ -62,4 +62,4 @@
 
 ---
 
-## 📄 [추가 논의점](https://www.notion.so/1374ec08d1a980c58e75cca3ac1e62e4)
+## 📄 [추가 논의점](https://www.notion.so/9d2647ee827845daa39f9b041a79d8fe)
