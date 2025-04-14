@@ -1,7 +1,6 @@
 INSERT INTO `user` (user_id, user_nickname, user_password, user_name, user_phonenumber, complete_count, user_targetcalorie, group_no)
 VALUES 
 (UNHEX(REPLACE('00000000-0000-0000-0000-000000000001', '-', '')), '1', '1', 'Alice', '010-1234-5678', 3, 2000, 5),
-(UNHEX(REPLACE('00000000-0000-0000-0000-000000000002', '-', '')), 'ssafy', 'ssafy', 'Bob', '010-5678-1234', 5, 2500, 2),
 (UNHEX(REPLACE('00000000-0000-0000-0000-000000000003', '-', '')), 'DreamCatcher', 'myPass@123', 'Charlie', '010-1111-2222', 7, 1800, 1),
 (UNHEX(REPLACE('00000000-0000-0000-0000-000000000004', '-', '')), 'StarGazer', 'secure!45$', 'Daisy', '010-3333-4444', 2, 2200, 2),
 (UNHEX(REPLACE('00000000-0000-0000-0000-000000000005', '-', '')), 'HappyFeet', 'coolPass*56', 'Ella', '010-5555-6666', 10, 1500, 3),
