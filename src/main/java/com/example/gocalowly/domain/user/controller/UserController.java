@@ -1,6 +1,6 @@
 package com.example.gocalowly.domain.user.controller;
 
-import com.example.gocalowly.domain.token.controller.TokenController;
+import com.example.gocalowly.domain.token.service.TokenService;
 import com.example.gocalowly.domain.user.dto.request.LoginRequestDto;
 import com.example.gocalowly.domain.user.dto.request.SignUpRequestDto;
 import com.example.gocalowly.domain.user.dto.request.TargetCalorieRequestDto;
@@ -22,13 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/user")
 public class UserController {
     UserService userService;
-    TokenController tokenController;
+    TokenService tokenService;
     private final static UUID TEST_USERID = UUID.fromString("00000000-0000-0000-0000-000000000001");
 
 
-    public UserController(UserService userService, TokenController tokenController) {
+    public UserController(UserService userService, TokenService tokenService) {
         this.userService = userService;
-        this.tokenController = tokenController;
+        this.tokenService = tokenService;
     }
 
     @PostMapping("/target-calorie")
@@ -53,8 +53,7 @@ public class UserController {
         session.setAttribute("groupNo", loginResponseDto.getGroupNo());
         session.setAttribute("userNickname", loginResponseDto.getUserNickname());
 
-        tokenController.setTokens(loginResponseDto.getUserId(), response);
-        //성공
+        tokenService.setTokens(loginResponseDto.getUserId(), response);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
